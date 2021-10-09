@@ -6,8 +6,21 @@
 # launch server:
 $ node server.js
 
-# visit user page:
-$ chrome http://localhost:82/index.html
+# visit index page
+$ explorer 1_index.url
+
+# visit server-dashboard page
+$ explorer 2_server_index.url
+
+# visit user-feedback page
+$ explorer 3_user_feedback.url
+
+# visit user-feedback-dev page (lang SELECT[250])
+$ explorer 3_user_feedback_dev.url
+
+# visit translation provider page
+$ explorer 4_i18n_populate.url
+
 ```
 ### `SERVER - NodeJS and Dashboard-page`
 
