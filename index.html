@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<!-- ┌─────────────────────────────────────────────────────────────────────┐ -->
+<!-- │ [index]                                        _TAG (210914:16h:15) │ -->
+<!-- └─────────────────────────────────────────────────────────────────────┘ -->
+<html>
+ <head>
+  <meta charset="utf-8"/>
+  <title>iwintoo/USR/index</title>
+  <!-- style {{{-->
+  <style>
+   html       { height     : 100%; }
+   body       { background : linear-gradient(to bottom right, rgba(255,255,255,1), rgba(0,0,0,0.5)); }
+
+   /* FREEZE PAGE WHEN OFFLINE */
+   .offline #div_online  { pointer-events :  none; opacity:0.2; }
+
+   /* SHOW LINK TO GET ONLINE */
+            #div_offline { position       : fixed; top: 1em; left: 1em; }
+            #div_offline { font-size      : 150%;               }
+            #div_offline { visibility     : hidden            ; }
+   .offline #div_offline { visibility     : visible !important; }
+
+   #div_online { display               : grid;        }
+   #div_online { grid-template-columns : 1fr 1fr 1fr; }
+   #div_online { box-shadow            : none;        }
+   #div_online { border                : none;        }
+
+   h1          { text-align        :  right; }
+   h1          { align-self        : center; }
+              
+   div         { box-shadow        : 2px 2px 2px #888; }
+   div         { border            : 1px solid   #DDD; }
+   div         { border-radius     : 1em;              }
+   div         { padding           : 1em;              }
+   div         { margin            : 1em;              }
+
+   /* PORT */
+
+   /* COLOR */
+   a:visited             { color      : unset !important;                        }
+   .hosname              { color      : black !important;                        }
+   .network              { color      : black !important;                        }
+   .localhost            { color      : gray  !important;                        }
+   .div_http             { background : rgba(255,127,127,0.8);                   }
+   .div_https            { background : rgba(192,192,224,0.8);                   }
+
+  </style>
+  <!--}}}-->
+  <!-- script {{{-->
+   <script>
+    /*_ set_body_style_f_location {{{*/
+    let set_body_style_f_location = function()
+    {
+     let className
+     = (location.protocol == "file:")
+      ?  "offline"
+      :  "online"
+      ;
+     document.body.className = className;
+
+console.log("set_body_style_f_location:\n PROTOCOL=["+location.protocol+"] ➔ "+className);
+    };
+    /*}}}*/
+   /*_ replace_localhost_with_location_hostname {{{*/
+   let replace_localhost_with_location_hostname = function()
+   {
+console.log("replace_localhost_with_location_hostname ["+location.hostname+"]");
+
+    let a_array = document.querySelectorAll("DIV.hostname");
+
+     for(let i=0; i<a_array.length; ++i)
+     {
+console.log("┌──────────────────────────────────────┐");
+      let a_innerText = a_array[i].innerText;
+console.log(a_array[i].innerText);
+      a_array[i].innerHTML = a_array[i].innerHTML.replace(/LOCALHOST/gm, location.hostname);
+console.log(a_array[i].innerText);
+console.log("└──────────────────────────────────────┘");
+     }
+   };
+   /*}}}*/
+  </script>
+  <!--}}}-->
+ </head>
+ <body onload='set_body_style_f_location(); replace_localhost_with_location_hostname();'>
+  <h1>iwintoo/USR/index</h1>
+
+  <div id="div_offline"> <!--{{{-->
+    <H3>URL ?</H3>
+
+    <ul>
+    <li> <a                         href="http://localhost:8080/index.html"             >http://localhost:8080/index.html           </a> </li>
+    <li> <a                         href="http://localhost/index.html"                  >http://localhost:80/index.html             </a> </li>
+    <li> <a                         href="http://localhost:81/index.html"               >http://localhost:81/index.html             </a> </li>
+    <li> <a                         href="http://localhost:82/index.html"               >http://localhost:82/index.html             </a> </li>
+    </ul>
+
+    <ul>
+    <li> <a                         href="http://localhost:8080/index.html"             >http://localhost:8080/index.html           </a> </li>
+    <li> <a                         href="http://localhost/index.html"                  >http://localhost:80/index.html             </a> </li>
+    <li> <a                         href="http://localhost:81/index.html"               >http://localhost:81/index.html             </a> </li>
+    <li> <a                         href="http://localhost:82/index.html"               >http://localhost:82/index.html             </a> </li>
+    </ul>
+
+    </ul>
+    <ul>
+    <li> <a                         href="http://localhost:8080/Download/index.html"    >localhost:8080/Download/index.html         </a></li>
+    <li> <a                         href="http://localhost/Download/index.html"         >localhost:80/Download/index.html           </a></li>
+    <li> <a                         href="http://localhost:81/Download/index.html"      >localhost:81/Download/index.html           </a></li>
+    <li> <a                         href="http://localhost:82/Download/index.html"      >localhost:82/Download/index.html           </a></li>
+    </ul>
+  </div> <!--}}}-->
+
+  <div id="div_online">
+   <h1  class="hostname">DOMAIN</h1> <!--{{{-->
+
+   <div class="div_http hostname">
+    <b>HTTP</b>
+    <ul>
+    <li><a target="server_index"    href="http://LOCALHOST:8080/server_index.html"      >LOCALHOST<em>:8080 </em>/server_index.html    </a></li>
+    <li><a target="server_index"    href="http://LOCALHOST/server_index.html"           >LOCALHOST<em>:80   </em>/server_index.html    </a></li>
+    <li><a target="server_index"    href="http://LOCALHOST:81/server_index.html"        >LOCALHOST<em>:81   </em>/server_index.html    </a></li>
+    <li><a target="server_index"    href="http://LOCALHOST:82/server_index.html"        >LOCALHOST<em>:82   </em>/server_index.html    </a></li>
+    </ul>
+   </div>
+
+   <div class="div_https hostname">
+    <b>HTTPS</b>
+    <ul>
+    <li><a target="server_index"    href="https://LOCALHOST/server_index.html"          >LOCALHOST<em>:443  </em>/server_index.html   </a></li>
+    <li><a target="server_index"    href="https://LOCALHOST:444/server_index.html"      >LOCALHOST<em>:444  </em>/server_index.html   </a></li>
+    <li><a target="server_index"    href="https://LOCALHOST:445/server_index.html"      >LOCALHOST<em>:445  </em>/server_index.html   </a></li>
+    </ul>
+   </div>
+
+   <!--}}}-->
+   <h1  class="network">NETWORK</h1> <!--{{{-->
+
+   <div class="div_http network">
+    <b>HTTP</b>
+    <ul>
+    <li><a target="server_index"    href="http://127.0.0.1:8080/server_index.html"      >127.0.0.1<em>:8080 </em>/server_index.html    </a></li>
+    <li><a target="server_index"    href="http://127.0.0.1/server_index.html"           >127.0.0.1<em>:80   </em>/server_index.html    </a></li>
+    <li><a target="server_index"    href="http://127.0.0.1:81/server_index.html"        >127.0.0.1<em>:81   </em>/server_index.html    </a></li>
+    <li><a target="server_index"    href="http://127.0.0.1:82/server_index.html"        >127.0.0.1<em>:82   </em>/server_index.html    </a></li>
+    </ul>
+   </div>
+
+   <div class="div_https network">
+    <b>HTTPS</b>
+    <ul>
+    <li><a target="server_index"    href="https://127.0.0.1/server_index.html"          >127.0.0.1<em>:443  </em>/server_index.html    </a></li>
+    <li><a target="server_index"    href="https://127.0.0.1:444/server_index.html"      >127.0.0.1<em>:444  </em>/server_index.html    </a></li>
+    <li><a target="server_index"    href="https://127.0.0.1:445/server_index.html"      >127.0.0.1<em>:445  </em>/server_index.html    </a></li>
+    </ul>
+   </div>
+
+   <!--}}}-->
+   <h1  class="localhost">LOCALHOST</h1> <!--{{{-->
+
+   <div class="div_http localhost">
+    <b>HTTP</b>
+    <ul>
+    <li><a target="server_index"    href="http://localhost:8080/server_index.html"      >localhost<em>:8080 </em>/server_index.html     </a></li>
+    <li><a target="server_index"    href="http://localhost/server_index.html"           >localhost<em>:80   </em>/server_index.html     </a></li>
+    <li><a target="server_index"    href="http://localhost:81/server_index.html"        >localhost<em>:81   </em>/server_index.html     </a></li>
+    <li><a target="server_index"    href="http://localhost:82/server_index.html"        >localhost<em>:82   </em>/server_index.html     </a></li>
+    </ul>
+   </div>
+
+   <div class="div_https localhost">
+    <b>HTTPS</b>
+    <ul>
+    <li><a target="server_index"    href="https://localhost/server_index.html"          >localhost<em>:443  </em>/server_index.html    </a></li>
+    <li><a target="server_index"    href="https://localhost:444/server_index.html"      >localhost<em>:444  </em>/server_index.html    </a></li>
+    <li><a target="server_index"    href="https://localhost:445/server_index.html"      >localhost<em>:445  </em>/server_index.html    </a></li>
+    </ul>
+   </div>
+
+   <!--}}}-->
+   <h1  class="localhost">LOCALHOST DOWNLOAD</h1> <!--{{{-->
+
+   <div class="div_http localhost">
+    <b>HTTP</b>
+    <ul>
+    <li><a target="Download/index"  href="http://localhost:8080/Download/index.html"    >localhost<em>:8080 </em>/Download/index.html  </a></li>
+    <li><a target="Download/index"  href="http://localhost/Download/index.html"         >localhost<em>:80   </em>/Download/index.html  </a></li>
+    <li><a target="Download/index"  href="http://localhost:81/Download/index.html"      >localhost<em>:81   </em>/Download/index.html  </a></li>
+    <li><a target="Download/index"  href="http://localhost:82/Download/index.html"      >localhost<em>:82   </em>/Download/index.html  </a></li>
+    </ul>
+   </div>
+
+   <div class="div_https localhost">
+    <b>HTTPS</b>
+    <ul>
+    <li><a target="Download/index"  href="https://localhost/Download/index.html"        >localhost<em>:443  </em>/Download/index.html </a></li>
+    <li><a target="Download/index"  href="https://localhost:444/Download/index.html"    >localhost<em>:444  </em>/Download/inde.htmls </a></li>
+    <li><a target="Download/index"  href="https://localhost:445/Download/index.html"    >localhost<em>:445  </em>/Download/inde.htmls </a></li>
+    </ul>
+   </div>
+
+   <!--}}}-->
+  </div>
+ </body>
+</html>
+

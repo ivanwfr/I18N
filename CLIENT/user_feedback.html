@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!-- ┌─────────────────────────────────────────────────────────────────────┐ -->
+<!-- │ [user_feedback_dev.html]                       _TAG (211008:21h:14) │ -->
+<!-- ├─────────────────────────────────────────────────────────────────────│ -->
+<!-- │ ➔ USER FEEDBACK EDIT PAGE ➔ TO ANSWER {question, qcm, comment}      │ -->
+<!-- └─────────────────────────────────────────────────────────────────────┘ -->
+<html lang="">
+ <head> <!--{{{-->
+  <meta charset="utf-8"/>
+  <title>User feedback</title>
+  <link href="feedback.css" rel="stylesheet" type="text/css" />
+ </head> <!--}}}-->
+
+ <body>
+
+
+
+
+
+
+  <!-- ┌───────────────────────────────────────────────────────────────────┐ -->
+  <!-- │ PAGE-TITLE                                                        │ -->
+  <!-- └───────────────────────────────────────────────────────────────────┘ -->
+<!--{{{-->
+  <h1 class="i18n">Page d'évaluation</h1>
+
+
+<!--}}}-->
+
+  <!-- ┌───────────────────────────────────────────────────────────────────┐ -->
+  <!-- │ [feedback_div]                 JSON TREE OF [subjects, questions] │ -->
+  <!-- └───────────────────────────────────────────────────────────────────┘ -->
+<!--{{{-->
+  <div id="feedback_div" onclick='feedback_tree.form_div_onclick(event);'></div>
+
+<!--}}}-->
+
+  <!-- ┌───────────────────────────────────────────────────────────────────┐ -->
+  <!-- │ FORM [submit .. good, correct, wrong, bad .. comment]             │ -->
+  <!-- └───────────────────────────────────────────────────────────────────┘ -->
+<!--{{{-->
+  <div id="form_div">
+
+    <form action="/feedback_submit" method="POST" id="dialog_form" onchange='feedback_tree.form_div_sync(event);'>
+    <!-- hidden ➔ [user_id] [lang] [subject] [question] [question_id] [qcm_rank] {{{-->
+
+     <input  type="hidden" id="user_id"     name="user_id"     />
+     <input  type="hidden" id="lang"        name="lang"        />
+     <input  type="hidden" id="subject"     name="subject"     />
+     <input  type="hidden" id="question"    name="question"    />
+     <input  type="hidden" id="question_id" name="question_id" />
+     <input  type="hidden" id="qcm_rank"    name="qcm_rank"    />
+     <input  type="hidden" id="feedback"    name="feedback"    />
+
+     <!--}}}-->
+     <!-- [submit] [purge] {{{-->
+     <button type="submit" id="button_submit" name="button_submit" formaction="/feedback_submit" class="i18n disabled" formtarget="response_iframe">Envoyer  </button>
+     <button type="submit" id="button_purge"  name="button_purge"  formaction="/feedback_purge"  class="i18n disabled" formtarget="response_iframe">Supprimer</button>
+
+     <!--}}}-->
+     <!-- [qcm] or [good correct wrong bad] .. radio {{{-->
+     <!--hr-->
+
+     <pre                  id="feedback_panel">
+      <input type="radio"  id="good"          name="feedback" value="good"    /> <label for="good"      class="i18n" > good    </label>
+      <input type="radio"  id="correct"       name="feedback" value="correct" /> <label for="correct"   class="i18n" > correct </label>
+      <input type="radio"  id="wrong"         name="feedback" value="wrong"   /> <label for="wrong"     class="i18n" > wrong   </label>
+      <input type="radio"  id="bad"           name="feedback" value="bad"     /> <label for="bad"       class="i18n" > bad     </label>
+     </pre>
+
+     <pre                  id="qcm_panel">
+      <!--ut type="radio"  id="qcm0"          name="qcm_rank" value="qcm0"    /> <label for="qcm0"      class="i18n" > qcm0    </label-->
+      <!--ut type="radio"  id="qcm1"          name="qcm_rank" value="qcm1"    /> <label for="qcm1"      class="i18n" > qcm1    </label-->
+      <!--ut type="radio"  id="qcm2"          name="qcm_rank" value="qcm2"    /> <label for="qcm2"      class="i18n" > qcm2    </label-->
+     </pre>
+     <!--}}}-->
+     <!-- [comment] {{{-->
+     <hr>
+
+     <label   for="comment" class="i18n">Commentaire</label><br>
+     <textarea
+      onkeyup     = 'feedback_tree.comment_monitor(event);'
+      id          = "comment" name="comment"
+      class       = "i18n"
+      cols        = "80" rows="10"
+      maxlength   = "240"
+      placeholder = "Dites-nous ce que vous en pensez"
+      ></textarea>
+
+     <em    id="ta_status"   ></em>
+
+     <div   id="status_panel"></div>
+     <!--}}}-->
+    <iframe id="response_iframe" name="response_iframe"> </iframe>
+
+   </form>
+  </div>
+
+<!--}}}-->
+
+  <!-- ┌───────────────────────────────────────────────────────────────────┐ -->
+  <!-- │ STATIC  SCRIPTS            FROM SERVER-SIDE DYNAMIC JSON BUILDER  │ -->
+  <!-- └───────────────────────────────────────────────────────────────────┘ -->
+<!-- DATA {{{-->
+  <script src="feedback_topics_json.js"  ></script> <!-- .. topics    TABLE -->
+  <script src="feedback_replies_json.js" ></script> <!-- .. feedbacks TABLE -->
+  <script src="i18n_translate_json.js"   ></script> <!-- .. i18n      TABLE -->
+<!--}}}-->
+<!-- GUI {{{-->
+  <script src="feedback_tree.js"         ></script>
+  <script src="../I18N/i18n_translate.js"></script>
+<!--}}}-->
+
+ </body>
+
+</html>
+<!--
+vim: sw=4
+-->

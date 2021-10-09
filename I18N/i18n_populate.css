@@ -1,0 +1,158 @@
+/* ┌──────────────────────────────────────────────────────────────────────┐ */
+/* │ [i18n_populate.css]                             _TAG (210917:20h:05) │ */
+/* └──────────────────────────────────────────────────────────────────────┘ */
+.sanitized { color: #F00; font-weight:bolder; font-style: oblique; }
+/* [page_id] {{{*/
+body     { background: #EEE; }
+
+#page_id { position: fixed; top: 1em; right: 1em; opacity: 0.2; }
+
+/*}}}*/
+/* [question] {{{*/
+
+#populate_div ol  { width      : max-content; }
+#populate_div li  { cursor     : pointer;     }
+.question         {
+    user-select      : none;
+    margin           : 0.2em;
+    border           : solid 1px lightgray;
+    border-radius    : 0.3em;
+    box-shadow       : 1px 1px 2px rgba(136,136,136,0.53);
+    padding          : 0.2em 1.0em;
+}
+
+
+.has_rank{ background : linear-gradient(to bottom right, rgba(000,255,000,1.00), rgba(000,255,000,0.13) 10px, rgba(000,255,000,0.13)); }
+.good    { background : linear-gradient(to bottom right, rgba(000,255,000,1.00), rgba(000,255,000,0.13) 10px, rgba(000,255,000,0.13)); }
+.correct { background : linear-gradient(to bottom right, rgba(221,221,000,1.00), rgba(221,221,000,0.13) 10px, rgba(221,221,000,0.13)); }
+.wrong   { background : linear-gradient(to bottom right, rgba(255,000,000,1.00), rgba(255,000,000,0.13) 10px, rgba(255,000,000,0.13)); }
+.bad     { background : linear-gradient(to bottom right, rgba(000,000,000,1.00), rgba(000,000,000,0.13) 10px, rgba(000,000,000,0.13)); }
+.question:hover   { outline    : 1px solid red; }
+
+/*}}}*/
+/* [form_div] {{{*/
+#form_div {
+    display          : none;
+    margin           : 0.5em;
+    background       : rgba(255,255,255,0.27);
+    width            : max-content;
+    border-radius    : 0.5em;
+    padding          : 0.5em;
+    border           : solid 1px gray;
+    box-shadow       : 1px 1px 3px rgba(136,136,136,0.53);
+}
+
+form {
+    margin           : 0.5em;
+}
+
+#status_panel {
+    display          : none;
+    background       : yellow;
+    border           : 3px solid orange;
+    outline          : 3px dotted black;
+    opacity          : 0.7;
+    transform        : rotate(-1deg);
+    transform-origin : 100% 0;
+}
+/*}}}*/
+/* [☺☺☺ good correct wrong bad] {{{*/
+#dialog_form    input         { margin-top: 0.6em; }
+#dialog_form    input::before {
+    font-size      : 180%;
+    line-height    : 0.5em;
+    vertical-align : middle;
+    color          : rgba(128,128,128,0.8);
+    text-shadow: 1px 1px 2px #666;
+    margin         : -2.5em;
+    opacity        : 0.5;
+    transition     : all ease-out 100ms;
+}
+#dialog_form    input:checked::before{
+    margin         : -1.2em;
+    opacity        : 1.0;
+    font-size      : 250%;
+}
+                input.blink::before  { margin-left : -1.5em !important; }
+
+#dialog_form    #good::before {   content: '\1f603'; color: #0F0; }
+#dialog_form #correct::before {   content: '\1f610'; color: #FF0; }
+#dialog_form   #wrong::before {   content: '\1f612'; color: #F00; }
+#dialog_form     #bad::before {   content: '\1f620'; color: #000; }
+/*}}}*/
+/* [response_iframe] {{{*/
+#response_iframe {
+    display          : block;
+    border           : none;
+    height           : 3em;
+    width            : 100%;
+    color            : #888;
+}
+
+/*}}}*/
+/* [button label em] {{{*/
+button { user-select : none; }
+
+#qcm_panel            { margin           : 0; }
+#fieedback_panel      { margin           : 0; }
+
+#form_div hr          { margin-top       : 1em;                              }
+#form_div input+label { user-select      : none;                             }
+#form_div input+label { display          : inline-block;                     }
+#form_div input+label { min-width        : 90%;                              }
+#form_div input+label { margin-left      : -2em;                             }
+#form_div input+label { padding          : 5px 0.5em 2px 3em;                }
+#form_div input+label { border           : 1px solid rgba(128,128,128,0.3 ); }
+#form_div input+label { background       : linear-gradient(to right, rgba(136,136,136,0.2), rgba(136,136,136,0.2) 30px, #AAA1 30px, transparent); }
+/*
+input+label { background-color :           rgba(136,136,136,0.05); }
+input+label { vertical-align   : text-bottom; }
+input       { vertical-align   : text-bottom; }
+*/
+
+em {
+    margin           : 0 0.5em;
+    border           : 1px solid navy;
+    border-radius    : 0.3em;
+    background-color : #CCF;
+    padding-left     : 0.3em;
+    padding-right    : 0.3em;
+    font-style       : normal;
+}
+/*}}}*/ 
+/* [textarea] {{{*/
+textarea          ::placeholder { font-style  : oblique; }
+textarea          ::placeholder { font-family : cursive; }
+textarea          ::placeholder { color       : #BBB; }
+textarea.mandatory::placeholder { color       : #D00; }
+
+textarea.mandatory              { outline     : 3px dashed rgba(255,0,0,0.5); }
+textarea.mandatory.min_reached  { outline     : 3px dashed rgba(192,192,192,0.5); }
+
+#ta_status                      { display : block; border  :  none; }
+
+/*}}}*/ 
+/* [details summary] {{{*/
+details {
+    margin-bottom : 1em;
+}
+summary {
+    min-width   :  20em;
+    cursor      :  pointer;
+    user-select :  none;
+}
+summary em { margin : 0.1em 0.2em; padding: 0.1em 1.0em; }
+/*}}}*/
+/* ECC colors {{{*/
+.gradient1 { background : linear-gradient(to right, rgba(150,  75,   0, 1),  rgba(150,  75,   0, 0.7) 0.5em,  #FFF 0.5em, transparent); }
+.gradient2 { background : linear-gradient(to right, rgba(255,   0,   0, 1),  rgba(255,   0,   0, 0.7) 0.5em,  #FFF 0.5em, transparent); }
+.gradient3 { background : linear-gradient(to right, rgba(255, 165,   0, 1),  rgba(255, 165,   0, 0.7) 0.5em,  #FFF 0.5em, transparent); }
+.gradient4 { background : linear-gradient(to right, rgba(255, 255,   0, 1),  rgba(255, 255,   0, 0.7) 0.5em,  #FFF 0.5em, transparent); }
+.gradient5 { background : linear-gradient(to right, rgba(154, 205,  50, 1),  rgba(154, 205,  50, 0.7) 0.5em,  #FFF 0.5em, transparent); }
+.gradient6 { background : linear-gradient(to right, rgba(100, 149, 237, 1),  rgba(100, 149, 237, 0.7) 0.5em,  #FFF 0.5em, transparent); }
+.gradient7 { background : linear-gradient(to right, rgba(238, 130, 238, 1),  rgba(238, 130, 238, 0.7) 0.5em,  #FFF 0.5em, transparent); }
+.gradient8 { background : linear-gradient(to right, rgba(160, 160, 160, 1),  rgba(160, 160, 160, 0.7) 0.5em,  #FFF 0.5em, transparent); }
+.gradient9 { background : linear-gradient(to right, rgba(255, 255, 255, 1),  rgba(255, 255, 255, 0.7) 0.5em,  #FFF 0.5em, transparent); }
+.gradient0 { background : linear-gradient(to right, rgba(128, 128, 128, 1),  rgba(128, 128, 128, 0.7) 0.5em,  #FFF 0.5em, transparent); }
+
+/*}}}*/

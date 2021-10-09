@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!-- ┌─────────────────────────────────────────────────────────────────────┐ -->
+<!-- │ [i18n_populate.html]                           _TAG (210917:20h:04) │ -->
+<!-- ├─────────────────────────────────────────────────────────────────────│ -->
+<!-- │ ➔ I18N EDIT PAGE ➔ TO POPULATE MISSING {key: value} TRANSLATIONS    │ -->
+<!-- └─────────────────────────────────────────────────────────────────────┘ -->
+<html lang="">
+ <head> <!--{{{-->
+  <meta charset="utf-8"/>
+  <title>i18n_populate</title>
+  <link href="i18n_populate.css" rel="stylesheet" type="text/css" />
+ </head> <!--}}}-->
+
+ <body onload='document.getElementsByTagName("H1")[0].innerHTML += " on <em>"+location.hostname+"</em>";'>
+
+
+
+
+
+
+  <!-- ┌───────────────────────────────────────────────────────────────────┐ -->
+  <!-- │ PAGE-TITLE                                                        │ -->
+  <!-- └───────────────────────────────────────────────────────────────────┘ -->
+<!--{{{-->
+  <h1>Translation required for <em>i18n TABLE</em></h1>
+
+<!--}}}-->
+
+  <!-- ┌───────────────────────────────────────────────────────────────────┐ -->
+  <!-- │ [populate_div]                       JSON LIST OF [key,val] pairs │ -->
+  <!-- └───────────────────────────────────────────────────────────────────┘ -->
+<!--{{{-->
+  <div id="populate_div" onclick='i18n_populate.form_div_onclick(event);'></div>
+
+<!--}}}-->
+
+  <!-- ┌───────────────────────────────────────────────────────────────────┐ -->
+  <!-- │ FORM [submit value] .. (selected key value dialog FORM)           │ -->
+  <!-- └───────────────────────────────────────────────────────────────────┘ -->
+<!--{{{-->
+  <div id="form_div">
+    <form id="dialog_form" onchange='i18n_populate.form_div_sync(event);' action="/populate_submit" method="POST">
+    <!-- hidden ➔ [user_id] [lang] [subject] [question] //FIXME not a i18n generic requirement {{{-->
+     <input  type="hidden" id="user_id"  name="user_id"  />
+     <input  type="hidden" id="lang"     name="lang"     />
+     <input  type="hidden" id="subject"  name="subject"  />
+     <input  type="hidden" id="question" name="question" />
+     <!--}}}-->
+     <!-- [submit] [purge] {{{-->
+     <button type="submit" id="button_submit" name="button_submit" formaction="/populate_submit" class="disabled" formtarget="response_iframe">Envoyer  </button>
+     <button type="submit" id="button_purge"  name="button_purge"  formaction="/populate_purge"  class="disabled" formtarget="response_iframe">Supprimer</button>
+  
+     <!--}}}-->
+     <!-- [value] {{{-->
+     <hr>
+  
+     <label   for="comment">Translation</label><br>
+     <textarea
+      onkeyup     = 'i18n_populate.comment_monitor(event);'
+      id          = "comment" name="comment"
+      cols        = "80" rows="3"
+      maxlength   = "240"
+      placeholder = "translation"
+      ></textarea>
+  
+     <!--}}}-->
+    <iframe id="response_iframe" name="response_iframe"> </iframe>
+   </form>
+  </div>
+
+<!--}}}-->
+
+  <!-- ┌───────────────────────────────────────────────────────────────────┐ -->
+  <!-- │ STATIC  SCRIPTS            FROM SERVER-SIDE DYNAMIC JSON BUILDER  │ -->
+  <!-- └───────────────────────────────────────────────────────────────────┘ -->
+<!-- DATA {{{-->
+  <script src="populate_lang_key_val_json.js"></script> <!-- .. i18n      TABLE -->
+  <script src="i18n_translate_json.js"       ></script> <!-- .. i18n      TABLE -->
+
+<!--}}}-->
+<!-- GUI SCRIPT {{{-->
+  <script src="i18n_translate.js"></script>
+  <script src="i18n_populate.js"             ></script>
+<!--}}}-->
+
+ </body>
+
+</html>
+
+<!--
+vim: sw=4
+-->

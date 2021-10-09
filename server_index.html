@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!-- ┌─────────────────────────────────────────────────────────────────────┐ -->
+<!-- │ [SERVER_INDEX]                                 _TAG (210913:18h:57) │ -->
+<!-- └─────────────────────────────────────────────────────────────────────┘ -->
+<html lang="FR">
+ <head>
+  <meta charset="utf-8"/>
+  <title>server_index</title>
+ </head>
+ <body>
+
+<style>
+SUMMARY { cursor      : pointer; }
+SUMMARY { user-select : none;    } /* to allow shift modifier */
+</style>
+
+   <details id="iframe_CLIENT">
+   <summary>iframe_CLIENT</summary>
+   <iframe id = "iframe_CLIENT"
+    src       = "./CLIENT/index_CLIENT.html"
+    style     = "
+        background-color : #484;
+        width            : 100%;
+        min-height       : 25rem;
+        padding          : 5px;
+        "
+    ></iframe>
+   </details>
+
+   <hr>
+
+   <details id="iframe_CONTROL">
+   <summary>iframe_CONTROL</summary>
+   <iframe id = "iframe_CONTROL"
+    src       = "./CONTROL/index_CONTROL.html"
+    style     = "
+        background-color : #448;
+        width            : 100%;
+        min-height       : 80rem;
+        padding          : 5px;
+        "
+    ></iframe>
+   </details>
+
+<!--
+-->
+  <script src="/CONTROL/t_details.js"></script> 
+  <script> t_details.t_details_onload("server_index.html"); </script>
+
+ </body>
+</html>
+<!--
+vim: sw=4
+-->
+

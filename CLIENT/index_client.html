@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<!-- ┌─────────────────────────────────────────────────────────────────────┐ -->
+<!-- │ [index_client.html]                            _TAG (210917:20h:05) │ -->
+<!-- ├─────────────────────────────────────────────────────────────────────│ -->
+<!-- │ ➔ I18N EDIT SCRIPT TO POPULATE MISSING {key: value} TRANSLATIONS    │ -->
+<!-- └─────────────────────────────────────────────────────────────────────┘ -->
+<html lang="FR">
+ <head> <!--{{{-->
+  <meta charset="utf-8"/>
+  <title>server_control</title>
+<!-- ┌─────────────────────────────────────────────────────────────────────┐ -->
+<!-- │ STYLE                                                               │ -->
+<!-- └─────────────────────────────────────────────────────────────────────┘ -->
+ <!--{{{-->
+<style>
+/* COLORS */
+/* COLOR-CODED {{{ */
+
+/* ECC #964B00 #FF0000 #FFA500 #FFFF00 #9ACD32 #6495ED #EE82EE #A0A0A0 #FFFFFF #CFB53B #C0C0C0 */
+/*      111111  222222  333333  444444  555555  666666  777777  888888  999999  000000  111111 */
+.cc1 { color: #FFF; background-color:#964B00 !important; padding: 0 0.2em; }
+.cc2 { color: #FFF; background-color:#FF0000 !important; padding: 0 0.2em; }
+.cc3 { color: #000; background-color:#FFA500 !important; padding: 0 0.2em; }
+.cc4 { color: #000; background-color:#FFFF00 !important; padding: 0 0.2em; }
+.cc5 { color: #000; background-color:#9ACD32 !important; padding: 0 0.2em; }
+.cc6 { color: #000; background-color:#6495ED !important; padding: 0 0.2em; }
+.cc7 { color: #000; background-color:#EE82EE !important; padding: 0 0.2em; }
+.cc8 { color: #000; background-color:#A0A0A0 !important; padding: 0 0.2em; }
+.cc9 { color: #000; background-color:#FFFFFF !important; padding: 0 0.2em; }
+.cc0 { color: #FFF; background-color:#202020 !important; padding: 0 0.2em; }
+
+.bg1 { background-color : rgba(150,  75,   0, .9); color : black; }
+.bg2 { background-color : rgba(255,   0,   0, .9); color : black; }
+.bg3 { background-color : rgba(255, 165,   0, .9); color : black; }
+.bg4 { background-color : rgba(255, 255,   0, .9); color : black; }
+.bg5 { background-color : rgba(154, 205,  50, .9); color : black; }
+.bg6 { background-color : rgba(100, 149, 237, .9); color : black; }
+.bg7 { background-color : rgba(238, 130, 238, .9); color : black; }
+.bg8 { background-color : rgba(160, 160, 160, .9); color : black; }
+.bg9 { background-color : rgba(255, 255, 255, .9); color : black; }
+.bg0 { background-color : rgba(128, 128, 128, .9); color : black; }
+
+.fg1 {            color : rgba(150,  75,   0, 1) !important; text-shadow : 0px 1px 1px #222; } /* overrides [ccX] color */
+.fg2 {            color : rgba(255,   0,   0, 1) !important; text-shadow : 0px 1px 1px #222; }
+.fg3 {            color : rgba(255, 165,   0, 1) !important; text-shadow : 0px 1px 1px #222; }
+.fg4 {            color : rgba(255, 255,   0, 1) !important; text-shadow : 0px 1px 1px #222; }
+.fg5 {            color : rgba(154, 205,  50, 1) !important; text-shadow : 0px 1px 1px #222; }
+.fg6 {            color : rgba(100, 149, 237, 1) !important; text-shadow : 0px 1px 1px #222; }
+.fg7 {            color : rgba(238, 130, 238, 1) !important; text-shadow : 0px 1px 1px #222; }
+.fg8 {            color : rgba(160, 160, 160, 1) !important; text-shadow : 0px 1px 1px #222; }
+.fg9 {            color : rgba(255, 255, 255, 1) !important; text-shadow : 0px 1px 1px #222; }
+.fg0 {            color : rgba(  0,   0,   0, 1) !important; text-shadow : 0px 1px 1px #222; }
+
+/* }}} */
+
+/* LAYOUT */
+/* :disabled {{{*/
+:disabled {
+    border  : dashed 5px black;
+    opacity : 50%;
+}
+/*}}}*/
+/* display {{{*/
+#query_div   { display : grid;         }
+/*
+FORM>ol  { display : grid;         }
+*/
+#user_id_div { display : inline-block; }
+#lang_div    { display : inline-block; }
+
+/*}}}*/
+/* #query_iframe {{{*/
+
+   #query_iframe { width  : -webkit-fill-available; }    /* Chrome  */
+   #query_iframe { width  :         -moz-available; }    /* Firefox */
+/* #query_iframe { height : 30em;                   } */
+
+/*}}}*/
+/* textarea {{{*/
+           textarea      { min-width   :  32em; }
+           textarea      { min-height  :   2em; }
+           textarea      { padding     : 0.5em; }
+
+#query_div textarea      { max-height  : 250px; }
+
+/*}}}*/
+/* margin {{{*/
+
+ body > *     { margin      : 0.5em;        }
+ table        { margin      : 0.5em;        }
+ textarea     { margin      : 0.2em;        }
+ p            { margin-left : 1.0em;        }
+#query_div    { margin      : 1.0em;        }
+#query_iframe { margin      : 1.0em;        }
+FORM>ol       { margin      : 1.0em;        }
+.missing      { margin-left : 2.0em;        }
+
+/* left-right only */
+ button       { margin      : 0.1em  1.0em; }
+ label        { margin      : 0.1em  1.0em; }
+#lang_div     { margin      : 0.1em  1.0em; }
+#user_id_div  { margin      : 0.1em  1.0em; }
+/*}}}*/
+/* transition {{{*/
+#user_id_div { transition       : all 250ms ease-out; }
+
+/*}}}*/
+/* float {{{*/
+.float_R { float : right; }
+
+/*}}}*/
+ /* details {{{*/
+ details[open]>details { margin-left: 1em; }
+
+ details      >summary { cursor  : zoom-in; }
+ details[open]>summary { cursor  : zoom-out; }
+ details[open]>summary { width  : fit-content; min-width: 2em; }
+
+         details[open]>summary { padding : 1.0em; }
+ details details[open]>summary { padding : 0.5em; }
+
+                                 details[open]>summary { background-color : rgba(150,  75,   0, .9); color : black; }
+                         details details[open]>summary { background-color : rgba(255,   0,   0, .9); color : black; }
+                 details details details[open]>summary { background-color : rgba(255, 165,   0, .9); color : black; }
+         details details details details[open]>summary { background-color : rgba(255, 255,   0, .9); color : black; }
+ details details details details details[open]>summary { background-color : rgba(154, 205,  50, .9); color : black; }
+ /*}}}*/
+ button       { max-height : 10em; overflow: auto; }
+
+/* FRAMING */
+/* border-radius {{{*/
+ #query_iframe div   { border-radius : 0.5em; }
+ body>*       { border-radius : 0.5em; }
+ button       { border-radius : 0.5em; }
+ div          { border-radius : 0.3em; }
+ table        { border-radius : 0.5em; }
+#lang_div     { border-radius : 1.0em; }
+#query_div    { border-radius : 0.5em; }
+#query_iframe { border-radius : 0.5em; }
+FORM>ol       { border-radius : 0.5em; }
+#user_id_div  { border-radius : 1.0em; }
+.user_id      { border-radius : 0.2em; }
+.lang         { border-radius : 0.2em; }
+
+/*}}}*/
+/* border-color {{{*/
+ body,
+ button,
+ div,
+ em,
+ iframe       { border-color : #FFF #CCC; }
+
+/*}}}*/
+/* border {{{*/
+ button       { border-width  : 1px; }
+ label        { border        : 1px outset;       }
+#lang_div     { border        : double 1px;   }
+#user_id_div  { border        : double 1px;   }
+.missing      { border        : 2px dashed;   }
+
+/*}}}*/
+/*  box-shadow {{{*/
+ button       { box-shadow : 1px 1px 3px 2px #888       ; } /* x y blur spread */
+ button:hover { box-shadow : 0px 0px 0px 3px #F00       ; }
+ button:active{ box-shadow : 0px 0px 1em 9em rgba(000,000,000,0.3) inset; }
+ div          { box-shadow : 2px 2px 5px     #888       ; }
+ table        { box-shadow : 1px 1px 3px     #888  inset; }
+#query_form>* { box-shadow : 1px 1px 3px     #888       ; }
+.user_id      { box-shadow : 1px 1px 3px     #888       ; }
+.lang         { box-shadow : 1px 1px 3px     #888       ; }
+
+/*}}}*/
+
+/* CONTENT */
+/* padding {{{*/
+ body > *    { padding : 0.5em;       }
+ div         { padding : 0.3em;       }
+ button      { padding : 0.1em 1.0em; }
+ label       { padding : 0.1em 1.0em; }
+#query_div   { padding : 0.5em;       }
+FORM>ol   { padding : 0.5em;       }
+#user_id_div { padding : 0.1em 1.0em; }
+.lang        { padding : 0 0.5em;     }
+.user_id     { padding : 0 0.5em;     }
+#user_id_div { padding : 0 1.0em;     }
+#lang_div    { padding : 0 1.0em;     }
+
+/*}}}*/
+/* background {{{*/
+ #query_iframe * div   { background-color : #DDD !important;                  }
+ body         { background-color : #DDD;                  }
+
+ div, table   { background : linear-gradient(to bottom right, rgba(128,128,128,0.1), rgba(128,128,128,0.5)); }
+
+#query_div    { background-color : rgba(128,192,192,0.3); }
+#query_iframe { background-color : #DDD;                  }
+
+.missing      { background-color : red;                   }
+#clr_user_id  { background-color : rgba(255,000,000,0.3); }
+#clr_lang     { background-color : rgba(255,000,000,0.3); }
+.lang         { background-color : rgba(000,255,000,0.3); }
+.user_id      { background-color : rgba(255,255,000,0.3); }
+
+ details      { background       : linear-gradient(to bottom right, #DDD, rgba(034,034,034,0.5)); }
+/*}}}*/
+/* flag {{{*/
+BUTTON.lang.selected { box-shadow: 0 0 0 3px red; }
+
+.flag {
+ display               : inline-block;
+ box-shadow            : none;
+ width                 : 5em;
+ height                : 2em;
+}
+.lang.flag {
+ background-position   : center;
+ background-position-x : 2.2em;
+ font-weight           : bolder;
+ text-shadow           : 1px 1px white;
+ padding-right         : 3em !important;
+}
+.bg_FR { background-repeat: no-repeat;  background-image:  url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEQklEQVR4nL2XvY5bVRSFv73P8fXPTJJRFKIUQUJCoqGCHkXi5wGAhgcA8QTkBVKloKeip0T0SLSIEiSkpEtSZKKghMnA+NpnL4pzrm0yScaDZtjS1bWv7bPXXvtnbcNxsxc8Oys7drZt3AV4e6929+d/8B8sXuA8Bp95w/ngeBNIcDZmLwFS33z2yXcXAh+5DDnmGKowDKCfL3nvxht88eW77OzmE70tbn/F/NuvIaXBnWqIAoWE28Xfy2OA/OGNWzcPDg9uX7myg1lgcvD19wGyF/b3H7GzK548efJK5763x7N791hOL2A7F1uYavELzNHBU+68+YyfF/mt/PDR3Y8+/fh9rr8+4++jqIArBuQVwWIRXLu2C4zY29s7kYHpO2+z1D42nbUnLbMmiMAvXYbvf+DW3cMPcs45Hv9xxMP9p5gZbkJevzuUQt8X5n8tTnQ8WH/nN+KXn7DZLmCgqAAEQcEVjBMIJ5uBIbouAYEs4WxUiiBGhqWt/WO5Q6MJ6hoD0aJXYApkAUc9Rk8GrwRFYGZYiPAaeytELE7bDAakFoSte0DWPjNwA4cMoIGiFrHaZd5okzDpBY5eYmrOtDFGrNVBMXBvRem10dSQqYiCoAgRFBlFRsgop/CPrFYxQNh6AkSjojQi0JqBiKjMCCQ19PUQKdajahv/855y0GPRt46ygWtwxxSrIstuoCLChZeWJhchrZArWk62tUVg8yU2KjXwaPRLEAVPQ3A2MKBKv7XGK8JNrNpB0C+W2wMASC3/ZthQewLkaFnqjDHIGBQJSThQXCSDaNNr0RcOD3v6/oxkwSqoIafZAJU6rIsLL46SKH3QL0rtFrdz0+gMhiQC4QFBsJiX1oZ+rstBA9BqABGCUqpU+yBI/w+AOmwUAe6rFt4U8XMFEAqWpRYf2pTiYQ609tzWnDr/seOrznC1OszuTkoJKLX1zEmmNg8cJEoROZ8CgVUQGtp4tYAN+IR5bYacUmIydpbLRDJDSVhdi3BVaXZg3J28Ca38O1U9BwVNbORSmDmehDvkUXIm444YASYSIHdcWi0nCWMy2l6PLTmewYaNkxZ9oY7iCNwCN8jdKDMbj4kiLFWO3L3qCTX/yQqT8SkAZPAOrOPf9BtA3QkMJznklDMXZpl56UhU6kw1R8N+3GdjPOlOwUCL3oEUTZoBH17XwlgxMJ1O6ZZVLZPXHNWT6i17MBmfpgaE54KlUistmspZ3S9o4pQc8nQyS9PpiOWitOp3zMBsPYaWKZh1lYETRdHAk9W9MgOUNvDbHkBZpWWawvODB7/ev3r5Jkfzp7ip6URjoRGx6IOrr+3U87foxnxpTO4E3aCgjfq0sW4hfvwzPzB3rkfwefLk5jX7yQyZkGy9GyJSGrT9FeYJK6rLT6t4MycUbbYpUPhSo0cXZ+mbk8M5Z3ue0PUedn42nL/5n/SYnbUKv/S8fwDq7hPokwZEwwAAAABJRU5ErkJggg=="); }
+.bg_EN { background-repeat: no-repeat;  background-image:  url("data:image/png;base64,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"); }
+.bg_DE { background-repeat: no-repeat;  background-image:  url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADQ0lEQVR4nK2XMW5kNwyGP1LyOIvAxcJwYSCVm1S+QoogZcokVcrcIVfIETa3MJAzpNluyzlAtgkCF7M24DcjMoXEN3pvZrzrGRMgniRz+P8iKUqGXZE9a68he/1K93VA29w7G+U0sT14Fpi5Aw/gnsjcwTHS79xm8zo5Ozu7KKWciQgiMhq04UkpcXfvxrEkZvYfgCwWi9+HYfjj+voaVcXdA5iOy0kSHNwdVeX+/p6HhwcuLi6+zcMw/HB7e8vNzQ2Pj48ApJRG424DR4mI4O6Y2fi9urri7u6O1Wr1fVZVWy6XLJdLVJWUEsAIrnpaDQawiFBKAaCUQks32d05Pz+vk5zHCLxWGtx9omZGKYX1eo27k4PJHDRCF9+XRMLMDhIPrM1mA0AOliEBFKA9mS8lsc/ObHuaA09VyXHwQ4sZmhJJFXNH205chGK7LeG5FAVxB0QVM8Pa3AFzrwQ+Tem3vxq0gtz2RZl2BZFq517VbLvW+zNv7c6rz00BqVHKf4nwo9L1QwNNzZGDenUSgO6wXtdvKeDyTKtysLIlGArghV8R8sdmaN7ADJAwssrUrGoAB6HP1YR5JT1ZM8QMcedRWhGOoB07aOFfF1hvmiOtt0R/czwnwm73Fxmj3S4d2eYvDLzlcT10+ZIpuHYgsJuGg8GZ3nV5wiwiUErbrWxDGHWlTO9H79bC7wvuzzxWZ0TBW97UwGYh7x3vG8/XDj5BSkdgzGcjEeH2CLl9vtgOSUSlrxWn+m5FkCkGD96s08xa2FbSS0nsC0GEaIuR5SeF7wQ27erV1Hbf1cSE/pdIAPu2n9Cia46g8JUhfzpZfxb4JfY336XOnL7kZtTZeGzAzY+ifytZPu37cUgf+mMeJgE2/xbAkQFytPvD4Ke8SfsmMT6ER78p9X1gwlg5vvj2+QsSu+e5i0CcgjlwOYHEzvlrWkmpQn7zpjZ9j7O59/AWjpPeZ2yskhCBxQLR9+/9HwARayrdONSP1LlPGRXgwwc+Cnz9TUrDbyKiIsTL1d1FVR3302qgvoow9xr3lBKqJsOQ/337Vt+d4Px1ZFKil5eX+vT05P1r+JRnef8fkYigqrJareII9MfiWXKvIQd9/Q+68tQwG7tyKwAAAABJRU5ErkJggg=="); }
+.bg_GR { background-repeat: no-repeat;  background-image:  url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEVklEQVR4nO2W24tVdRTHP2v9fnuf4zjNRWUkh8RLRjchg4JSujAlFJGYKERG0YPVP2AEWYQPGfQcRQQ9lAgm+tCL0O0lih6UppciU8kYx3EuZy7nvvdv9bDPmTPazKgzmS9+YP84e/NjrfVbv/Vd68BNbjACsGzNe0tC0DgkxtL2HO+8+SivvryJ0UKFvW9/w6Ev+4njKNu8QC8hAATEBEDGzu0tAPj2lXveqBSLB3p7u1A1BgYLbFibJ01KLOtq48TJU/Qsd8S5BbsHwIKBKIIwPl6hY9U+0uqpO3y1eP6JzX1bWb++m2K5xppCmZ6VPTjfBsCDD29ktFAlF2nLmBkjY5V5HQZoZSxAEEMChGDct6KdI0f6SSZ+7/PO+3DmrwlOnxtFxLhwscxYoQQsB+DEyQEGL5aIY5fZCkaSpHz0wVZGxspzBiAAwVoBCVkAAmbCjqc2cGD/V3gFnFNcpICQjxXVVrqjSMjFSi7KvqUB0sR4um/tVSR+fo4cXIEvFcoMDE7gfIqKMDlcolxKpjeNjJQZHJoi18hAGoxqJZnL5jUhIvi39vXx/IsvUa9UCBj1Wspddy6f3nT402dJ04A0sqIiiCpP7jhEZ2f+yk7IFGBmmJE9IiQ1+Pn70/jb13Vz94YOoGNWAxvv6Zn1+9ffnWXd2q7MxSwCkcYSGnWQpoAF0kYA5anA2GgJ39mRu+IpZmWsyFB7TBpSLA2kwQjBMAtgmQoUQBTVRjSayTBBsGIKdcPv3nOMVe/XwBKcCMOFIkc/e44tD60G4LFnPufCcJE4dpgIIQkUi1XM9lOp1rEA0jzuJcdvYPzrxTlHFCnbtv2IT+qByWIVpwHBmByvkc6QT6lSZ6qU4Eo1arWEej2hVM6KMJ+LFpa9BlHk8c4rXgWnggLqBdVW00nrKbVyhXzeE0WKcxHBFtcVm+RixcOMChXDmvfYIEkSVAXJ8oxzQtsSj3S8e3Vemsk0y5qISfZbYqj149M0UKsHnNZRU6rVhDS0AkhTo54EVNNL7K7qnV01MwmN+gjTErSsORqEEDF+3uGdU3KRIqaIQqR2SeHkc544dkSNRnRNNAaChcyxWcBMCGaIeCqxg2NHvzhuN4jdL+x6TQuFuQfK9aZaTfB/nB7l19/GqFUqGIY0BWDKZSJeBNkotMaVqCm5pW0MDZcRbtl+nGVbtmIJ4gQxQ1QRAZFmADq9XikkIbv65grZ+J2+/9CIQmK48MnrPurOk7+tEwlVEEFEUSwLAG0O9gWeXMHAaBYfIEaaGuLzTE3k8I9sXs0Dj2+inlSnT481/C72FlrpyMxIwIIAQpxv4/CH3fg92+9l1877F+Fl4Zz5tgcN6ZU3Xi/MwB88Mej+vPUs9XI5axqALvwP+JwErGXVIN/VRf9QSfzxn374+5ctOwmTKWLGdN3NQFAWgl1WvE0ZmihaqXCuv39AgF7gFQSH/WfCnx8VJdhFnP/4f/F3k/n4B5BCcsrnPhfRAAAAAElFTkSuQmCC"); }
+.bg_ES { background-repeat: no-repeat;  background-image:  url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFGElEQVR4nK2XXWwUVRSAv3tndku73W35KbTRQFuDEC2UACrhoRhDYpTEYNQoEQlBHwwP/sQHjCbEFw2JDxoiYAwPxAfxB1Ni0ER8MSEoiUgsiCXUQAxtRWnptrPbdmZ27vVh5u7Mli2Rtie5e//OPf/n7Bm4FUSVs7mAqnRFYtaAjPY6gSOZHagq/JThaSeYG8ZJQaYSmAkkNVdT9uHmTCqVTQVBSgiBECJGCJezc4nWOrFGg0ZrsVapYQBxKJ3es9zz9tW0tICUCK0N43ieLRgZtEZLSTAyglsscjGbXWFf8bzNW1atwmpvJxgfDxEtK3wkZfx4piBESEOp8pxuamLk+HEOOM4jti2E8nov4fZeQlsWSCs0+lxZQetwCAFBEFo4UKQEjAB2SWv8ksDDgpKJPQsRSjE75qEE6HJsW0CARKLxEYB934l7WLllLXHgJxnPVUkwAiQTboymHWew/UEfKEbSJQUQUwjcaTlIZpwRoJz+wCSqqAxVBQTRxdQ5+cjsQ4F6el2uDthU1i0DUwU2OEG812BXIhhmQUTAPFJlnOGRNBP1kpv9Ad7fUBge5JzbwqIWl0Y/IJfzqLRe0rUyGrF17JihHc3WFI1JELC4eCFP86az/LlBkikI5JDH6LLfqT0b0P/bGjZ2VLOIsZpRxOCIpAWCiImRrlIL35nE9Sbo6kpx7L0F5K+PEyyWuHmF96/L1Wfm83iHzeiEpqHWorKCG2saxfyyZWSl+U0sBAmpXWCc7g9/5av3e6CgeHhJlsLPLv/sG6LJfxp7/RNsfG03kOPwzlOc/KSPOKirQaycjLVPzgIoEWZHCfBYvnUr7c9vZ+z0ED0vXqZhA2wq+NTs3ktnsJUTB9bgsoB1r7/Coo3rAe9OBDBRb4SYjDSXZbNlRhuo+3GSoe/H8B+sZ8VbKQKgvqme0pjDvZ2t9H83wPzTinljmdswrwQZ+8WY34/WcfQ6Vyfo29WD07AEPaFZkC3wx9GlfL22ix92vcz45gcoiToUNpPNLZx/8iyqFEzD0igcgh0fJNNQViBn2+pof+cuBt/+lpqLTVzrGGXpl+f4Yt2bBMN5Hju4jbyXoe4NTf+r3aw6fD/SvvF/LQBxAFav/54zybXuGlou7CWtC2RagIca2VPczwdXjpBfNExutIcaZ4zWvoP0vnuTMHamwq3NkdTlOqCrjPA8nU2xcn+aUu8plC+RKkAEmtJyTapBUetqtEyRSqdxzp9gfXcTsWuno60QCKQlkik43dAcOlLks5N5mhsXo1ttvOE8fnY7NzqeIv3TEErWkulayqfdl/j8WA2VqWzoUHEmhMYWIul7M8yfjygT2vZcEa0l4PPo0dUUSq1cGQDsLK0fPUuOAfxSgRd25LClk9De0DaM42InhMa26xOhUK5YVgIZIMXqtmvROryrt/tYvUwlzixStqaz7a/onZ24UwmasXIyLbAL39xksjDBuAcI82cRpclc9IS6/BPOWiPQNGagdLmIXbrs4NcV8XwRMdSRIKKCxp10A7f03ijQEW0d3nrzFIxo7FyzsOa1SQIv8r8GpOkHZ6JyFdCRG5QMlVSKmqyk9pdA2D3jDOzsLNHoiIhhoh2by47MuME0qBnNhetiUCDr77aE+5JMSQmawA9AogVChsiz+TILTa8FSoQFB8u2QCvhufaN+Tn58ayVmy1UfJwuXLhQuq6rtdYIITDzTMF8lRk6UkrhOI7J3WSLfFvh5gKmpfUflaNFmxscKN0AAAAASUVORK5CYII="); }
+.bg_IT { background-repeat: no-repeat;  background-image:  url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEWUlEQVR4nLWXz25bRRTGf9+Z8bXdxnGqKIJGVQUUCQnBAhU2rBBCLBBizQMgHgH6CCxZIvUluuAhQOxYIFWCTStaqggSElIltmcOi5lr36Ru4oRyLGs81/fO+c53/l54VrTk2ouQpeeqszpgde+de4z/JnmJvtzqjB3lreIukNMHXEa6ludT+7LpffneKBk9AcIEDmbIYZqmurV1g28//4pP33p/jvIsbX73LrpzB/b2wGxxu3t53F3K+U+A2Hz25teTfw6/ub55HZPh7sgADOGA+O3XX/j41rvs7R8wS+lse8dj6PeJ+/v49nZXcVnN0O4ujw8P+WE0eiNOnux+9PYHn/Day6/y9OgpmBHccQzDcYON3Vdohg3NsFnNHzdvYrffgWubIBXFOS/WrS24d4/vDw4+jBZDvv/XE+7vPMYcgglUlWMYsL/zcE59Pov/6oP86A/ijz+h9fWFYgkqe0oJJHYkomP0DURDFCARXNUNjhD7sVnF7oX0agwPh0V595tzATKdEtyrTneCvERkBllGWThWgOiCieBW8khLUl+CEGA2AyBi4F79JDAHXLiE4ajuK7urIgDsJIDcMaINSjOsOC0BCZKTSeCOecJb2tJ5jn/GzFpJOgBsST1zJ84BZy9Uu4BEziUQswBfnnrLHFNun8Asw+S4XtTCcukEM1EIecI9kkmEHMgSwZyMV5fkucJldfVZy+ra1oxuEKZU2KhgItV4ywlJZGUCwrPKM0GQvZakS3Sq04FoVkDUOIioIPDsOAJBMhFqEKWjCRz8fVG1K4sJcE+1wKRqpcjTGZOnh+Q8XR5Al5VajluJ7UV5Kgx4Ik0nmGek8OIUP0ciCPfigizwlItXzLCLZt8q0inJFQAlBtzxlDGEzEqwaYXafzkUtKlSXZDIyTGVBjyvVG3MXxTE6fHGva65WuTz/yNRWDBMpRQHhBRw+XwioNGJselcCZRKOKhFJwvkkKwDzmEmYuiLeNWwnEEBuSOBmeFuJU3W7GIkNMA14JrN+whtv3EvgMhwDDH2A/1RwJMIHpA5cps3I8dgFC/GQD/AlmCzV6toONWWKR1xz4hxYDTjgE8DQSoMWBnNjFDCIJW8XRWAhoKXQmFAoXRCefG/e2nXjaOHRgxXRLPRQ0cZmZALUUC0MvRwwnVnawcGwHYP1nuFaoXa7Dos9B0GIvaGxmAjkI9a64URWvIBoxdi/bVaUcxXArYd8FEo9FO7bAsiO6yBXTVibxzDYBzIjSifwrVs0UT6IS6a0AoM2MBgO8CVWklzqFNVjSR3WDfCyBRnD/Z/H99eY7Y7o002x7AO1xuTq/PfcZV2+Poa3B6ipt+5WM9TZWEU+PnB7JEGNDdSyF8omAmR0hSQu2Tte0HyGYFAyun8QGwHDkEdKME9o9KXQzBE1uzIdjbGve9WMOf/lRMvp5ubm3Z8fOzujlSalJZNtiuKVze255iZDg4O2qHq3NLyIl/Tn3vWvxwSA5o9eTy5AAAAAElFTkSuQmCC"); }
+.bg_PT { background-repeat: no-repeat;  background-image:  url("data:image/png;base64,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"); }
+/*}}}*/
+/* text-align {{{*/
+FORM>ol button { text-align :   left; }
+#query_div  button { text-align :   left; }
+#query_div  label  { text-align :   left; }
+
+/*}}}*/
+/* white-space {{{*/
+/*
+ details    button { white-space : pre-line; }
+*/
+ details    button { white-space : pre;      }
+FORM>ol>button { white-space : nowrap;   }
+ button.info       { white-space : nowrap;   }
+ button.delete     { white-space : nowrap;   }
+
+/*}}}*/
+/* placeholder {{{*/
+ textarea::placeholder { color       : #CCC;    }
+ textarea::placeholder { font-style  : oblique; }
+ textarea::placeholder { font-family : cursive; }
+ textarea::placeholder { font-weight : 900;     }
+
+/*}}}*/
+/* user-select {{{*/
+button  { user-select : none; }
+summary { user-select : none; }
+
+/*}}}*/
+/* cursor {{{*/
+summary         { cursor : pointer; }
+#lang_div       { cursor : pointer; }
+#user_id_div    { cursor : pointer; }
+
+/*}}}*/
+/* warn info postgres {{{*/
+
+/* HORIZONTAL OFFSET */
+.create       { margin-left      : 5em; }
+.delete       { margin-left      : 3em; }
+.drop         { margin-left      : 5em; }
+
+/* STAND OUT */
+.insert       { border           : 0.2em outset    ; border-radius: 1em; color: #444; }
+
+.amael        { background-color : rgba(000,000,000,0.5); color : white; }
+.create       { background-color : #88F                 ; color : black; }
+.delete       { background-color : #F66                 ; color : black; }
+.drop         { background-color : #F00                 ; color : black; }
+.dynamic      { background-color : navy                 ; color : white; }
+.info         { background-color : rgba(000,255,000,0.4); color : black; }
+.insert       { background-color : #DDD                 ; color : black; }
+
+.insert       { font-size        : 75% !important; }
+
+details button { font-family : monospace; }
+details button { overflow    : auto;      }
+/*
+details button { width            : 30em;      }
+*/
+
+/* warn {{{
+.warn         { background : linear-gradient(to right
+, #F00      , #F00 0.3em
+, #FF0 0.4em, #FF0 0.7em
+, #222 0.8em, #222
+); }
+}}}*/
+.warn         {
+    color            : red;
+    background-color : #DDD;
+    font-weight      : bolder;
+}
+button.warn::before {
+    display          : inline-block;
+    box-shadow       : 1px 1px 2px gray;
+    width            : 1.2em;
+    background-color : #FA0;
+    color            : black;
+    content          : "\26A0";
+    text-align       : center;
+    vertical-align   : sub;
+    font-weight      : bolder;
+    font-size        : 120%;
+    line-height      : 1.2em;
+}
+
+/*}}}*/
+
+/* GRID */
+/* grid .. align {{{*/
+#query_div>button   { align-self : center; }
+#query_div>label    { align-self : center; }
+#query_div>button   { align-self : center; }
+#query_div>label    { align-self : center; }
+
+/*
+#query_div>*        { vertical-align        :  middle; }
+*/
+/*}}}*/
+/* grid-template-columns {{{*/
+/*
+FORM>ol         { grid-template-columns : 1fr 1fr 1fr; }
+*/
+#query_div          { grid-template-columns : 10em 5fr; }
+
+/*}}}*/
+/* grid start..end {{{*/
+#query_div>button   { grid-column-start : 1;                   }
+#query_div>label    { grid-column-start : 1;                   }
+#query_div>textarea { grid-column-start : 2;                   }
+#query_div>textarea { grid-row-start    : 1; grid-row-end : 4; }
+
+/*}}}*/
+/* grid gap {{{*/
+FORM>ol          { grid-gap              : 1em; }
+/*
+*/
+/*}}}*/
+
+</style>
+<!--}}}-->
+ </head> <!--}}}-->
+ <body onload='get_user_id(); get_lang(); tag_page();'>
+
+<!-- ┌─────────────────────────────────────────────────────────────────────┐ -->
+<!-- │ DYNAMIC HTML                                  [SERVER_INDEX_JS_TAG] │ -->
+<!-- └─────────────────────────────────────────────────────────────────────┘ -->
+<!--         ../CONTROL/server_control.js {{{-->
+
+<script src="../CONTROL/server_control.js"></script>
+<button onclick='document.getElementById("submit_clear").click();' style="clear:right; float:right;">clear server console</button>
+
+<script>
+<!-- iframe_CLIENT MATERIAL -->
+/* IMPORT [server_control] {{{*/
+    let clr_lang             = server_control.clr_lang;
+    let clr_user_id          = server_control.clr_user_id;
+    let disableAfterSubmit   = server_control.disableAfterSubmit;
+    let get_lang             = server_control.get_lang;
+    let get_user_id          = server_control.get_user_id;
+    let qtext_add            = server_control.qtext_add;
+    let qtext_clear          = server_control.qtext_clear;
+    let qtext_onchange       = server_control.qtext_onchange;
+    let qtext_onkeyup        = server_control.qtext_onkeyup;
+    let qtext_submit         = server_control.qtext_submit;
+    let set_lang             = server_control.set_lang;
+    let set_user_id          = server_control.set_user_id;
+    let tag_page             = server_control.tag_page;
+    // COOKIES
+//  let del_cookie           = server_control.del_cookie;
+    let get_cookie           = server_control.get_cookie;
+//  let set_cookie           = server_control.set_cookie;
+    let localStorage_setItem = server_control.localStorage_setItem;
+    let localStorage_getItem = server_control.localStorage_getItem;
+    let localStorage_delItem = server_control.localStorage_delItem;
+
+/*}}}*/
+</script>
+
+<script>
+/*_ check_cookies {{{*/
+let check_cookies = function()
+{
+/* GET [user_id] [lang] {{{*/
+//console.log("check_cookies")
+
+    let user_id = get_user_id();
+    let lang    = get_lang();
+//console.log("➔ get_user_id=["+user_id+"]")
+//console.log("➔ get_lang=["+lang+"]")
+
+    if(user_id) return true;
+
+/*}}}*/
+    /* SELECTING FIRST [user_id] COOKIE TEMPLATE {{{*/
+    if(!user_id)
+    {
+        let user_id_el  = document.querySelector("BUTTON.user_id");
+        if( user_id_el  )
+        {
+            user_id     = user_id_el.value;
+//console.log ( user_id_el );
+            set_user_id ( user_id    );
+        }
+
+    }
+    /*}}}*/
+    /* SELECTING FIRST [lang] COOKIE TEMPLATE {{{*/
+    if(!lang) {
+        let lang_el     = document.querySelector("BUTTON.lang"   );
+        if( lang_el     )
+        {
+            lang        = lang_el.value;
+            set_lang    ( lang, "FROM FIRST COOKIE TEMPLATE");
+        }
+    }
+    /*}}}*/
+    /* alert {{{*/
+    let msg = "SELECTING FIRST COOKIE TEMPLATE VALUES"
+        +" user_id=["+ user_id +"]"
+        +"\n"
+        +" lang   =["+ lang    +"]"
+        ;
+    alert( msg );
+    /*}}}*/
+    return true;
+};
+/*}}}*/
+/*_ open_url_with_lang_user_id {{{*/
+let open_url_with_lang_user_id = function(a)
+{
+//console.log("open_url_with_lang_user_id(a)")
+
+   check_cookies();
+
+//console.trace();
+//console.dir(a.href);
+
+    let  url_path = a.href.replace(/\?.*/,"");
+    let      lang = get_cookie( "lang"    );
+    let   user_id = get_cookie( "user_id" );
+    a.href = url_path
+        +       "?lang="   + encodeURI( lang    )
+        +       "&user_id="+ encodeURI( user_id );
+
+//console.log("➔ document.loaction:");
+//console.log(   document.location );
+
+//console.log("➔ .url_path=["+ url_path +"]:")
+//console.log("➔ .....lang=["+ lang     +"]:")
+//console.log("➔ ..user_id=["+ user_id  +"]:")
+  console.log("➔ ...a.href=["+ a.href   +"]");
+
+//return false;
+};
+/*}}}*/
+</script>
+<!--}}}-->
+
+<!-- ┌─────────────────────────────────────────────────────────────────────┐ -->
+<!-- │ LINK TO USER FEEDBACK PAGE                 COOKIES [lang] [user_id] │ -->
+<!-- └─────────────────────────────────────────────────────────────────────┘ -->
+  <div>
+   <!-- PAGE URL [user_feedback.html] {{{-->
+   <a
+   onclick= 'return open_url_with_lang_user_id(this);'
+   target = "user_feedback"
+   href   = "user_feedback.html"
+   style  = "font-size:200%;"
+   >
+    <div style="display:inline-block;">user_feedback.html</div>
+   </a>
+   <!--}}}-->
+   <!-- PAGE URL [user_feedback_dev.html] {{{-->
+   <a
+   onclick= 'return open_url_with_lang_user_id(this);'
+   target = "user_feedback_dev"
+   href   = "user_feedback_dev.html"
+   style  = "font-size:200%; margin-left:1em;"
+   >
+    <div style="display:inline-block; background-color:#BFF;">user_feedback_dev.html</div>
+   </a>
+   <!--}}}-->
+   <!-- COOKIES [lang] [user_id] {{{-->
+   <ul>
+   <!-- [user_id_div] {{{-->
+   <li><em class="user_id">user_id cookie</em> ➔ <div id="user_id_div"></div></li>
+   <table border="1">
+    <tr>
+     <td><button id="clr_user_id"                                              onclick='clr_user_id();'          >clr_user_id</button></td>
+     <td><button class="user_id"  value="5073869e-097a-4b94-a7c5-9694f3a5397d" onclick='set_user_id(this.value);'>5073869e…  </button></td>
+     <td><button class="user_id"  value="793493f9-fbda-4771-9e6c-b10aa2868353" onclick='set_user_id(this.value);'>793493f9…  </button></td>
+     <td><button class="user_id"  value="0db1ebfa-b6b8-4287-b684-3c989d6382f3" onclick='set_user_id(this.value);'>0db1ebfa…  </button></td>
+     <td><button class="user_id"  value="1eead3ac-279a-4e5c-b5ab-758c31711073" onclick='set_user_id(this.value);'>1eead3ac…  </button></td>
+     <td><button class="user_id"  value="a06cbdeb-0e6d-409b-a417-b7f6860f1094" onclick='set_user_id(this.value);'>a06cbdeb…  </button></td>
+     <td><button class="user_id"  value="46dc23d5-7cd2-4d04-bed5-a97d2549892d" onclick='set_user_id(this.value);'>46dc23d5…  </button></td>
+     <td><button class="user_id"  value="983e1fa7-583e-46ad-b810-07ea5cc3cd6b" onclick='set_user_id(this.value);'>983e1fa7…  </button></td>
+    </tr>
+   </table>
+   </li>
+   <!--}}}-->
+   <!-- [lang_div] {{{-->
+   <li><em class="lang">lang cookie</em> ➔ <div id="lang_div"   ></div></li>
+   <table border="1">
+    <tr>
+     <td><button id="clr_lang"                       onclick='clr_lang();'          >clr_lang</button></td>
+     <td><button class="lang flag bg_FR" value="FR"  onclick='set_lang(this.value,"BY CLICK");'>FR      </button></td>
+     <td><button class="lang flag bg_EN" value="EN"  onclick='set_lang(this.value,"BY CLICK");'>EN      </button></td>
+     <td><button class="lang flag bg_DE" value="DE"  onclick='set_lang(this.value,"BY CLICK");'>DE      </button></td>
+     <td><button class="lang flag bg_GR" value="GR"  onclick='set_lang(this.value,"BY CLICK");'>GR      </button></td>
+     <td><button class="lang flag bg_ES" value="ES"  onclick='set_lang(this.value,"BY CLICK");'>ES      </button></td>
+     <td><button class="lang flag bg_IT" value="IT"  onclick='set_lang(this.value,"BY CLICK");'>IT      </button></td>
+     <td><button class="lang flag bg_PT" value="PT"  onclick='set_lang(this.value,"BY CLICK");'>PT      </button></td>
+    </tr>
+<!--{{{-->
+     <tr>
+     <td> 250 countries ➔ </td>
+     <td colspan="6">
+<select
+    style    = ""
+    id       = "country_select"
+    name     = "country"
+    onchange = 'set_lang(event.target.value, "BY SELECT"); '
+>
+        <option value="EN">EN (english)</option>
+        <option value="AD">AD Andorra</option>
+        <option value="AE">AE United Arab Emirates</option>
+        <option value="AF">AF Afghanistan</option>
+        <option value="AG">AG Antigua and Barbuda</option>
+        <option value="AI">AI Anguilla</option>
+        <option value="AL">AL Albania</option>
+        <option value="AM">AM Armenia</option>
+        <option value="AO">AO Angola</option>
+        <option value="AQ">AQ Antarctica</option>
+        <option value="AR">AR Argentina</option>
+        <option value="AS">AS American Samoa</option>
+        <option value="AT">AT Austria</option>
+        <option value="AU">AU Australia</option>
+        <option value="AW">AW Aruba</option>
+        <option value="AX">AX Åland Islands</option>
+        <option value="AZ">AZ Azerbaijan</option>
+        <option value="BA">BA Bosnia and Herzegovina</option>
+        <option value="BB">BB Barbados</option>
+        <option value="BD">BD Bangladesh</option>
+        <option value="BE">BE Belgium</option>
+        <option value="BF">BF Burkina Faso</option>
+        <option value="BG">BG Bulgaria</option>
+        <option value="BH">BH Bahrain</option>
+        <option value="BI">BI Burundi</option>
+        <option value="BJ">BJ Benin</option>
+        <option value="BL">BL Saint Barthélemy</option>
+        <option value="BM">BM Bermuda</option>
+        <option value="BN">BN Brunei Darussalam</option>
+        <option value="BO">BO Bolivia, Plurinational State of</option>
+        <option value="BQ">BQ Bonaire, Sint Eustatius and Saba</option>
+        <option value="BR">BR Brazil</option>
+        <option value="BS">BS Bahamas</option>
+        <option value="BT">BT Bhutan</option>
+        <option value="BV">BV Bouvet Island</option>
+        <option value="BW">BW Botswana</option>
+        <option value="BY">BY Belarus</option>
+        <option value="BZ">BZ Belize</option>
+        <option value="CA">CA Canada</option>
+        <option value="CC">CC Cocos (Keeling) Islands</option>
+        <option value="CD">CD Congo, the Democratic Republic of the</option>
+        <option value="CF">CF Central African Republic</option>
+        <option value="CG">CG Congo</option>
+        <option value="CH">CH Switzerland</option>
+        <option value="CI">CI Côte d'Ivoire</option>
+        <option value="CK">CK Cook Islands</option>
+        <option value="CL">CL Chile</option>
+        <option value="CM">CM Cameroon</option>
+        <option value="CN">CN China</option>
+        <option value="CO">CO Colombia</option>
+        <option value="CR">CR Costa Rica</option>
+        <option value="CU">CU Cuba</option>
+        <option value="CV">CV Cape Verde</option>
+        <option value="CW">CW Curaçao</option>
+        <option value="CX">CX Christmas Island</option>
+        <option value="CY">CY Cyprus</option>
+        <option value="CZ">CZ Czech Republic</option>
+        <option value="DE">DE Germany</option>
+        <option value="DJ">DJ Djibouti</option>
+        <option value="DK">DK Denmark</option>
+        <option value="DM">DM Dominica</option>
+        <option value="DO">DO Dominican Republic</option>
+        <option value="DZ">DZ Algeria</option>
+        <option value="EC">EC Ecuador</option>
+        <option value="EE">EE Estonia</option>
+        <option value="EG">EG Egypt</option>
+        <option value="EH">EH Western Sahara</option>
+        <option value="ER">ER Eritrea</option>
+        <option value="ES">ES Spain</option>
+        <option value="ET">ET Ethiopia</option>
+        <option value="FI">FI Finland</option>
+        <option value="FJ">FJ Fiji</option>
+        <option value="FK">FK Falkland Islands (Malvinas)</option>
+        <option value="FM">FM Micronesia, Federated States of</option>
+        <option value="FO">FO Faroe Islands</option>
+        <option value="FR">FR France</option>
+        <option value="GA">GA Gabon</option>
+        <option value="GB">GB United Kingdom</option>
+        <option value="GD">GD Grenada</option>
+        <option value="GE">GE Georgia</option>
+        <option value="GF">GF French Guiana</option>
+        <option value="GG">GG Guernsey</option>
+        <option value="GH">GH Ghana</option>
+        <option value="GI">GI Gibraltar</option>
+        <option value="GL">GL Greenland</option>
+        <option value="GM">GM Gambia</option>
+        <option value="GN">GN Guinea</option>
+        <option value="GP">GP Guadeloupe</option>
+        <option value="GQ">GQ Equatorial Guinea</option>
+        <option value="GR">GR Greece</option>
+        <option value="GS">GS South Georgia and the South Sandwich Islands</option>
+        <option value="GT">GT Guatemala</option>
+        <option value="GU">GU Guam</option>
+        <option value="GW">GW Guinea-Bissau</option>
+        <option value="GY">GY Guyana</option>
+        <option value="HK">HK Hong Kong</option>
+        <option value="HM">HM Heard Island and McDonald Islands</option>
+        <option value="HN">HN Honduras</option>
+        <option value="HR">HR Croatia</option>
+        <option value="HT">HT Haiti</option>
+        <option value="HU">HU Hungary</option>
+        <option value="ID">ID Indonesia</option>
+        <option value="IE">IE Ireland</option>
+        <option value="IL">IL Israel</option>
+        <option value="IM">IM Isle of Man</option>
+        <option value="IN">IN India</option>
+        <option value="IO">IO British Indian Ocean Territory</option>
+        <option value="IQ">IQ Iraq</option>
+        <option value="IR">IR Iran, Islamic Republic of</option>
+        <option value="IS">IS Iceland</option>
+        <option value="IT">IT Italy</option>
+        <option value="JE">JE Jersey</option>
+        <option value="JM">JM Jamaica</option>
+        <option value="JO">JO Jordan</option>
+        <option value="JP">JP Japan</option>
+        <option value="KE">KE Kenya</option>
+        <option value="KG">KG Kyrgyzstan</option>
+        <option value="KH">KH Cambodia</option>
+        <option value="KI">KI Kiribati</option>
+        <option value="KM">KM Comoros</option>
+        <option value="KN">KN Saint Kitts and Nevis</option>
+        <option value="KP">KP Korea, Democratic People's Republic of</option>
+        <option value="KR">KR Korea, Republic of</option>
+        <option value="KW">KW Kuwait</option>
+        <option value="KY">KY Cayman Islands</option>
+        <option value="KZ">KZ Kazakhstan</option>
+        <option value="LA">LA Lao People's Democratic Republic</option>
+        <option value="LB">LB Lebanon</option>
+        <option value="LC">LC Saint Lucia</option>
+        <option value="LI">LI Liechtenstein</option>
+        <option value="LK">LK Sri Lanka</option>
+        <option value="LR">LR Liberia</option>
+        <option value="LS">LS Lesotho</option>
+        <option value="LT">LT Lithuania</option>
+        <option value="LU">LU Luxembourg</option>
+        <option value="LV">LV Latvia</option>
+        <option value="LY">LY Libya</option>
+        <option value="MA">MA Morocco</option>
+        <option value="MC">MC Monaco</option>
+        <option value="MD">MD Moldova, Republic of</option>
+        <option value="ME">ME Montenegro</option>
+        <option value="MF">MF Saint Martin (French part)</option>
+        <option value="MG">MG Madagascar</option>
+        <option value="MH">MH Marshall Islands</option>
+        <option value="MK">MK Macedonia, the former Yugoslav Republic of</option>
+        <option value="ML">ML Mali</option>
+        <option value="MM">MM Myanmar</option>
+        <option value="MN">MN Mongolia</option>
+        <option value="MO">MO Macao</option>
+        <option value="MP">MP Northern Mariana Islands</option>
+        <option value="MQ">MQ Martinique</option>
+        <option value="MR">MR Mauritania</option>
+        <option value="MS">MS Montserrat</option>
+        <option value="MT">MT Malta</option>
+        <option value="MU">MU Mauritius</option>
+        <option value="MV">MV Maldives</option>
+        <option value="MW">MW Malawi</option>
+        <option value="MX">MX Mexico</option>
+        <option value="MY">MY Malaysia</option>
+        <option value="MZ">MZ Mozambique</option>
+        <option value="NA">NA Namibia</option>
+        <option value="NC">NC New Caledonia</option>
+        <option value="NE">NE Niger</option>
+        <option value="NF">NF Norfolk Island</option>
+        <option value="NG">NG Nigeria</option>
+        <option value="NI">NI Nicaragua</option>
+        <option value="NL">NL Netherlands</option>
+        <option value="NO">NO Norway</option>
+        <option value="NP">NP Nepal</option>
+        <option value="NR">NR Nauru</option>
+        <option value="NU">NU Niue</option>
+        <option value="NZ">NZ New Zealand</option>
+        <option value="OM">OM Oman</option>
+        <option value="PA">PA Panama</option>
+        <option value="PE">PE Peru</option>
+        <option value="PF">PF French Polynesia</option>
+        <option value="PG">PG Papua New Guinea</option>
+        <option value="PH">PH Philippines</option>
+        <option value="PK">PK Pakistan</option>
+        <option value="PL">PL Poland</option>
+        <option value="PM">PM Saint Pierre and Miquelon</option>
+        <option value="PN">PN Pitcairn</option>
+        <option value="PR">PR Puerto Rico</option>
+        <option value="PS">PS Palestinian Territory, Occupied</option>
+        <option value="PT">PT Portugal</option>
+        <option value="PW">PW Palau</option>
+        <option value="PY">PY Paraguay</option>
+        <option value="QA">QA Qatar</option>
+        <option value="RE">RE Réunion</option>
+        <option value="RO">RO Romania</option>
+        <option value="RS">RS Serbia</option>
+        <option value="RU">RU Russian Federation</option>
+        <option value="RW">RW Rwanda</option>
+        <option value="SA">SA Saudi Arabia</option>
+        <option value="SB">SB Solomon Islands</option>
+        <option value="SC">SC Seychelles</option>
+        <option value="SD">SD Sudan</option>
+        <option value="SE">SE Sweden</option>
+        <option value="SG">SG Singapore</option>
+        <option value="SH">SH Saint Helena, Ascension and Tristan da Cunha</option>
+        <option value="SI">SI Slovenia</option>
+        <option value="SJ">SJ Svalbard and Jan Mayen</option>
+        <option value="SK">SK Slovakia</option>
+        <option value="SL">SL Sierra Leone</option>
+        <option value="SM">SM San Marino</option>
+        <option value="SN">SN Senegal</option>
+        <option value="SO">SO Somalia</option>
+        <option value="SR">SR Suriname</option>
+        <option value="SS">SS South Sudan</option>
+        <option value="ST">ST Sao Tome and Principe</option>
+        <option value="SV">SV El Salvador</option>
+        <option value="SX">SX Sint Maarten (Dutch part)</option>
+        <option value="SY">SY Syrian Arab Republic</option>
+        <option value="SZ">SZ Swaziland</option>
+        <option value="TC">TC Turks and Caicos Islands</option>
+        <option value="TD">TD Chad</option>
+        <option value="TF">TF French Southern Territories</option>
+        <option value="TG">TG Togo</option>
+        <option value="TH">TH Thailand</option>
+        <option value="TJ">TJ Tajikistan</option>
+        <option value="TK">TK Tokelau</option>
+        <option value="TL">TL Timor-Leste</option>
+        <option value="TM">TM Turkmenistan</option>
+        <option value="TN">TN Tunisia</option>
+        <option value="TO">TO Tonga</option>
+        <option value="TR">TR Turkey</option>
+        <option value="TT">TT Trinidad and Tobago</option>
+        <option value="TV">TV Tuvalu</option>
+        <option value="TW">TW Taiwan, Province of China</option>
+        <option value="TZ">TZ Tanzania, United Republic of</option>
+        <option value="UA">UA Ukraine</option>
+        <option value="UG">UG Uganda</option>
+        <option value="UM">UM United States Minor Outlying Islands</option>
+        <option value="US">US United States</option>
+        <option value="UY">UY Uruguay</option>
+        <option value="UZ">UZ Uzbekistan</option>
+        <option value="VA">VA Holy See (Vatican City State)</option>
+        <option value="VC">VC Saint Vincent and the Grenadines</option>
+        <option value="VE">VE Venezuela, Bolivarian Republic of</option>
+        <option value="VG">VG Virgin Islands, British</option>
+        <option value="VI">VI Virgin Islands, U.S.</option>
+        <option value="VN">VN Viet Nam</option>
+        <option value="VU">VU Vanuatu</option>
+        <option value="WF">WF Wallis and Futuna</option>
+        <option value="WS">WS Samoa</option>
+        <option value="YE">YE Yemen</option>
+        <option value="YT">YT Mayotte</option>
+        <option value="ZA">ZA South Africa</option>
+        <option value="ZM">ZM Zambia</option>
+        <option value="ZW">ZW Zimbabwe</option>
+    </select>
+     </td>
+    </tr>
+<!--}}}-->
+   </table>
+   </li>
+   <!--}}}-->
+   </ul>
+<!--}}}-->
+  </div>
+
+<!-- ┌─────────────────────────────────────────────────────────────────────┐ -->
+<!-- │ LINK TO POPULATE PAGE                                               │ -->
+<!-- └─────────────────────────────────────────────────────────────────────┘ -->
+   <!-- PAGE URL [i18n_populate.html] {{{-->
+  <div>
+   <a
+   onclick= 'return open_url_with_lang_user_id(this);'
+   target = "user_populate"
+   href   = "../I18N/i18n_populate.html"
+   style  = "font-size:150%;"
+   >
+    <b>../I18N/i18n_populate.html</b>
+   </a>
+
+  </div>
+   <!--}}}-->
+
+<!-- ┌─────────────────────────────────────────────────────────────────────┐ -->
+<!-- │ LINK TO TED PAGE                                                    │ -->
+<!-- └─────────────────────────────────────────────────────────────────────┘ -->
+   <!-- PAGE URL [TED/jqgram_test.html] {{{-->
+  <div>
+   <a target = "TED_jqgram_test" href  = "../TED/jqgram_test.html" style = "font-size:150%;" ><b>TED/jqgram_test.html</b></a>
+
+  </div>
+   <!--}}}-->
+
+<!--
+-->
+  <script src="/CONTROL/t_details.js"></script> 
+  <script> t_details.t_details_onload("index_CLIENT.html"); </script>
+
+ </body>
+</html>
+<!--
+vim: sw=4
+-->
