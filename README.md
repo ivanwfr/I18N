@@ -1,67 +1,71 @@
-# I18N stack - Postgres, NodeJS, Admin and User page
+# I18N - Postgres, NodeJS, Admin, User and Translator pages
 
 ### ✔ [ZIP archive on GitHub](../../archive/master.zip)
 
+## `USAGE`
 ```bash
-# launch server:
-$ node server.js
-
-# visit index page
-$ explorer 1_index.url
-
-# visit server-dashboard page
-$ explorer 2_server_index.url
-
-# visit user-feedback page
-$ explorer 3_user_feedback.url
-
-# visit user-feedback-dev page (lang SELECT[250])
-$ explorer 3_user_feedback_dev.url
-
-# visit translation provider page
-$ explorer 4_i18n_populate.url
-
+$ node server.js                   # launch server
+$ explorer 1_index.url             # visit index page
+$ explorer 2_server_index.url      # visit server-dashboard page
+$ explorer 3_user_feedback.url     # visit user-feedback page
+$ explorer 3_user_feedback_dev.url # visit user-feedback-dev page (lang SELECT[250])
+$ explorer 4_i18n_populate.url     # visit translation provider page
 ```
-### `SERVER - NodeJS and Dashboard-page`
 
- File                     | Description
- -------------------------|---------------------------
- server.js                | server NodeJS
- index.html               | server LAN URL
- server_index.html        | SERVER-DASHBOARD page URL
- CLIENT/index_client.html | CLIENT-FRAME cookies + URI
+### `SERVER - NodeJS and web pages`
+File                     | Description
+-------------------------|---------------------------
+server.js                | server NodeJS
+index.html               | server LAN URL
+server_index.html        | SERVER-DASHBOARD page URL
+CLIENT/index_client.html | CLIENT-FRAME cookies + URI
 
-### `CLIENT - feedback-page and translation logic`
+### `CLIENT - USER feedback`
+File                   | Description
+-----------------------|------------------------------------
+user_feedback.html     | subject and questions layout
+user_feedback_dev.html | (same with language selector added)
+form.html              | User input-form
+feedback_tree.js       | localized user-feedback-page-logic
+feedback.css           | user page stylesheet
 
- File                   | Description
- -----------------------|------------------------------------
- feedback_tree.js       | Localized user-feedback-page-logic
- feedback.css           | …
- form.html              | subject-question-comment input-form
- user_feedback.html     | …
- user_feedback_dev.html | …
+### `CLIENT - I18N REPORTING and TRANSLATING reported missing translations`
+File                          | Description
+------------------------------|-------------------------------
+I18N/i18n_populate.html       | translator page
+I18N/i18n_populate.css        | translator page stylesheet
+I18N/i18n_translate.js        | page translation and reporting
+I18N/i18n_populate.js         | missing translations editor
 
-### `CONTROL - client-side dashboard-page`
+### `POSTGRES - DATABASE config and SQL queries`
+File                          | Description
+------------------------------|-------------
+config_dev.json               | …
+POSTGRES/server_sql.js        | …
 
- File                          | Description
- ------------------------------|------------
- CONTROL/feedback_postgres.js  | …
- CONTROL/index_control.html    | …
- CONTROL/server_control.js     | …
- CONTROL/server_download.js    | …
- CONTROL/t_details.js          | …
+## `DASHBOARD -  server control web page`
 
-### `I18N - missing reporting and translation providing page`
+File                          | Description
+------------------------------|------------
+CONTROL/index_control.html    | …
+CONTROL/feedback_postgres.js  | …
+CONTROL/server_control.js     | …
+CONTROL/server_download.js    | …
+CONTROL/t_details.js          | …
 
- File                          | Description
- ------------------------------|-------------------------------
- I18N/i18n_translate.js        | page translation and reporting
- I18N/i18n_populate.js         | missing translations editor
- I18N/i18n_populate.html       | …
- I18N/i18n_populate.css        | …
+1. buttons to CREATE the 3 required DATABASE TABLES
 
-### `POSTGRES - server-side DB config and SQL`
- File                          | Description
- ------------------------------|-------------
- config_dev.json               | …
- POSTGRES/server_sql.js        | …
+ TABLE       | fields
+ ------------|-------
+ *topics*    | subject  question
+ *i18n*      | lang     key      val     
+ *feedbacks* | user_id  subject  question feedback comment
+
+2. buttons to check localized SQL queries f(LANG and USER_ID)
+
+Button                        | Description
+------------------------------|-------------------------------------------------
+ feedback_topics_json.js      | check current topics table content
+ feedback_replies_json.js     | check current user replies ➔ f(USER_ID)
+ populate_lang_key_val_json.js| check generated missing translation page builder
+ i18n_translate_json.js       | check generated LANG translation dictionary
