@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- ┌─────────────────────────────────────────────────────────────────────┐ -->
-<!-- │ [index_client.html]                            _TAG (211009:19h:23) │ -->
+<!-- │ [index_client.html]                            _TAG (211012:17h:56) │ -->
 <!-- ├─────────────────────────────────────────────────────────────────────│ -->
 <!-- │ ➔ I18N EDIT SCRIPT TO POPULATE MISSING {key: value} TRANSLATIONS    │ -->
 <!-- └─────────────────────────────────────────────────────────────────────┘ -->
@@ -283,9 +283,9 @@ summary         { cursor : pointer; }
 
 details button { font-family : monospace; }
 details button { overflow    : auto;      }
-/*
-details button { width            : 30em;      }
-*/
+DIV   > EM     { font-size   : 75%; }
+TABLE   button { padding     : 2px; }
+TABLE   button { margin      : 2px; }
 
 /* warn {{{
 .warn         { background : linear-gradient(to right
@@ -357,7 +357,6 @@ FORM>ol          { grid-gap              : 1em; }
 <!--         ../CONTROL/server_control.js {{{-->
 
 <script src="../CONTROL/server_control.js"></script>
-<button onclick='document.getElementById("submit_clear").click();' style="clear:right; float:right;">clear server console</button>
 
 <script>
 <!-- iframe_CLIENT MATERIAL -->
@@ -470,61 +469,78 @@ let open_url_with_lang_user_id = function(a)
 <!-- │ LINK TO USER FEEDBACK PAGE                 COOKIES [lang] [user_id] │ -->
 <!-- └─────────────────────────────────────────────────────────────────────┘ -->
   <div>
-   <!-- PAGE URL [user_feedback.html] {{{-->
-   <a
-   onclick= 'return open_url_with_lang_user_id(this);'
-   target = "user_feedback"
-   href   = "user_feedback.html"
-   style  = "font-size:200%;"
-   >
-    <div style="display:inline-block;">user_feedback.html</div>
-   </a>
-   <!--}}}-->
-   <!-- PAGE URL [user_feedback_dev.html] {{{-->
-   <a
-   onclick= 'return open_url_with_lang_user_id(this);'
-   target = "user_feedback_dev"
-   href   = "user_feedback_dev.html"
-   style  = "font-size:200%; margin-left:1em;"
-   >
-    <div style="display:inline-block; background-color:#BFF;">user_feedback_dev.html</div>
-   </a>
-   <!--}}}-->
-   <!-- COOKIES [lang] [user_id] {{{-->
+
    <ul>
-   <!-- [user_id_div] {{{-->
-   <li><em class="user_id">user_id cookie</em> ➔ <div id="user_id_div"></div></li>
+   <li>
+   <!-- <A> [user_feedback.html] {{{-->
+    <a
+    onclick= 'return open_url_with_lang_user_id(this);'
+    target = "user_feedback"
+    href   = "user_feedback.html"
+    >
+     <div style="display:inline-block;">user_feedback.html</div>
+    </a>
+   <!--}}}-->
+   <!-- <A> [user_feedback_dev.html] {{{-->
+    <a
+    onclick= 'return open_url_with_lang_user_id(this);'
+    target = "user_feedback_dev"
+    href   = "user_feedback_dev.html"
+    style  = "margin-left:1em;"
+    >
+     <div style="display:inline-block; background-color:#BFF;">user_feedback_dev.html</div>
+    </a>
+   <!--}}}-->
+   </li>
+   </ul>
+
+   <ul>
+   <!-- <li> [USER_ID] {{{-->
+   <li><em class="user_id">user_id cookie</em> ➔ <div id="user_id_div"></div>
+   <details><summary>impersonate USER_ID</summary>
    <table border="1">
     <tr>
      <td><button id="clr_user_id"                                              onclick='clr_user_id();'          >clr_user_id</button></td>
      <td><button class="user_id"  value="5073869e-097a-4b94-a7c5-9694f3a5397d" onclick='set_user_id(this.value);'>5073869e…  </button></td>
      <td><button class="user_id"  value="793493f9-fbda-4771-9e6c-b10aa2868353" onclick='set_user_id(this.value);'>793493f9…  </button></td>
      <td><button class="user_id"  value="0db1ebfa-b6b8-4287-b684-3c989d6382f3" onclick='set_user_id(this.value);'>0db1ebfa…  </button></td>
+    </tr>
+    <tr>
      <td><button class="user_id"  value="1eead3ac-279a-4e5c-b5ab-758c31711073" onclick='set_user_id(this.value);'>1eead3ac…  </button></td>
      <td><button class="user_id"  value="a06cbdeb-0e6d-409b-a417-b7f6860f1094" onclick='set_user_id(this.value);'>a06cbdeb…  </button></td>
      <td><button class="user_id"  value="46dc23d5-7cd2-4d04-bed5-a97d2549892d" onclick='set_user_id(this.value);'>46dc23d5…  </button></td>
      <td><button class="user_id"  value="983e1fa7-583e-46ad-b810-07ea5cc3cd6b" onclick='set_user_id(this.value);'>983e1fa7…  </button></td>
     </tr>
    </table>
+   </details>
    </li>
    <!--}}}-->
-   <!-- [lang_div] {{{-->
-   <li><em class="lang">lang cookie</em> ➔ <div id="lang_div"   ></div></li>
+   <hr>
+   <!-- <li> [LANG] {{{-->
+   <li><em class="lang">lang cookie</em> ➔ <div id="lang_div"   ></div>
+   <details><summary>simulate USER LANG</summary>
    <table border="1">
+    <!--<tr> {{{-->
     <tr>
      <td><button id="clr_lang"                       onclick='clr_lang();'          >clr_lang</button></td>
      <td><button class="lang flag bg_FR" value="FR"  onclick='set_lang(this.value,"BY CLICK");'>FR      </button></td>
      <td><button class="lang flag bg_EN" value="EN"  onclick='set_lang(this.value,"BY CLICK");'>EN      </button></td>
      <td><button class="lang flag bg_DE" value="DE"  onclick='set_lang(this.value,"BY CLICK");'>DE      </button></td>
+    </tr>
+    <!--}}}-->
+    <!--<tr> {{{-->
+    <tr>
      <td><button class="lang flag bg_GR" value="GR"  onclick='set_lang(this.value,"BY CLICK");'>GR      </button></td>
      <td><button class="lang flag bg_ES" value="ES"  onclick='set_lang(this.value,"BY CLICK");'>ES      </button></td>
      <td><button class="lang flag bg_IT" value="IT"  onclick='set_lang(this.value,"BY CLICK");'>IT      </button></td>
      <td><button class="lang flag bg_PT" value="PT"  onclick='set_lang(this.value,"BY CLICK");'>PT      </button></td>
     </tr>
-<!--{{{-->
+    <!--}}}-->
+    <!--<tr> {{{-->
      <tr>
      <td> 250 countries ➔ </td>
      <td colspan="6">
+    <!--<select> {{{-->
 <select
     style    = ""
     id       = "country_select"
@@ -782,14 +798,16 @@ let open_url_with_lang_user_id = function(a)
         <option value="ZM">ZM Zambia</option>
         <option value="ZW">ZW Zimbabwe</option>
     </select>
+   <!--}}}-->
      </td>
     </tr>
 <!--}}}-->
    </table>
+   </details>
    </li>
    <!--}}}-->
    </ul>
-<!--}}}-->
+
   </div>
 
 <!-- ┌─────────────────────────────────────────────────────────────────────┐ -->
@@ -797,6 +815,9 @@ let open_url_with_lang_user_id = function(a)
 <!-- └─────────────────────────────────────────────────────────────────────┘ -->
    <!-- PAGE URL [i18n_populate.html] {{{-->
   <div>
+   <ul>
+   <li>
+   <button>
    <a
    onclick= 'return open_url_with_lang_user_id(this);'
    target = "user_populate"
@@ -805,6 +826,9 @@ let open_url_with_lang_user_id = function(a)
    >
     <b>../I18N/i18n_populate.html</b>
    </a>
+   </button>
+   </li>
+   </ul>
 
   </div>
    <!--}}}-->

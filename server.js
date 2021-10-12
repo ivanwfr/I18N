@@ -7,7 +7,7 @@
 /* eslint-disable no-warning-comments */
 
 const SERVER_JS_ID  = "server";
-const SERVER_JS_TAG = SERVER_JS_ID    +" (211009:19h:30)";
+const SERVER_JS_TAG = SERVER_JS_ID    +" (211012:21h:36)";
 /*}}}*/
 let server = (function() {
 "use strict";
@@ -830,11 +830,12 @@ let request_dump_USR_TABLES = function(args)
     let { uri,          response } = args;
     let consumed_by;
 
-    if(uri.path == "dump_USR_TABLES")
+    if((uri.path == "query") && uri.query.includes("dump_USR_TABLES"))
     {
 log_M("  ┌─────────────────┐\n"
      +"➔ │ dump_USR_TABLES │\n"
      +"  └─────────────────┘");
+console.dir(uri)//FIXME
         response.writeHead(200, HTML_RESPONSE_HEADER );
         response.write("<h3>"+uri.path+"</h3>");
         feedback_postgres.dump_USR_TABLES( response );
@@ -901,9 +902,6 @@ return {  request_CLEAR
 /*_ request_js_script {{{*/
 let request_js_script = function(args) /* eslint-disable-line complexity */
 {
-//console.log("server.js.request_js_script");
-//console.dir(args);
-
     let { uri, request, response } = args;
     let consumed_by;
 
@@ -924,7 +922,9 @@ let request_js_script = function(args) /* eslint-disable-line complexity */
         && (   request.headers.referer.includes("_dev"     )
             || request.headers.referer.includes("_populate"))
     ;
-console.log("from_a_tool_page=["+from_a_tool_page+"]");
+if(config.LOG_MORE) console.log("request_js_script: from_a_tool_page=["+from_a_tool_page+"]");
+if(config.LOG_MORE) console.log("args.uri:");
+if(config.LOG_MORE) console.dir( args.uri  );
 
     /*}}}*/
 
@@ -963,9 +963,8 @@ if(config.LOG_MORE)
 /*_ request_sql_query {{{*/
 let request_sql_query = function(args)
 {
-//console.log("server.js.request_sql_query")
     let { uri,          response } = args;
-//console.dir(uri)
+
     let consumed_by;
 
     if(uri.path == "query")

@@ -9,7 +9,7 @@
 /* eslint-disable no-warning-comments */
 
 const SERVER_CONTROL_JS_ID  = "server";
-const SERVER_CONTROL_JS_TAG = SERVER_CONTROL_JS_ID +" (211008:14h:38)";
+const SERVER_CONTROL_JS_TAG = SERVER_CONTROL_JS_ID +" (211012:21h:25)";
 /*}}}*/
 let server_control = (function() {
 "use strict";
@@ -482,17 +482,17 @@ let localStorage_delItem = function(key    ) { /*...*/ localStorage.removeItem(k
 let tag_page = function()
 {
 
-    let loc           = document.createElement("I");
-    document.body.insertBefore(loc, document.body.firstElementChild);
-    loc.outerHTML     = "<i style='float:right; color:rgba(68,68,68,0.3); margin:0;'>"+location.href+"</i>";
-
     let tag           = document.createElement("I");
     document.body.insertBefore(tag, document.body.firstElementChild);
-    tag.outerHTML     = "<i style='float:right; color:rgba(68,68,255,0.3); margin:0;'>"+SERVER_CONTROL_JS_TAG+"</i>";
+    tag.outerHTML     = "<i style='float:right; clear:right; color:rgba(68,68,255,0.3); margin:  0em 0 0 0;'>"+SERVER_CONTROL_JS_TAG+"</i>";
 
-    let doc           = document.createElement("I");
-    document.body.insertBefore(doc, document.body.firstElementChild);
-    doc.outerHTML     = "<a style='float:right; color:rgba(68,68,68,0.3); margin:0;' target='doc' href='/doc/index.html'>&#x1F4A1;</i>";
+    let loc           = document.createElement("I");
+    document.body.insertBefore(loc, document.body.firstElementChild);
+    loc.outerHTML     = "<i style='float:right; clear:right; color:rgba(68,68, 68,0.3); margin:3.0em 0 0 0;'>"+location.href+"</i>";
+
+//  let doc           = document.createElement("I");
+//  document.body.insertBefore(doc, document.body.firstElementChild);
+//  doc.outerHTML     = "<a style='float:right; color:rgba(68,68,68,0.3); margin:0;' target='doc' href='/doc/index.html'>&#x1F4A1;</i>";
 
     let secure = document.location.href.toLowerCase().startsWith("https"    );
     let local  = document.location.href.toLowerCase().includes  ("//localhost");

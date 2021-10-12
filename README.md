@@ -7,8 +7,8 @@
 $ node server.js                   # launch server
 $ explorer 1_index.url             # visit index page
 $ explorer 2_server_index.url      # visit server-dashboard page
-$ explorer 3_user_feedback.url     # visit user-feedback page
-$ explorer 3_user_feedback_dev.url # visit user-feedback-dev page (lang SELECT[250])
+$ explorer 3_user_feedback.url     # visit user-feedback page     f(URI/cookies: LANG,USER_ID)
+$ explorer 3_user_feedback_dev.url # visit user-feedback-dev page f(URI/cookies: LANG,USER_ID) SELECT[250])
 $ explorer 4_i18n_populate.url     # visit translation provider page
 ```
 
@@ -29,7 +29,7 @@ form.html              | User input-form
 feedback_tree.js       | localized user-feedback-page-logic
 feedback.css           | user page stylesheet
 
-### `CLIENT - I18N REPORTING and TRANSLATING reported missing translations`
+### `CLIENT - I18N REPORTING and TRANSLATING reported as missing translations`
 File                          | Description
 ------------------------------|-------------------------------
 I18N/i18n_populate.html       | translator page

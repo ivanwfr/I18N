@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- ┌─────────────────────────────────────────────────────────────────────┐ -->
-<!-- │ [index_control.html]                           _TAG (211009:17h:10) │ -->
+<!-- │ [index_control.html]                           _TAG (211012:21h:20) │ -->
 <!-- └─────────────────────────────────────────────────────────────────────┘ -->
 <html lang="FR">
  <head> <!--{{{-->
@@ -123,7 +123,12 @@ FORM>ol       { margin      : 1.0em;        }
          details details details details[open]>summary { background-color : rgba(255, 255,   0, .9); color : black; }
  details details details details details[open]>summary { background-color : rgba(154, 205,  50, .9); color : black; }
  /*}}}*/
- button       { max-height : 10em; overflow: auto; }
+ button       { max-height  :  10em; }
+ button       { overflow    :  auto; }
+/*
+ button       { line-height : 1.5em; }
+*/
+ button       {  min-height : 2.0em; }
 
 /* FRAMING */
 /* border-radius {{{*/
@@ -355,8 +360,13 @@ FORM>ol          { grid-gap              : 1em; }
 <!-- │ DYNAMIC HTML                                  [SERVER_INDEX_JS_TAG] │ -->
 <!-- └─────────────────────────────────────────────────────────────────────┘ -->
 <!--         server_control.js {{{-->
+<button
+ title   = "CLEAR RESPONSE&#x000D;(and server console)"
+ style   = "position:fixed; right:1em; background-color: rgba(000,255,000,0.3);"
+ onclick = 'document.getElementById("submit_clear").click();'
+>CLEAR server console
+</button>
 <script src="server_control.js"></script>
-<button onclick='document.getElementById("submit_clear").click();' style="clear:right; float:right;">clear server console</button>
 <script>
 
     let clr_lang              = server_control.clr_lang;
@@ -452,7 +462,7 @@ let check_cookies = function(event)
 <li>
 <details id="tables" onclick='if(event.target.tagName == "BUTTON") return qtext_add(event.target.innerText);'>
   <summary><b>TABLES … <em class="fg3">DROP</em> … <em class="fg4">CREATE</em> … <em class="fg5">INSERT</em></b></summary>
- <button type = "submit" formaction="/dump_USR_TABLES" class="info">dump_USR_TABLES <em>(topics i18n feedback site_TREE)</em> </button>
+ <button type = "submit" formaction="/dump_USR_TABLES" class="info">dump_USR_TABLES <em>(topics i18n feedback)</em> </button>
 <ol>
 <!-- TABLE topics {{{-->
 <li>
@@ -824,6 +834,7 @@ let check_cookies = function(event)
      name        = "clear"
      formaction  ="/clear"
      style       = "background-color: rgba(000,255,000,0.3); font-weight:900;"
+     title       = "CLEAR RESPONSE&#x000D;(and server console)"
      >&#x274C; CLEAR</button>
 
     <!--}}}-->

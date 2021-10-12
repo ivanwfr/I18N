@@ -10,7 +10,7 @@
 }}}*/
 
 const FEEDBACK_POSTGRES_JS_ID  = "feedback_postgres";
-const FEEDBACK_POSTGRES_JS_TAG = FEEDBACK_POSTGRES_JS_ID+" (211009:17h:06)";    // eslint-disable-line no-unused-vars
+const FEEDBACK_POSTGRES_JS_TAG = FEEDBACK_POSTGRES_JS_ID+" (211012:21h:24)";    // eslint-disable-line no-unused-vars
 let feedback_postgres = (function() {
 "use strict";
 
@@ -98,8 +98,8 @@ let dump_USR_TABLES = function(response)
         = [   config.   TOPICS_TABLE
             , config.     I18N_TABLE
             , config. FEEDBACK_TABLE
-            , config.    XPATH_TABLE
-            , config. SITE_TREE_TABLE
+//          , config.    XPATH_TABLE
+//          , config. SITE_TREE_TABLE
         ];
 
     response.as_html = true;
