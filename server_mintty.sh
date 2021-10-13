@@ -1,9 +1,10 @@
 #!/bin/sh
+#┌────────────────────────────────────────────────────────────────────────────┐
+#│ server_mintty.sh                                       _TAG(211013:15h:10) │
+#└────────────────────────────────────────────────────────────────────────────┘
+  X=0   ;Y=0;  W=165;H=54
+# X=0   ;Y=0;  W=165;H=65
+# X=1364;Y=0;  W=165;H=111
+set -x
+mintty -t "USR" -p $X,$Y -s $W,$H --exec sh -c "cd `pwd`; ./server.sh"
 
-# node server.js
-# read -p 'PRESS ANY KEY TO TERNINATE...'
-
-CWD=`pwd`
-mintty -t "USR" -p   64,0  -s 165,65  --exec sh -c "cd $CWD; node server.js; read -p '➔ PRESS ENTER TO TERNINATE...'"
-#----------------p 1364,0---------54 
-#--------------------------------111
