@@ -70,6 +70,11 @@ Button                        | Description
  populate_lang_key_val_json.js| check generated missing translation page builder
  i18n_translate_json.js       | check generated LANG translation dictionary
 
-### `server_index.html`
+### `screenshot`
 
-![server_index.html](/screenshot/server_index.png)
+![nodejs_server](/screenshot/nodejs_server.png)
+![server_index_client](/screenshot/server_index_client.png)
+![server_index_control](/screenshot/server_index_control.png)
+![user_feedback](/screenshot/user_feedback.png)
+![user_feedback_form](/screenshot/user_feedback_form.png)
+![i18n_populate](/screenshot/i18n_populate.png)
