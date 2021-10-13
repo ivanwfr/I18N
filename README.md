@@ -69,3 +69,7 @@ Button                        | Description
  feedback_replies_json.js     | check current user replies ➔ f(USER_ID)
  populate_lang_key_val_json.js| check generated missing translation page builder
  i18n_translate_json.js       | check generated LANG translation dictionary
+
+### `server_index.html`
+
+![server_index.html](/screenshot/server_index.png)
