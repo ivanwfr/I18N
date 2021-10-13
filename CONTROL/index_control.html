@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- ┌─────────────────────────────────────────────────────────────────────┐ -->
-<!-- │ [index_control.html]                           _TAG (211012:21h:20) │ -->
+<!-- │ [index_control.html]                           _TAG (211013:18h:36) │ -->
 <!-- └─────────────────────────────────────────────────────────────────────┘ -->
 <html lang="FR">
  <head> <!--{{{-->
@@ -510,13 +510,14 @@ let check_cookies = function(event)
    <button class="insert">
     INSERT into i18n values('FR', $$Page d'évaluation$$                , $$FR ➔ PAGE D'ÉVALUATION$$        );
 
-    INSERT into i18n values('FR', 'Envoyer'                            , 'Envoyer'                         );
-    INSERT into i18n values('FR', 'Supprimer'                          , 'Supprimer'                       );
+    INSERT into i18n values('FR', 'Submit'                             , 'Envoyer'                         );
+    INSERT into i18n values('FR', 'Remove'                             , 'Supprimer'                       );
     INSERT into i18n values('FR',  'good'                              , 'très bien'                       );
     INSERT into i18n values('FR',  'correct'                           , 'convenable'                      );
     INSERT into i18n values('FR',  'wrong'                             , 'acceptable'                      );
     INSERT into i18n values('FR',  'bad'                               , 'lamentable'                      );
-    INSERT into i18n values('FR', 'Commentaire'                        , 'Commentaire'                     );
+    INSERT into i18n values('FR', 'Comment'                            , 'Commentaire'                     );
+    INSERT into i18n values('FR', 'Translation'                        , 'Traduction'                      );
     INSERT into i18n values('FR',  'Dites-nous ce que vous en pensez'  , 'Dites-nous ce que vous en pensez');
 
     INSERT into i18n values('FR', $$Ergonomie$$                        , $$Ergonomie$$                     );
@@ -546,13 +547,14 @@ let check_cookies = function(event)
   <button  class="delete"  > DELETE    FROM i18n WHERE lang='EN'</button><br>
   <details open> <summary>(8 phrases) .. (6 subjects)</summary> <!--{{{-->
   <button class="insert">
-   INSERT into i18n values('EN', 'Envoyer'                          , 'Submit'                );
-   INSERT into i18n values('EN', 'Supprimer'                        , 'Delete'                );
+   INSERT into i18n values('EN', 'Submit'                           , 'Submit'                );
+   INSERT into i18n values('EN', 'Remove'                           , 'Remove'                );
    INSERT into i18n values('EN',  'good'                            , 'good'                  );
    INSERT into i18n values('EN',  'correct'                         , 'correct'               );
    INSERT into i18n values('EN',  'wrong'                           , 'wrong'                 );
    INSERT into i18n values('EN',  'bad'                             , 'bad'                   );
-   INSERT into i18n values('EN', 'Commentaire'                      , 'Comment'               );
+   INSERT into i18n values('EN', 'Comment'                          , 'Comment'               );
+   INSERT into i18n values('EN', 'Translation'                      , 'Translation'           );
    INSERT into i18n values('EN',  'Dites-nous ce que vous en pensez', 'Tell us what you think');
 
    INSERT into i18n values('EN', $$Page d'évaluation$$                , $$EN ➔ PAGE D'ÉVALUATION$$         );
@@ -576,13 +578,14 @@ let check_cookies = function(event)
   <button  class="delete"  > DELETE    FROM i18n WHERE lang='DE'</button><br>
   <details open> <summary>(8 phrases) .. (6 subjects)</summary> <!--{{{-->
   <button class="insert">
-   INSERT into i18n values('DE', 'Envoyer'                          , 'Senden'                          );
-   INSERT into i18n values('DE', 'Supprimer'                        , 'Entfernen'                       );
+   INSERT into i18n values('DE', 'Submit'                           , 'Senden'                          );
+   INSERT into i18n values('DE', 'Remove'                           , 'Entfernen'                       );
    INSERT into i18n values('DE',  'good'                            , 'gut'                             );
    INSERT into i18n values('DE',  'correct'                         , 'geeignet'                        );
    INSERT into i18n values('DE',  'wrong'                           , 'akzeptabel'                      );
    INSERT into i18n values('DE',  'bad'                             , 'beklagenswert'                   );
-   INSERT into i18n values('DE', 'Commentaire'                      , 'Kommentar'                       );
+   INSERT into i18n values('DE', 'Comment'                          , 'Kommentar'                       );
+   INSERT into i18n values('DE', 'Translation'                      , 'Übersetzung'                     );
    INSERT into i18n values('DE',  'Dites-nous ce que vous en pensez', 'Erzählen Sie uns, was Sie denken');
 
    INSERT into i18n values('DE', $$Page d'évaluation$$                , $$DE ➔ PAGE D'ÉVALUATION$$         );
@@ -602,13 +605,14 @@ let check_cookies = function(event)
   <button  class="delete"  > DELETE    FROM i18n WHERE lang='GR'</button><br>
   <details open> <summary>(8 phrases) .. (6 subjects)</summary> <!--{{{-->
   <button class="insert">
-   INSERT into i18n values('GR', 'Envoyer'                          , 'Steílete'              );
-   INSERT into i18n values('GR', 'Supprimer'                        , 'Na diagrápso'          );
+   INSERT into i18n values('GR', 'Submit'                           , 'Steílete'              );
+   INSERT into i18n values('GR', 'Remove'                           , 'Na diagrápso'          );
    INSERT into i18n values('GR',  'good'                            , 'Kalós'                 );
    INSERT into i18n values('GR',  'correct'                         , 'sostós'                );
    INSERT into i18n values('GR',  'wrong'                           , 'lanthasménos'          );
    INSERT into i18n values('GR',  'bad'                             , 'kakó'                  );
-   INSERT into i18n values('GR', 'Commentaire'                      , 'Paratírisi'            );
+   INSERT into i18n values('GR', 'Comment'                          , 'Paratírisi'            );
+   INSERT into i18n values('GR', 'Translation'                      , 'Μετάφραση (Metáfrasi)' );
    INSERT into i18n values('GR',  'Dites-nous ce que vous en pensez', 'Peíte mas ti skéfteste');
 
    INSERT into i18n values('GR', $$Page d'évaluation$$                , $$GR ➔ PAGE D'ÉVALUATION$$         );
@@ -628,13 +632,14 @@ let check_cookies = function(event)
   <button  class="delete"  > DELETE    FROM i18n WHERE lang='ES'</button><br>
   <details open> <summary>(8 phrases) .. (6 subjects)</summary> <!--{{{-->
   <button class="insert">
-   INSERT into i18n values('ES', 'Envoyer'                           , 'Enviar'            );
-   INSERT into i18n values('ES', 'Supprimer'                         , 'Borrar'            );
+   INSERT into i18n values('ES', 'Submit'                            , 'Enviar'            );
+   INSERT into i18n values('ES', 'Remove'                            , 'Borrar'            );
    INSERT into i18n values('ES',  'good'                             , 'bien'              );
    INSERT into i18n values('ES',  'correct'                          , 'correcto'          );
    INSERT into i18n values('ES',  'wrong'                            , 'incorrecto'        );
    INSERT into i18n values('ES',  'bad'                              , 'malo'              );
-   INSERT into i18n values('ES', 'Commentaire'                       , 'Observación'       );
+   INSERT into i18n values('ES', 'Comment'                           , 'Observación'       );
+   INSERT into i18n values('ES', 'Translation'                      , 'Traducción'         );
    INSERT into i18n values('ES',  'Dites-nous ce que vous en pensez' , 'Dinos qué piensas' );
 
    INSERT into i18n values('ES', $$Page d'évaluation$$                , $$ES ➔ PAGE D'ÉVALUATION$$         );
@@ -654,13 +659,14 @@ let check_cookies = function(event)
   <button  class="delete"  > DELETE    FROM i18n WHERE lang='IT'</button><br>
   <details open> <summary>(8 phrases) .. (6 subjects)</summary> <!--{{{-->
   <button class="insert">
-   INSERT into i18n values('IT', 'Envoyer'                           , 'Mandare'                );
-   INSERT into i18n values('IT', 'Supprimer'                         , 'Cancellare'             );
+   INSERT into i18n values('IT', 'Submit'                            , 'Mandare'                );
+   INSERT into i18n values('IT', 'Remove'                            , 'Cancellare'             );
    INSERT into i18n values('IT',  'good'                             , 'Buona'                  );
    INSERT into i18n values('IT',  'correct'                          , 'corretta'               );
    INSERT into i18n values('IT',  'wrong'                            , 'sbagliato'              );
    INSERT into i18n values('IT',  'bad'                              , 'cattivo'                );
-   INSERT into i18n values('IT', 'Commentaire'                       , 'Osservazioni'           );
+   INSERT into i18n values('IT', 'Comment'                           , 'Osservazioni'           );
+   INSERT into i18n values('IT', 'Translation'                      , 'Traduzione'              );
    INSERT into i18n values('IT',  'Dites-nous ce que vous en pensez' , 'Diteci cosa ne pensate' );
 
    INSERT into i18n values('IT', $$Page d'évaluation$$                , $$IT ➔ PAGE D'ÉVALUATION$$         );
@@ -680,13 +686,14 @@ let check_cookies = function(event)
   <button  class="delete"  > DELETE    FROM i18n WHERE lang='PT'</button><br>
   <details open> <summary>(8 phrases) .. (6 subjects)</summary> <!--{{{-->
   <button class="insert">
-   INSERT into i18n values('PT', 'Envoyer'                           , 'Mandar'                   );
-   INSERT into i18n values('PT', 'Supprimer'                         , 'Deletar'                  );
+   INSERT into i18n values('PT', 'Submit'                            , 'Mandar'                   );
+   INSERT into i18n values('PT', 'Remove'                            , 'Deletar'                  );
    INSERT into i18n values('PT',  'good'                             , 'Boa'                      );
    INSERT into i18n values('PT',  'correct'                          , 'correto'                  );
    INSERT into i18n values('PT',  'wrong'                            , 'errado'                   );
    INSERT into i18n values('PT',  'bad'                              , 'mau'                      );
-   INSERT into i18n values('PT', 'Commentaire'                       , 'Observação'               );
+   INSERT into i18n values('PT', 'Comment'                           , 'Observação'               );
+   INSERT into i18n values('PT', 'Translation'                      , 'Translation'               );
    INSERT into i18n values('PT',  'Dites-nous ce que vous en pensez' , 'Nos diga o que você acha' );
 
    INSERT into i18n values('PT', $$Page d'évaluation$$                , $$PT ➔ PAGE D'ÉVALUATION$$         );
@@ -826,6 +833,12 @@ let check_cookies = function(event)
     <button type = "submit" id = "submit_pg_tables"
      onclick     = 'return qtext_add("SELECT * FROM pg_catalog.pg_tables WHERE schemaname=\"public\" ORDER BY tablename");'
      style       = "background-color: rgba(128,128,128,0.3); font-weight:900;"
+    >PG CATALOG</button>
+    <!--}}}-->
+    <!-- POSTGRES TABLES (I18N only) {{{-->
+    <button type = "submit" id = "submit_pg_tables_i18n"
+     onclick     = 'return qtext_add("SELECT * FROM pg_catalog.pg_tables ,REGEXP_MATCHES(tablename,\"i18n|topics|feedbacks\")");'
+     style       = "background-color: rgba(192,128,192,0.3); font-weight:900;"
     >PG CATALOG</button>
     <!--}}}-->
     <br>
