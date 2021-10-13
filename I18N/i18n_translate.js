@@ -1,5 +1,5 @@
 //┌────────────────────────────────────────────────────────────────────────────┐
-//│ [i18n_translate] .. [set_lang] [get_lang] [get_i18n]  _TAG (211009:16h:55) │
+//│ [i18n_translate] .. [set_lang] [get_lang] [get_i18n]  _TAG (211013:18h:40) │
 //└────────────────────────────────────────────────────────────────────────────┘
 /* jshint esversion 9, laxbreak:true, laxcomma:true, boss:true */ /*{{{*/
 /* globals  module, i18n_translate_json */
@@ -205,7 +205,7 @@ if( log_this) console.log("translated=["+translated+"] .. index_phrase=["+index_
 let sync_i18n_elements = function(_el_array)
 {
 let log_this = LOG_I18N;
-if( log_this) console.log("%c sync_i18n_elements("+(_el_array ? el_array.length:"")+"): lang_current=["+lang_current+"]", "background-color:#4E4; color:black;");
+if( log_this) console.log("%c sync_i18n_elements("+(_el_array ? _el_array.length:"")+"): lang_current=["+lang_current+"]", "background-color:#4E4; color:black;");
 if( log_this) console.dir(_el_array);
 
     /* process [passed elements] OR [collect likely translation targets] */
