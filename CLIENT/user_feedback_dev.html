@@ -327,8 +327,8 @@
 
      <!--}}}-->
      <!-- [submit] [purge] {{{-->
-     <button type="submit" id="button_submit" name="button_submit" formaction="/feedback_submit" class="i18n disabled" formtarget="response_iframe">Envoyer  </button>
-     <button type="submit" id="button_purge"  name="button_purge"  formaction="/feedback_purge"  class="i18n disabled" formtarget="response_iframe">Supprimer</button>
+     <button type="submit" id="button_submit" name="button_submit" formaction="/feedback_submit" class="i18n disabled" formtarget="response_iframe">Submit</button>
+     <button type="submit" id="button_purge"  name="button_purge"  formaction="/feedback_purge"  class="i18n disabled" formtarget="response_iframe">Remove</button>
 
      <!--}}}-->
      <!-- [qcm] or [good correct wrong bad] .. radio {{{-->
@@ -350,7 +350,7 @@
      <!-- [comment] {{{-->
      <hr>
 
-     <label   for="comment" class="i18n">Commentaire</label><br>
+     <label   for="comment" class="i18n">Comment</label><br>
      <textarea
       onkeyup     = 'feedback_tree.comment_monitor(event);'
       id          = "comment" name="comment"
