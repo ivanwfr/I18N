@@ -90,6 +90,7 @@ Button                        | Description
 * _Create, Populate and Delete database tables from scratch_
 * _check dynamically generated translation JSON code_
 * _JSON error helper_
+
     *![JSON_parse](/screenshot/JSON_parse.png)
 
 >![server_index_control](/screenshot/server_index_control.png)
