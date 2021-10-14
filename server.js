@@ -7,7 +7,7 @@
 /* eslint-disable no-warning-comments */
 
 const SERVER_JS_ID  = "server";
-const SERVER_JS_TAG = SERVER_JS_ID    +" (211012:21h:36)";
+const SERVER_JS_TAG = SERVER_JS_ID    +" (211014:19h:28)";
 /*}}}*/
 let server = (function() {
 "use strict";
@@ -416,8 +416,7 @@ log_C("┌───────────────────────�
 //console.dir( uri )
 response.request_count = ++request_count;
 
-if(config.LOG_MORE)
-    console.log("REQUEST #"+response.request_count+" "+TRACE_OPEN+" uri.path=["+uri.path+"] ");//DEBUG
+if(config.LOG_MORE) console.log("REQUEST #"+response.request_count+" "+TRACE_OPEN+" uri.path=["+uri.path+"] ");//DEBUG
 
     let consumed_by = "";
     /*}}}*/
@@ -484,6 +483,7 @@ if(config.LOG_MORE)
     }
     /*}}}*/
 //log_N("consumed_by=["+consumed_by+"]")
+if(config.LOG_MORE) console.log(TRACE_CLOSE);//DEBUG
 };
 /*}}}*/
 /*_ parse_url {{{*/
