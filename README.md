@@ -70,11 +70,40 @@ Button                        | Description
  populate_lang_key_val_json.js| check generated missing translation page builder
  i18n_translate_json.js       | check generated LANG translation dictionary
 
-### `screenshot`
+### `SCREENSHOT`
 
-![nodejs_server](/screenshot/nodejs_server.png)
-![server_index_client](/screenshot/server_index_client.png)
-![server_index_control](/screenshot/server_index_control.png)
-![user_feedback](/screenshot/user_feedback.png)
-![user_feedback_form](/screenshot/user_feedback_form.png)
-![i18n_populate](/screenshot/i18n_populate.png)
+`NodeJS server.js`
+>* _console trace: on startup, after config.json evaluation_
+> * _editing **config.json** ➔ kill and restart **node server.js**_
+
+>![nodejs_server](/screenshot/nodejs_server.png)
+
+`SERVER WEB PAGE .. CLIENT FRAME`
+>* _href with **lang** and **user_id** parameters_
+>* _href to the translation page_
+>    * _lang and user_id will be saved as a site cookie
+
+>![server_index_client](/screenshot/server_index_client.png)
+
+`SERVER WEB PAGE .. CONTROL FRAME`
+* Postgres TABLES templates
+* _Create, Populate and Delete tables from scratch_
+* _check dynamically generated translation JSON code_
+* _JSON error helper_
+
+>![server_index_control](/screenshot/server_index_control.png)
+
+`USER FEEDBACK WEB PAGE`
+* _translated HTML Elements textContent .. (only those with **class="i18n"** )_
+
+>![user_feedback](/screenshot/user_feedback.png)
+
+`USER FEEDBACK INPUT FORM`
+* _(**class="i18n"**) works there as well_
+
+>![user_feedback_form](/screenshot/user_feedback_form.png)
+
+`TRANSLATOR EDIT WEB PAGE`
+* _(**class="i18n"**) works there too_
+
+>![i18n_populate](/screenshot/i18n_populate.png)
