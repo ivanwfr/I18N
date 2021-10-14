@@ -1,23 +1,28 @@
 //┌────────────────────────────────────────────────────────────────────────────┐
-//│ [i18n_translate] .. [set_lang] [get_lang] [get_i18n]  _TAG (211013:18h:40) │
+//│ [i18n_translate] .. [set_lang] [get_lang] [get_i18n]                       │
 //└────────────────────────────────────────────────────────────────────────────┘
 /* jshint esversion 9, laxbreak:true, laxcomma:true, boss:true */ /*{{{*/
 /* globals  module, i18n_translate_json */
 /* globals  console, document, navigator, XMLHttpRequest */
 /* exported set_lang */
 /* eslint-disable no-warning-comments */
-/*
-update|1,$y *
-!start explorer https://jshint.com/
-}}}*/
+
+const I18N_TRANSLATE_JS_ID  = "i18n_translate";
+const I18N_TRANSLATE_JS_TAG = I18N_TRANSLATE_JS_ID+" (211014:14h:20)";    // eslint-disable-line no-unused-vars
+/*}}}*/
 //try { i18n_translate_json = require("./i18n_translate_json.js"); } catch(ex) {} // server-side-only requirement
 let i18n_translate = (function() {
 "use strict";
 const LOG_I18N = false;
 const TAG_I18N = false;
+
 //┌────────────────────────────────────────────────────────────────────────────┐
-   const LANG_KEY    = "lang";
+//│ SET ➔ GET ➔ NEW                                                            │
 //└────────────────────────────────────────────────────────────────────────────┘
+/*{{{*/
+const LANG_KEY = "lang";
+
+/*}}}*/
 /*➔ set_lang {{{*/
 /*{{{*/
 let     lang_current;
@@ -70,7 +75,7 @@ if( log_this) console.dir(el);
     /* UPDATE COOKIE {{{*/
 if( log_this) console.log("➔ UPDATE COOKIE: lang=["+lang+"]");
 
-    document.cookie = "lang="+lang+"; max-age="+(24*3600)+"; path=/";
+    set_cookie("lang", lang);
 if( log_this || TAG_I18N) console.log("%c"+document.cookie, "border: 3px solid green; font-size:120%;");
 
     /*}}}*/
@@ -81,11 +86,22 @@ if( log_this || TAG_I18N) console.log("%c"+document.cookie, "border: 3px solid g
     return lang_current;
 };
 /*}}}*/
+/*_ set_cookie {{{*/
+let set_cookie = function(name,value)
+{
+//console.log("set_cookie("+name+" , "+value+")")
+
+    document.cookie = name+"="+String(value).trim()+"; max-age="+(24*3600)+"; path=/";
+};
+/*}}}*/
 /*➔ get_lang {{{*/
 let get_lang = function()
 {
+    /* RETURN [lang_current] .. (if set) {{{*/
 // console.log("%c get_lang", "font-size:200%")
+
     if(lang_current) return lang_current;
+    /*}}}*/
     /* FROM LANG_KEY COOKIE {{{*/
     lang_current = _get_cookie(LANG_KEY);
     if( lang_current )
@@ -109,8 +125,14 @@ let new_lang = function(_lang,_caller)
 {
 let log_this = LOG_I18N;
 if( log_this || TAG_I18N) console.log("%c new_lang(["+_lang+"] ["+_caller+"])", "border:3px solid orange; font-size:150%;");
+    /* BY [onclick] OR [SELECT onchange] {{{*/
 
-    /* SET CURRENT LANG {{{*/
+    // HTML event:
+    // i18n_translate.new_lang(event.target.id    , "BY CLICK" );
+    // i18n_translate.new_lang(event.target.value , "BY SELECT");
+
+    /*}}}*/
+    /* SET [lang_current] .. f(_lang) {{{*/
     if(!_lang) return;
     let  lang    = _lang.toUpperCase().trim();
     if(( lang  == "US") || (lang == "GB"))
@@ -118,18 +140,13 @@ if( log_this || TAG_I18N) console.log("%c new_lang(["+_lang+"] ["+_caller+"])", 
 
     lang = set_lang(lang, _caller);
     /*}}}*/
-    // LOCATION
-    // https://192.168.1.14:444/CLIENT/user_feedback_dev.html?lang=EN&user_id=5073869e-097a-4b94-a7c5-9694f3a5397d
+//  /* ➔ RELOAD .. f(href parameter) {{ {*/
+//  // https://192.168.1.14:444/CLIENT/user_feedback_dev.html?lang=EN&user_id=5073869e-097a-4b94-a7c5-9694f3a5397d
+//  let href     = document.location.href.replace(/lang=../, "lang="+lang+"");
 
-    // CHANGED FROM HTML
-    // i18n_translate.new_lang(event.target.id    , "BY CLICK" );
-    // i18n_translate.new_lang(event.target.value , "BY SELECT");
-
-    let href     = document.location.href.replace(/lang=../, "lang="+lang+"");
-console.log("NAVIGATE TO href=["+href+"]");
-
-    document.location.href = href;
-
+//  console.log("NAVIGATE TO href=["+href+"]");
+//  document.location.href = href;
+//  /*}}}*/
 };
 /*}}}*/
 
