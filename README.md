@@ -91,7 +91,7 @@ Button                        | Description
 * _check dynamically generated translation JSON code_
 * _JSON error helper_
 
-    *![JSON_parse](/screenshot/JSON_parse.png)
+    ![JSON_parse](/screenshot/JSON_parse.png)
 
 >![server_index_control](/screenshot/server_index_control.png)
 
