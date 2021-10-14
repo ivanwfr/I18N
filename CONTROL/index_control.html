@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- ┌─────────────────────────────────────────────────────────────────────┐ -->
-<!-- │ [index_control.html]                           _TAG (211013:18h:36) │ -->
+<!-- │ [index_control.html]                           _TAG (211014:16h:14) │ -->
 <!-- └─────────────────────────────────────────────────────────────────────┘ -->
 <html lang="FR">
  <head> <!--{{{-->
@@ -1140,7 +1140,7 @@ query_format_div.title = query_format_div.watermark;
 //          query_format_watermark.style.top             = "1em";
 //          query_format_watermark.style.right           = "1em";
 //          query_format_watermark.style.backgroundColor = "transparent";
-            query_format_watermark.style.fontSize        = "32px";
+//          query_format_watermark.style.fontSize        = "32px";
 
             query_format_div.parentElement.insertBefore(query_format_watermark, query_format_div);
         }
@@ -1183,6 +1183,7 @@ query_format_div.title = query_format_div.watermark;
         sel_text         = cb_textArea.value;
     }
     if(!sel_text             ) {
+        query_format_watermark.innerText = "";
         query_format_div.innerHTML = "<em class='error'>"+YOU_HAVE_TO_SELECT+"</em>";
         query_format_collapse_toggle( false ); // SHOW
 

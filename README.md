@@ -78,18 +78,19 @@ Button                        | Description
 
 >![nodejs_server](/screenshot/nodejs_server.png)
 
-`SERVER WEB PAGE .. CLIENT FRAME`
->* _href with **lang** and **user_id** parameters_
->* _href to the translation page_
+`SERVER WEB PAGE (client frame)`
+>* _href to **user feedback page** with **lang** and **user_id** parameters_
+>* _href to the **translation page**_
 >    * _lang and user_id will be saved as a site cookie
 
 >![server_index_client](/screenshot/server_index_client.png)
 
-`SERVER WEB PAGE .. CONTROL FRAME`
-* Postgres TABLES templates
-* _Create, Populate and Delete tables from scratch_
+`SERVER WEB PAGE (control frame)`
+* Postgres TABLE templates
+* _Create, Populate and Delete database tables from scratch_
 * _check dynamically generated translation JSON code_
 * _JSON error helper_
+    *![JSON_parse](/screenshot/JSON_parse.png)
 
 >![server_index_control](/screenshot/server_index_control.png)
 
