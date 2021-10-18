@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- ┌─────────────────────────────────────────────────────────────────────┐ -->
-<!-- │ [index_control.html]                           _TAG (211014:16h:14) │ -->
+<!-- │ [index_control.html]                           _TAG (211018:18h:10) │ -->
 <!-- └─────────────────────────────────────────────────────────────────────┘ -->
 <html lang="FR">
  <head> <!--{{{-->
@@ -359,15 +359,17 @@ FORM>ol          { grid-gap              : 1em; }
 <!-- ┌─────────────────────────────────────────────────────────────────────┐ -->
 <!-- │ DYNAMIC HTML                                  [SERVER_INDEX_JS_TAG] │ -->
 <!-- └─────────────────────────────────────────────────────────────────────┘ -->
-<!--         server_control.js {{{-->
+<!--  CLEAR .. server_control.js .. check_cookies {{{-->
+<!-- CLEAR server console {{{-->
 <button
  title   = "CLEAR RESPONSE&#x000D;(and server console)"
  style   = "position:fixed; right:1em; background-color: rgba(000,255,000,0.3);"
  onclick = 'document.getElementById("submit_clear").click();'
->CLEAR server console
-</button>
+
+>CLEAR server console </button>
+<!--}}}-->
 <script src="server_control.js"></script>
-<script>
+<script> /* (inlining) {{{*/
 
     let clr_lang              = server_control.clr_lang;
     let clr_user_id           = server_control.clr_user_id;
@@ -393,6 +395,8 @@ FORM>ol          { grid-gap              : 1em; }
 
     let query_iframe_onsubmit = server_control.query_iframe_onsubmit;
 
+/*}}}*/
+/*_ check_cookies {{{*/
 let check_cookies = function(event)
 {
 /* GET [user_id] [lang] {{{*/
@@ -441,7 +445,7 @@ let check_cookies = function(event)
     /*}}}*/
     return true;
 };
-
+/*}}}*/
 </script>
 <!--}}}-->
 
@@ -487,10 +491,27 @@ let check_cookies = function(event)
 
    INSERT   into  topics values($$5. Aspect visuel et Design$$    , $$8. L'application est elle visuellement agréable (boutons, icones, couleurs ...)?$$);
 
-   INSERT   into  topics values($$6. Appréciation Globale$$       , $$9. En donnant une note allant de 1 à 5 (5 étant la meilleure note), qu'avez vous pensé de l'application/extension de navigateur ?$$);
-
   </button>
   </details> <!--}}}-->
+</details>
+</li>
+<!--}}}-->
+<!-- TABLE feedbacks {{{-->
+<li>
+ <details id="table_feedbacks">
+  <summary class="warn">TABLE feedbacks</summary>
+  <button  class="info"    > SELECT * FROM feedbacks</button><br>
+  <button  class="delete"  > DELETE   FROM feedbacks</button><br>
+  <button  class="drop"    > DROP    TABLE feedbacks</button><br>
+  <button  class="create"  > CREATE  TABLE feedbacks <em>(user_id  uuid NOT NULL, subject  varchar, question varchar, feedback varchar, comment  varchar)</em> </button><br>
+  <!-- feedbacks values: 'user_id' , 'subject' , 'question' ,'feedback' , 'comment' -->
+  <button  class="insert">
+   INSERT into feedbacks values('5073869e-097a-4b94-a7c5-9694f3a5397d' , $$1. Ergonomie$$               , $$1. Les textes sont ils facilement lisible et compréhensible ?$$                                             , 'good'    , '');
+   INSERT into feedbacks values('5073869e-097a-4b94-a7c5-9694f3a5397d' , $$1. Ergonomie$$               , $$2. Est il facile de revenir en arrière en cas d'erreur ?$$                                                  , 'correct' , '');
+   INSERT into feedbacks values('5073869e-097a-4b94-a7c5-9694f3a5397d' , $$1. Ergonomie$$               , $$3. L'application s'adapte t'elle bien à vos appareils ?$$                                                   , 'wrong'   , 'wrong wrong wrong wrong wrong');
+   INSERT into feedbacks values('5073869e-097a-4b94-a7c5-9694f3a5397d' , $$2. Facilité d'installation$$ , $$4. Avez vous rencontré des difficultés à l'installation de l'application mobile/extension de navigateur ?$$ , 'bad'     , 'bad bad bad bad bad bad');
+
+  </button>
 </details>
 </li>
 <!--}}}-->
@@ -711,25 +732,6 @@ let check_cookies = function(event)
 </details>
 </li>
 <!--}}}-->
-<!-- TABLE feedbacks {{{-->
-<li>
- <details id="table_feedbacks">
-  <summary class="warn">TABLE feedbacks</summary>
-  <button  class="info"    > SELECT * FROM feedbacks</button><br>
-  <button  class="delete"  > DELETE   FROM feedbacks</button><br>
-  <button  class="drop"    > DROP    TABLE feedbacks</button><br>
-  <button  class="create"  > CREATE  TABLE feedbacks <em>(user_id  uuid NOT NULL, subject  varchar, question varchar, feedback varchar, comment  varchar)</em> </button><br>
-  <!-- feedbacks values: 'user_id' , 'subject' , 'question' ,'feedback' , 'comment' -->
-  <button  class="insert">
-   INSERT into feedbacks values('5073869e-097a-4b94-a7c5-9694f3a5397d' , $$1. Ergonomie$$               , $$1. Les textes sont ils facilement lisible et compréhensible ?$$                                             , 'good'    , '');
-   INSERT into feedbacks values('5073869e-097a-4b94-a7c5-9694f3a5397d' , $$1. Ergonomie$$               , $$2. Est il facile de revenir en arrière en cas d'erreur ?$$                                                  , 'correct' , '');
-   INSERT into feedbacks values('5073869e-097a-4b94-a7c5-9694f3a5397d' , $$1. Ergonomie$$               , $$3. L'application s'adapte t'elle bien à vos appareils ?$$                                                   , 'wrong'   , 'wrong wrong wrong wrong wrong');
-   INSERT into feedbacks values('5073869e-097a-4b94-a7c5-9694f3a5397d' , $$2. Facilité d'installation$$ , $$4. Avez vous rencontré des difficultés à l'installation de l'application mobile/extension de navigateur ?$$ , 'bad'     , 'bad bad bad bad bad bad');
-
-  </button>
-</details>
-</li>
-<!--}}}-->
 
 
 
@@ -829,16 +831,16 @@ let check_cookies = function(event)
      >LOG_MORE</button>
 
     <!--}}}-->
-    <!-- POSTGRES TABLES {{{-->
-    <button type = "submit" id = "submit_pg_tables"
-     onclick     = 'return qtext_add("SELECT * FROM pg_catalog.pg_tables WHERE schemaname=\"public\" ORDER BY tablename");'
-     style       = "background-color: rgba(128,128,128,0.3); font-weight:900;"
-    >PG CATALOG</button>
-    <!--}}}-->
     <!-- POSTGRES TABLES (I18N only) {{{-->
     <button type = "submit" id = "submit_pg_tables_i18n"
      onclick     = 'return qtext_add("SELECT * FROM pg_catalog.pg_tables ,REGEXP_MATCHES(tablename,\"i18n|topics|feedbacks\")");'
      style       = "background-color: rgba(192,128,192,0.3); font-weight:900;"
+    >PG CATALOG <sup><i style="color:gray;">I18N</i></sup></button>
+    <!--}}}-->
+    <!-- POSTGRES TABLES {{{-->
+    <button type = "submit" id = "submit_pg_tables"
+     onclick     = 'return qtext_add("SELECT * FROM pg_catalog.pg_tables WHERE schemaname=\"public\" ORDER BY tablename");'
+     style       = "background-color: rgba(128,128,128,0.3); font-weight:900;"
     >PG CATALOG</button>
     <!--}}}-->
     <br>
@@ -978,9 +980,11 @@ em.error    { text-shadow      : 1px 1px 1px #222;                 }
 
 /*}}}*/
 /* submit {{{*/
-#submit_LOG_MORE::after             { content : " \2714"; font-size: 24px; font-weight: 900; font-family: "system-ui"; color: gray; } /* ✔ */
-#submit_LOG_MORE.selected::after    { content : " \2718"; font-size: 24px; font-weight: 900; font-family: "system-ui";              } /* ✘ */
-#submit_pg_tables::after            { content : " \2714"; font-size: 24px; font-weight: 900; font-family: "system-ui"; color: gray; } /* ✔ */
+
+
+#submit_LOG_MORE::after             { content : " \2714"; font-weight: 900; font-family: "system-ui"; color: gray; vertical-align: super; } /* ✔ */
+#submit_LOG_MORE.selected::after    { content : " \2718"; font-weight: 900; font-family: "system-ui"; color:  red; vertical-align: super; } /* ✘ */
+#submit_pg_tables::after            { content : " all"  ; font-weight: 900; font-family: "system-ui"; color: gray; vertical-align: super; } /* ✔ */
 
 /*}}}*/
 /* magnified {{{*/
@@ -1072,8 +1076,8 @@ div.magnified table { max-height : 92%                    !important; }
 #query_format_collapse { vertical-align   :    top; }
 #query_format_collapse { margin           :      0; }
 
-#query_format_collapse::before           { content : "HIDE"; }
-#query_format_collapse.collapsed::before { content : "SHOW"; }
+#query_format_collapse::before           { content : "JSON HIDE"; }
+#query_format_collapse.collapsed::before { content : "JSON SHOW"; }
 
 /*}}}*/
 </style>

@@ -7,7 +7,7 @@
 , "PORT"               : 5432
 , "USER"               : "postgres"
 , "PASSWORD"           : "ivan"
-, "DATABASE"           : "cxu-feedback"
+, "DATABASE"           : "postgres"
 
 ,   "TOPICS_TABLE"     : "topics"
 ,     "I18N_TABLE"     : "i18n"
@@ -17,18 +17,9 @@
 , "SELECT_i18n"        : "with args as(select ? as lang from dual), subjects as (select args.lang, 's_'|| subject_id as key, libelle as val from subjects_translation inner join args on subjects_translation.lang=args.lang), questions as (select args.lang, 'q_'|| question_id as key, libelle as val from questions_translation inner join args on questions_translation.lang=args.lang), qcm as (select args.lang, 'q_' || question_id || '_r_' || rank as key, libelle as val from qcm_translation inner join args on qcm_translation.lang=args.lang)select * from qcm union select * from questions union select * from subjects"
 , "SELECT_topics"      : "select 's_' || subject_id as subject, 'q_' || id as question from questions ORDER BY subject,question"
 
-,    "XPATH_TABLE"     : "site_XPATH"
-,"SITE_TREE_TABLE"     : "site_TREE"
-
-
   , "LOG_MORE"              : false
   , "I18N_SELECT_feedbacks" : "SELECT * FROM feedbacks WHERE user_id='?' ORDER BY subject,question"
   , "I18N_SELECT_i18n"      : "SELECT * FROM i18n      ORDER BY key"
   , "I18N_SELECT_topics"    : "SELECT * FROM topics    ORDER BY subject,question"
 
-
-, "SELECT_site_TREE"    : "SELECT * FROM site_TREE WHERE site_url LIKE '?' ORDER BY site_url"
-
-, "URI_DIR"             :    "Files"
-, "URI_DIR_TARGET"      : "C:/Files"
 }

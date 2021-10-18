@@ -64,7 +64,7 @@ let   config              =
 //  , HOST                      : "localhost"
 //  , USER                      : "postgres"
 //  , PASSWORD                  : "ivan"
-//  , DATABASE                  : "cxu-feedback"
+//  , DATABASE                  : "postgres"
 //  , FEEDBACK_TABLE            : "feedbacks"
 //  , URI_DIR                   :    "Files"
 //  , URI_DIR_TARGET            : "C:/Files"
@@ -118,17 +118,6 @@ try {
     config_LOAD_STATUS_log(       `CONFIG    [${POSTGRES_REQUIRE}]`);
 } catch(ex) {
     config_LOAD_STATUS_log(       `******    [${POSTGRES_REQUIRE}] ERROR ➔ ${ex}`);
-}
-
-/*}}}*/
-//➔ DOWNLOAD_REQUIRE {{{
-const DOWNLOAD_REQUIRE          = "./CONTROL/server_download.js";
-let   server_download;
-try {
-    server_download             = require(      DOWNLOAD_REQUIRE );
-    config_LOAD_STATUS_log(       `CONFIG    [${DOWNLOAD_REQUIRE}]`);
-} catch(ex) {
-    config_LOAD_STATUS_log(       `******    [${DOWNLOAD_REQUIRE}] ERROR ➔ ${ex}`);
 }
 
 /*}}}*/
@@ -375,11 +364,6 @@ let createServer = function()
     //watch_SQL_changes();
 
     /*}}}*/
-    /* WATCH DOWNLOAD FOLDER {{{*/
-    server_download.set_server( server );
-    server_download.watch_DOWNLOAD_changes();
-
-    /*}}}*/
 };
 /*}}}*/
 
@@ -446,19 +430,6 @@ if(config.LOG_MORE) console.log("REQUEST #"+response.request_count+" "+TRACE_OPE
     }
 /*}}}*/
     //┌────────────────────────────────────────────────────────────────────────┐
-    //│ SERVER: [URI]                                                          │
-    //└────────────────────────────────────────────────────────────────────────┘
-/*{{{*/
-    if(     !consumed_by )
-    {
-        if(    uri.path.includes( config.URI_DIR )
-            &&     fs.existsSync( config.URI_DIR )
-          )
-            consumed_by = server_request_uri.request_uri( args );
-
-    }
-/*}}}*/
-    //┌────────────────────────────────────────────────────────────────────────┐
     //│ FALLBACK TO SERVE FILES FROM CURRENT DIRECTORY                         │
     //└────────────────────────────────────────────────────────────────────────┘
     /* 7. fs.readFile {{{*/
@@ -519,146 +490,6 @@ let parse_url = function(url)
 };
 /*}}}*/
 return { request_listener };
-})();
-
-//┌────────────────────────────────────────────────────────────────────────────┐
-//│ RESPONSE URI                                                               │
-//└────────────────────────────────────────────────────────────────────────────┘
-let server_request_uri = (function() {
-/*_ request_uri {{{*/
-const FILE_HEAD_REGEXP = new RegExp(config.URI_DIR+"/(.*)/[^/]*$"); /* URI_DIR SUB-FOLDER(s) */
-const FILE_NAME_REGEXP = new RegExp( ".*\\[[^\\]]*\\](.*$)"      ); /* the part after some [version] between brackets */
-const FILE_UUID_REGEXP = new RegExp(      ".*\/(.*)$"            ); /* FILE NAME TAIL */
-let request_uri = function(args)
-{
-console.log("request_uri");
-
-    /* [config.URI_DIR] {{{*/
-    let { uri,          response } = args;
-//console.dir(uri);
-
-    if(!fs.existsSync(config.URI_DIR))
-    {
-log_R("["+config.URI_DIR+"] NOT FOUND UNDER PROCESS CURRENT DIRECTORY ["+process.cwd()+"]");
-        return null;
-    }
-    /*}}}*/
-    /*  REGEX {{{*/
-    let file_head_match   = uri.path.match( FILE_HEAD_REGEXP );
-    let file_head         = file_head_match ? file_head_match[1] : "";
-
-    let file_uuid_match   = uri.path.match( server_download.FILE_UUID_REGEXP );
-    if(!file_uuid_match)
-    {
-log_R("["+config.URI_DIR+"] NO MATCH FOR [server_download.FILE_UUID_REGEXP]");
-
-        return null;
-    }
-    let file_uuid        = file_uuid_match[1];
-
-console.dir( { FILE_HEAD_REGEXP
-             , FILE_UUID_REGEXP
-             , FILE_NAME_REGEXP
-             , file_head
-             , file_uuid
-});
-/*{{{
-}}}*/
-    /*}}}*/
-    /* SEARCH [file_path] [file_tail] .. f(file_uuid) {{{*/
-    let consumed_by;
-
-    let file_path = request_uri_search_dir(config.URI_DIR+"/"+file_head, file_uuid);
-console.log("file_path=["+file_path+"]");
-    if(!file_path ) return undefined;
-
-    let file_path_match  = file_path.match( server_download.FILE_NAME_REGEXP );
-    let file_tail        = file_path_match ? file_path_match[1] : "";
-console.log("file_tail=["+file_tail+"]");
-
-    if(!file_path ) return undefined;
-    /*}}}*/
-    /* [response] SAVE AS {{{*/
-    if( response )
-    {
-        // [response] piggyback
-/*
-:!start explorer "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition"
-*/
-        //sponse.content_disposition =     'inline; filename="'+file_tail+'"'; // eslint-disable-line quotes
-        response.content_disposition = 'attachment; filename="'+file_tail+'"'; // eslint-disable-line quotes
-
-        fs.readFile(file_path, function(err,data) { fs_read_file_callback(file_path, uri.query, response, err, data); });
-
-        consumed_by   = "URI: .. file_uuid=["+file_uuid+"] .. ["+file_tail+"]";
-
-if(consumed_by) console.log( consumed_by );
-        return consumed_by;
-    }
-    /*}}}*/
-    else {
-        return { file_path , file_tail };
-    }
-};
-/*}}}*/
-/*_ request_uri_search_dir {{{*/
-let request_uri_search_dir = function(dir_name, file_uuid)
-{
-//log_Y("request_uri_search_dir("+dir_name+", "+file_uuid+")");
-
-    /* [dir_name] {{{*/
-    if(!fs.existsSync( dir_name ))
-    {
-log_M("["+dir_name+"] NOT FOUND");
-
-        return null;
-    }
-    /*}}}*/
-    let file_path;
-
-    let                      options = { withFileTypes: true };
-    fs.readdirSync(dir_name, options)
-        .forEach( (dirent) => {
-//log_N("...file_path=["+file_path+"] ..["+dirent.type+"] .. ["+dirent.name+"]"); // VERBOSE config.URI_DIR SEARCH
-            if(!file_path) {
-                /* dirent {{{*/
-/*{{{
-                let dirent_type
-                    = dirent.isDirectory()    ? "DIR:"
-                    : dirent.isFile()         ? "FILE"
-                    : dirent.isSymbolicLink() ? "LINK"
-                    :                           dirent["Symbol(type)"];
-
-                let color
-                    = (dirent_type == "DIR:") ? Y
-                    : (dirent_type == "FILE") ? G
-                    : (dirent_type == "LINK") ? C
-                    :                           R;
-
-log_N("..."+color+"["+dirent_type+"] .. ["+dirent.name+"]"); // VERBOSE config.URI_DIR SEARCH
-}}}*/
-                /*}}}*/
-                /* DIR {{{*/
-                if(dirent.isDirectory() || dirent.isSymbolicLink())
-                {
-                    let sub_dir_name = dir_name+"/"+dirent.name;
-                    file_path = request_uri_search_dir(sub_dir_name, file_uuid);
-                }
-                /*}}}*/
-                /* FILE {{{*/
-                else {
-                    if(dirent.name.startsWith( file_uuid ))
-                        file_path = dir_name+"/"+dirent.name;
-                }
-                /*}}}*/
-            }
-        });
-
-//console.log("request_uri_search_dir("+dir_name+"): ...return file_path=["+file_path+"]")
-    return file_path;
-};
-/*}}}*/
-return { request_uri };
 })();
 
 //┌────────────────────────────────────────────────────────────────────────────┐
@@ -835,7 +666,6 @@ let request_dump_USR_TABLES = function(args)
 log_M("  ┌─────────────────┐\n"
      +"➔ │ dump_USR_TABLES │\n"
      +"  └─────────────────┘");
-console.dir(uri)//FIXME
         response.writeHead(200, HTML_RESPONSE_HEADER );
         response.write("<h3>"+uri.path+"</h3>");
         feedback_postgres.dump_USR_TABLES( response );

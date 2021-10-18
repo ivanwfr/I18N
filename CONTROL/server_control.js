@@ -9,7 +9,7 @@
 /* eslint-disable no-warning-comments */
 
 const SERVER_CONTROL_JS_ID  = "server";
-const SERVER_CONTROL_JS_TAG = SERVER_CONTROL_JS_ID +" (211012:21h:25)";
+const SERVER_CONTROL_JS_TAG = SERVER_CONTROL_JS_ID +" (211018:13h:56)";
 /*}}}*/
 let server_control = (function() {
 "use strict";
@@ -178,50 +178,6 @@ let sync_user_id = function(_caller)
 //      fs.existsSync   ( file_name )
 //      fs.readFileSync ( file_name )
 //└────────────────────────────────────────────────────────────────────────────┘
-/*➔   TOPICS_QUERY {{{*/
-/* eslint-disable no-tabs */
-
-const TOPICS_QUERY = `
-with q1 as (
-	select id as question_id, subject_id from questions
-), q2 as (
-	select pays, q1.subject_id, libelle as subject, q1.question_id
-	from q1 inner join subjects_translation on q1.subject_id=subjects_translation.subject_id
-), qfinal as (
-	select q2.pays, q2.subject_id, q2.subject, q2.question_id, libelle
-	from q2 inner join questions_translation on q2.question_id=questions_translation.question_id
-	where q2.pays=questions_translation.pays
-)
-select * from qfinal order by pays;
-`;
-
-/* eslint-enable  no-tabs */
-/*}}}*/
-/*➔   REPONSES_QUERY {{{*/
-/* eslint-disable no-tabs */
-
-const REPONSES_QUERY = `
-with vargs as(
-	select uuid('USER_ID') as cxu_id, 'LANG' as pays
-	from dual
-), q1 as (
-	select id as question_id, subject_id from questions
-), q2 as (
-	select pays, q1.subject_id, libelle as subject, q1.question_id
-	from q1 inner join subjects_translation on q1.subject_id=subjects_translation.subject_id
-), q3 as (
-	select q2.pays, q2.subject_id, q2.subject, q2.question_id, libelle as question
-	from q2 inner join questions_translation on q2.question_id=questions_translation.question_id
-	where q2.pays=questions_translation.pays
-), qf as (
-	select cxu_id, q3.pays, subject_id, subject, question_id, question from q3 inner join vargs on q3.pays=vargs.pays
-)
-select qf.subject_id, subject, qf.question_id, question, niveau, commentaire from qf right outer join reponses on qf.question_id=reponses.question_id
-where qf.cxu_id=reponses.user_id;
-`;
-
-/* eslint-enable  no-tabs */
-/*}}}*/
 /*_ qtext_clear {{{*/
 let qtext_clear    = function(qtext)
 {
@@ -242,11 +198,6 @@ let qtext_add  = function(_text)
         .  replace(/(\n\s+)|(\s+\n)/gm, "\n") // SPACE       ➔ trim heading and trailing
         .  replace(             /;$/  , ""  ) // SEMICOLON   ➔ postpone
     ;
-
-    text
-        = (text == "TOPICS_QUERY"  ) ?   TOPICS_QUERY
-        : (text == "REPONSES_QUERY") ? REPONSES_QUERY
-        :                                        text;
 
     /* UPDATE TEXTAREA */
     let qtext  = document.getElementById("qtext");
