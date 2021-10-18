@@ -8,7 +8,7 @@
 /* eslint-disable no-warning-comments */
 
 const I18N_TRANSLATE_JS_ID  = "i18n_translate";
-const I18N_TRANSLATE_JS_TAG = I18N_TRANSLATE_JS_ID+" (211014:14h:20)";    // eslint-disable-line no-unused-vars
+const I18N_TRANSLATE_JS_TAG = I18N_TRANSLATE_JS_ID+" (211018:19h:05)";    // eslint-disable-line no-unused-vars
 /*}}}*/
 //try { i18n_translate_json = require("./i18n_translate_json.js"); } catch(ex) {} // server-side-only requirement
 let i18n_translate = (function() {
@@ -161,16 +161,20 @@ const LANG_NOT_SUPPORTED_YET = "LANG NOT SUPPORTED YET";
 /*}}}*/
 let get_i18n = function(_index_phrase, _lang=lang_current) /* eslint-disable-line complexity */
 {
-//console.log("%c get_i18n", "font-size:200%")
 let log_this = LOG_I18N;
-    /* [lang key] trim {{{*/
-    let index_phrase
-        = _index_phrase.trim()
-        . replace(/^\d+\s*[\.-]?\s*/,"") // TRIM ORDERING-HEADER: (digit > space > punct > space) > phrase
-        ;
-if( log_this) console.log("index_phrase=["+index_phrase+"]");
 
-    let         lang = (_lang) ? _lang : get_lang();
+if( log_this) console.log("get_i18n("+_index_phrase+")");
+    /* [key] [lang] trim {{{*/
+
+    let matches      = _index_phrase.trim().match(/^(\d+\s*[\.-]?\s*)?(.*)/); // 1 - XXX
+    let head         = matches[1] || "";
+    let index_phrase = matches[2];
+
+    let lang         = (_lang) ? _lang : get_lang();
+
+if( log_this) console.log("...........lang=["+ lang +"]");
+if( log_this) console.log("...........head=["+ head +"]");
+if( log_this) console.log("...index_phrase=["+ index_phrase +"]");
     /*}}}*/
     /* [i18n_translate_json] undefined {{{*/
     if(typeof i18n_translate_json == "undefined")
@@ -215,7 +219,7 @@ if( log_this) console.log("index_phrase=["+index_phrase+"]");
 
 if( log_this) console.log("translated=["+translated+"] .. index_phrase=["+index_phrase+"]");
 //if(!translated) console.trace()
-    return translated || index_phrase;
+    return head + (translated || index_phrase);
 };
 /*}}}*/
 /*➔ sync_i18n_elements {{{*/
@@ -240,7 +244,7 @@ if( log_this) console.dir( el_array );
     {
         let      el = el_array[i];
 
-        let      el_is_a_number = !isNaN( parseInt(el.innerText) );
+        let      el_is_a_number = !isNaN(     el.innerText  ); // !isNaN( parseInt(el.innerText) );
         if     ( el_is_a_number ) continue;
         else if( el.innerText   ) el_set_lang(el, lang_current);
         else if( el.placeholder ) el_set_lang(el, lang_current);
