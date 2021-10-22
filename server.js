@@ -1,5 +1,5 @@
 //┌──▼▼▼▼▼▼────────────────────────────────────────────────────────────────────┐
-//│ [SERVER]                                                                   │
+//│ [SERVER]                                                            [I18N] │
 //└──▲▲▲▲▲▲────────────────────────────────────────────────────────────────────┘
 /* jshint esversion: 9, laxbreak:true, laxcomma:true, boss:true */ /*{{{*/
 /* globals  require, process */
@@ -7,7 +7,7 @@
 /* eslint-disable no-warning-comments */
 
 const SERVER_JS_ID  = "server";
-const SERVER_JS_TAG = SERVER_JS_ID    +" (211014:19h:28)";
+const SERVER_JS_TAG = SERVER_JS_ID    +" (211020:17h:02)";
 /*}}}*/
 let server = (function() {
 "use strict";
@@ -20,9 +20,10 @@ const DEFAULT_URI_PATH              = "./index.html";
 const TRACE_OPEN  = " {{{";
 const TRACE_CLOSE = " }}}";
 
-const THANKS_FOR_YOUR_FEEDBACK      = "Thank you for your feedback";
+
 /*}}}*/
 //➔ ANSII-TERMINAL {{{*/
+/* eslint-disable no-unused-vars */
 const    LF = String.fromCharCode(10);
 const   ESC = String.fromCharCode(27);
 const R=ESC+"[1;31m"; //     RED
@@ -44,8 +45,9 @@ let log_Y = function(arg0, ...rest) { log_X([ Y + arg0, ...rest]); }; // eslint-
 
 let log_N = function(arg0, ...rest) { log_X([ N + arg0, ...rest]); };
 
+/* eslint-enable  no-unused-vars */
 /*}}}*/
-//➔ REQUIRE {{{*/
+//➔ REQUIRE
 //➔ [fs http https networkInterfaces] {{{
 let   fs                        = require("fs"   );
 let   http                      = require("http" );
@@ -71,6 +73,7 @@ let   config              =
 
 };
 
+/*}}}*/
 /*_ config_LOAD_STATUS_log {{{*/
 let config_LOAD_STATUS_log = function(msg)
 {
@@ -81,7 +84,6 @@ let config_LOAD_STATUS_log = function(msg)
     config.LOAD_STATUS     += msg;
 };
 /*}}}*/
-/*}}}*/
 //➔ CONFIG_JSON {{{
 const CONFIG_JSON               = "./config.json" ;
 const CONFIG_DEV_JSON           = "./config_dev.json" ;
@@ -90,6 +92,10 @@ let   config_json               = fs.existsSync( CONFIG_DEV_JSON ) ? CONFIG_DEV_
 try {
     config                      = require(      config_json );
     config_LOAD_STATUS_log(       `CONFIG    [${config_json}]`);
+
+
+
+
 } catch(ex) {
     let cwd = process.cwd().replace(/\\/g,"/");
     config_LOAD_STATUS_log(       "****************************************"         + LF
@@ -110,18 +116,19 @@ try {
 }
 
 /*}}}*/
-//➔ POSTGRES_REQUIRE {{{
-const POSTGRES_REQUIRE          = "./CONTROL/feedback_postgres.js";
-let   feedback_postgres;
+//➔ [lib_postgres] {{{
+const LIB_PG_REQUIRE            = "./lib/lib_postgres.js";
+let   lib_postgres;
 try {
-    feedback_postgres           = require(      POSTGRES_REQUIRE );
-    config_LOAD_STATUS_log(       `CONFIG    [${POSTGRES_REQUIRE}]`);
+    lib_postgres                = require(      LIB_PG_REQUIRE );
+    config_LOAD_STATUS_log(       `CONFIG    [${LIB_PG_REQUIRE}]`);
 } catch(ex) {
-    config_LOAD_STATUS_log(       `******    [${POSTGRES_REQUIRE}] ERROR ➔ ${ex}`);
+    config_LOAD_STATUS_log(       `******    [${LIB_PG_REQUIRE}] ERROR ➔ ${ex}`);
 }
 
 /*}}}*/
-/*}}}*/
+
+
 
 //┌────────────────────────────────────────────────────────────────────────────┐
 //│ STATUS                                                                     │
@@ -168,6 +175,9 @@ if( response )
 │ DATABASE          [${config.DATABASE    }]
 │ URI_DIR           [${config.URI_DIR     }]`
 ;
+
+
+
 
     if(config.LOG_MORE)
         s += LF+"│ LOG_MORE    ➔➔➔ ["+    config.LOG_MORE     +"] ➔ VERBOSE node server.js";
@@ -241,6 +251,7 @@ if( response )
     /*}}}*/
     /* HTTP  {{{*/
 
+//lib_log.log_key_val("http__server", http__server);
     let http__address = http__server  ?            http__server.address() : null;
     let http__port    = http__address ?            http__address.port     : null;
     let http__status  = http__port    ? (  "LISTENING PORT "+http__port ) : "NOT LISTENING";
@@ -320,6 +331,7 @@ let server_top_folder;
 /*}}}*/
 let createServer = function()
 {
+
     /* [HTTP ] {{{*/
     try {
         http__server    = http .createServer();
@@ -333,22 +345,27 @@ let createServer = function()
             = {    key: fs.readFileSync(config.KEY_PEM )
                 , cert: fs.readFileSync(config.CERT_PEM)
             };
+
         https_server    = https.createServer( ssl_options );
     }
-    catch(ex) { log_R(ex); }
-
+    catch(ex) { log_R(ex);
+        config.LOAD_STATUS
+            = `ERROR    : https(ssl_options) ➔ ${ex.code}\n`
+            + config.LOAD_STATUS;
+    }
     /*}}}*/
-    /* FOLDER {{{*/
+    /* [FOLDER] {{{*/
     started_folder      = process.cwd().replace(/\\/g,"/");
     server_top_folder   = process.cwd().replace(/\\/g,"/");
 
     /*}}}*/
+
     /* [PORT] {{{*/
     if(http__server) http__server.listen ( config.PORT_HTTP  ||  80);
     if(https_server) https_server.listen ( config.PORT_HTTPS || 443);
 
-    if( feedback_postgres )
-        feedback_postgres.configure( config );
+    if( lib_postgres )
+        lib_postgres.configure(config, server_sql);
 
     /*}}}*/
     /* LISTEN {{{*/
@@ -360,10 +377,8 @@ let createServer = function()
     log_STATUS();
 
     /*}}}*/
-    /* WATCH SQL FOLDER {{{*/
-    //watch_SQL_changes();
 
-    /*}}}*/
+
 };
 /*}}}*/
 
@@ -383,8 +398,7 @@ let request_listener = function(request, response) /* eslint-disable-line comple
     /* CLEAR TERMINAL BETWEEN REQUEST CHUNKS {{{*/
     let time_now_MS = new Date().getTime();
     if((time_now_MS - last_request_time) > CLEAR_COOLDOWN) {
-        if(config.LOG_MORE)
-            console.log("\x1Bc➔  clear terminal between request chunks");
+        if(config.LOG_MORE) console.log("\x1Bc➔  clear terminal between request chunks");
     }
     last_request_time = time_now_MS; // restart cooldown start time
     /*}}}*/
@@ -398,8 +412,8 @@ log_C("┌───────────────────────�
      +"└──────────────────────────────────────────────────────────────────────────────┘");
 //log_N("uri")
 //console.dir( uri )
-response.request_count = ++request_count;
 
+    response.request_count = ++request_count;
 if(config.LOG_MORE) console.log("REQUEST #"+response.request_count+" "+TRACE_OPEN+" uri.path=["+uri.path+"] ");//DEBUG
 
     let consumed_by = "";
@@ -411,6 +425,7 @@ if(config.LOG_MORE) console.log("REQUEST #"+response.request_count+" "+TRACE_OPE
     let args = { uri , request , response };
 
     if(     !consumed_by) consumed_by = server_request_commands.request_CLEAR       ( args );
+
     if(     !consumed_by) consumed_by = server_request_commands.request_LOG_MORE    ( args );
     if(     !consumed_by) consumed_by = server_request_commands.request_STATUS      ( args );
     if(     !consumed_by) consumed_by = server_request_commands.request_EXIT        ( args );
@@ -420,15 +435,19 @@ if(config.LOG_MORE) console.log("REQUEST #"+response.request_count+" "+TRACE_OPE
     //│ SERVER: [CONTROL]                                                      │
     //└────────────────────────────────────────────────────────────────────────┘
 /*{{{*/
-    if( feedback_postgres )
+    if( lib_postgres )
     {
-        if( !consumed_by) consumed_by = server_request_commands.request_dump_USR_TABLES ( args );
-        if( !consumed_by) consumed_by = server_request_data_io .request_data_io         ( args );
-        if( !consumed_by) consumed_by =                         request_js_script       ( args );
-        if( !consumed_by) consumed_by =                         request_sql_query       ( args );
+        if( !consumed_by) consumed_by = server_request_data_io .request_data_io    ( args );
+        if( !consumed_by) consumed_by =                         request_js_script  ( args );
+        if( !consumed_by) consumed_by =                         request_sql_query  ( args );
+        if( !consumed_by) consumed_by = server_request_commands.request_dump_TABLES( args );
 
     }
 /*}}}*/
+
+
+
+
     //┌────────────────────────────────────────────────────────────────────────┐
     //│ FALLBACK TO SERVE FILES FROM CURRENT DIRECTORY                         │
     //└────────────────────────────────────────────────────────────────────────┘
@@ -492,22 +511,39 @@ let parse_url = function(url)
 return { request_listener };
 })();
 
+
+
+
+
+
+
+
+
+
 //┌────────────────────────────────────────────────────────────────────────────┐
 //│ RESPONSE DATA-IN-OUT                        [lang_errors] [submit] [purge] │
 //└────────────────────────────────────────────────────────────────────────────┘
 let server_request_data_io = (function() {
+/*    REQUEST_URL_ARRAY {{{*/
+const REQUEST_URL_ARRAY
+    = [   "/feedback_submit"
+        , "/feedback_purge"
+        , "/lang_errors"
+        , "/populate_submit"
+        , "/populate_purge"
+    ];
+
+/*}}}*/
 /*_ request_data_io {{{*/
 let request_data_io = function(args)
 {
     let {      request, response } = args;
     let consumed_by = "";
 
-    if(   request.url.includes("/feedback_submit")
-       || request.url.includes("/feedback_purge" )
-       || request.url.includes("/lang_errors"    )
-       || request.url.includes("/populate_submit")
-       || request.url.includes("/populate_purge" )
-      ) {
+    /* [REQUEST_URL_ARRAY] {{{*/
+if(config.LOG_MORE) console.log("request_data_io: request.url=["+request.url+"]");
+    if( REQUEST_URL_ARRAY.includes(request.url) )
+    {
 log_B("  ┌───────────────────────────────────────────────┐\n"
      +"➔ │ "+request.url+" method "+ request.method +"\n"
      +"  └───────────────────────────────────────────────┘");
@@ -527,6 +563,7 @@ log_Y("...allow access to the origin of the petition:");
 
         consumed_by = request.url;
     }
+    /*}}}*/
 
     return consumed_by;
 };
@@ -534,7 +571,7 @@ log_Y("...allow access to the origin of the petition:");
 /*_ post_callback {{{*/
 let post_callback = function(request,response)
 {
-//console.log("post_callback")
+if(config.LOG_MORE) console.log("post_callback");
 
     let body = "";
     request.on("data", (chunk) => {
@@ -569,7 +606,7 @@ try {
 /*_ get_callback {{{*/
 let get_callback = function(request,response)
 {
-//console.log("get_callback")
+if(config.LOG_MORE) console.log("get_callback");
 
     let body =     decodeURIComponent( request.url );
 
@@ -580,9 +617,10 @@ return { request_data_io };
 })();
 
 //┌────────────────────────────────────────────────────────────────────────────┐
-//│ RESPONSE COMMAND                       [clear status dump_USR_TABLES exit] │
+//│ RESPONSE COMMAND                           [clear status dump_TABLES exit] │
 //└────────────────────────────────────────────────────────────────────────────┘
 let server_request_commands = (function() {
+
 /*_ request_CLEAR {{{*/
 let request_CLEAR = function(args)
 {
@@ -655,22 +693,22 @@ log_N("  ┌───────┐\n"
     return consumed_by;
 };
 /*}}}*/
-/*_ request_dump_USR_TABLES {{{*/
-let request_dump_USR_TABLES = function(args)
+/*_ request_dump_TABLES {{{*/
+let request_dump_TABLES = function(args)
 {
     let { uri,          response } = args;
     let consumed_by;
 
-    if((uri.path == "query") && uri.query.includes("dump_USR_TABLES"))
+    if((uri.path == "query") && uri.query.includes("dump_TABLES"))
     {
-log_M("  ┌─────────────────┐\n"
-     +"➔ │ dump_USR_TABLES │\n"
-     +"  └─────────────────┘");
+log_M("  ┌─────────────┐\n"
+     +"➔ │ dump_TABLES │\n"
+     +"  └─────────────┘");
         response.writeHead(200, HTML_RESPONSE_HEADER );
         response.write("<h3>"+uri.path+"</h3>");
-        feedback_postgres.dump_USR_TABLES( response );
+        lib_postgres.dump_TABLES( response );
 
-        consumed_by = "dump_USR_TABLES";
+        consumed_by = "dump_TABLES";
     }
 
     return consumed_by;
@@ -701,11 +739,13 @@ log_N("* "+consumed_by+" *");
     return consumed_by;
 };
 /*}}}*/
+
 return {  request_CLEAR
     ,     request_EXIT
+
     ,     request_LOG_MORE
     ,     request_STATUS
-    ,     request_dump_USR_TABLES
+    ,     request_dump_TABLES
 };
 })();
 
@@ -759,6 +799,7 @@ if(config.LOG_MORE) console.dir( args.uri  );
     /*}}}*/
 
     /* GENERATE FILE */
+
     /*{{{*/
     if(!consumed_by
        && (   uri.path.includes(       "feedback_topics_json.js")
@@ -773,7 +814,7 @@ if(config.LOG_MORE) console.dir( args.uri  );
         if( uri.path.includes("feedback_replies_json.js") )
             file_args.no_reply_ok = true;
 
-        feedback_postgres.generate_file(file_args, response);
+        lib_postgres.generate_file(file_args, response);
 
         consumed_by = "PUPULATE FILE";
     }
@@ -819,7 +860,7 @@ console.dir(qtext);
             /* POSTGRES SQL {{{*/
             if(qtext.includes(" "))
             {
-                feedback_postgres.sql_query(response, qtext);
+                lib_postgres.sql_query(response, qtext);
 
                 consumed_by = "SQL qtext";
             }
@@ -911,14 +952,13 @@ console.dir(response_200_header);
 //                )+"]");
         }
         /*}}}*/
-        /* WRITE FILE CONTENT .. replace [127.0.0.1] with [net_address] {{{*/
+        /* WRITE FILE CONTENT .. replace (127.0.0.1|localhost) with [net_address] {{{*/
         if(query && query.startsWith("qtext")) {
             response.write("<pre style='background:black; color:#DDD;'>"+data+"</pre>");
         }
         else {
-
             if(net_address && DEFAULT_URI_PATH.includes(file_name))
-                response.write(String(data).replace(/127.0.0.1/gm, net_address));
+                response.write(String(data).replace(/(127.0.0.1|localhost)/gm, net_address));
             else
                 response.write(       data);
         }
@@ -941,6 +981,10 @@ console.dir(response_200_header);
 //let server_request = (function() {
 //"use strict";
 /*_ handle_request {{{*/
+/*{{{*/
+const THANKS_FOR_YOUR_FEEDBACK      = "Thank you for your feedback";
+
+/*}}}*/
 let handle_request = function(request, response, body) // eslint-disable-line complexity
 {
 /*{{{*/
@@ -1039,7 +1083,7 @@ log_M(recap);
                 response.write("✔ <button onclick='history.go(-1);'>←</button>");
             }
 
-            //console.log("response.request_count["+response.request_count+"] handle_request"+TRACE_CLOSE)
+//console.log("response.request_count["+response.request_count+"] handle_request"+TRACE_CLOSE)
             response.end();
 
             consumed_by = "NOT HANDLED: ["+request.url+"]";
@@ -1073,7 +1117,7 @@ if(config.LOG_MORE) console.log("➔ sql=["+sql+"]");
 
     response.writeHead(200, "OK", {"Content-Type": "text/html; charset=UTF-8"});
     try {
-        feedback_postgres.sql_query(response, sql);
+        lib_postgres.sql_query(response, sql);
     }
     catch(ex)
     {
@@ -1133,7 +1177,7 @@ let handle_request_lang_errors = function(request,response,lang_errors)
 
     response.writeHead(200, "OK", {"Content-Type": "text/html; charset=UTF-8"});
     try {
-        feedback_postgres.sql_query(response, sql);
+        lib_postgres.sql_query(response, sql);
     }
     catch(ex)
     {
@@ -1164,7 +1208,7 @@ let handle_request_populate = function(request,response,args)
 
     response.writeHead(200, "OK", {"Content-Type": "text/html; charset=UTF-8"});
     try {
-        feedback_postgres.sql_query(response, sql);
+        lib_postgres.sql_query(response, sql);
     }
     catch(ex)
     {
@@ -1174,9 +1218,11 @@ let handle_request_populate = function(request,response,args)
     }
 };
 /*}}}*/
+
 //return { handle_request
 //    ,    handle_request_feedback
 //    ,    handle_request_lang_errors
+//
 //    };
 //})();
 
