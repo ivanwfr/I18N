@@ -67,12 +67,12 @@ $ explorer 4_i18n_populate.url     # visit translation provider page
 ## `DASHBOARD -  server control web page`
 <!--{{{-->
 
-> File                         | Description
-> -----------------------------|-------------
-> CONTROL/index_control.html   | JS + HTML<br>- server_control.js and CONTROL FORM:<br>TABLES: [topis, feedbacks, i18n]<br>- drop, create, insert<br>- use-case contents template<br>QUERY IFRAME:<br>- generated dynamic js<br>QUERY FORMAT CHECK:<br>- trace log
-> CONTROL/feedback_postgres.js | PostgreSQL databse interface
-> CONTROL/server_control.js    | HTTP cookie, submit, user_id, lang      
-> CONTROL/t_details.js         | Persistent DETAILS-SUMMARY open state   
+> File                        | Description
+> ----------------------------|-------------
+> CONTROL /index_control.html | JS + HTML<br>- server_control.js and CONTROL FORM:<br>TABLES: [topis, feedbacks, i18n]<br>- drop, create, insert<br>- use-case contents template<br>QUERY IFRAME:<br>- generated dynamic js<br>QUERY FORMAT CHECK:<br>- trace log
+> CONTROL /server_control.js  | HTTP cookie, submit, user_id, lang      
+>      lib/lib_postgres.js    | PostgreSQL database interface
+>      lib/t_details.js       | Persistent DETAILS-SUMMARY open state   
 
 <!--}}}-->
 
