@@ -8,7 +8,7 @@
 /* eslint-disable no-warning-comments */
 
 const I18N_TRANSLATE_JS_ID  = "i18n_translate";
-const I18N_TRANSLATE_JS_TAG = I18N_TRANSLATE_JS_ID+" (211018:19h:05)";    // eslint-disable-line no-unused-vars
+const I18N_TRANSLATE_JS_TAG = I18N_TRANSLATE_JS_ID+" (211020:17h:06)";    // eslint-disable-line no-unused-vars
 /*}}}*/
 //try { i18n_translate_json = require("./i18n_translate_json.js"); } catch(ex) {} // server-side-only requirement
 let i18n_translate = (function() {
@@ -383,6 +383,10 @@ if(verbose || log_this || TAG_I18N) console.log("➔ %c ALL ("+lang_errors[lang_
 };
 /*}}}*/
 /*_ rep_lang_errors {{{*/
+/*{{{*/
+const LANG_ERRORS_URL = "/lang_errors";
+
+/*}}}*/
 let rep_lang_errors = function(verbose)
 {
 let log_this = LOG_I18N;
@@ -446,8 +450,7 @@ if( log_this) console.dir( lang_errors_list  );
     if(lang_errors_list.length)
     {
         let xhr = new XMLHttpRequest();
-        let url = document.location.hostname+"/lang_errors";
-        xhr.open            ("POST"        , url, true); // async
+        xhr.open            ("POST"        , LANG_ERRORS_URL, true); // async
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send            ("lang_errors="+ JSON.stringify(lang_errors_list));
     }
