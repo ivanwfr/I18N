@@ -466,7 +466,7 @@ let check_cookies = function(event)
 <li>
 <details id="tables" onclick='if(event.target.tagName == "BUTTON") return qtext_add(event.target.innerText);'>
   <summary><b>TABLES … <em class="fg3">DROP</em> … <em class="fg4">CREATE</em> … <em class="fg5">INSERT</em></b></summary>
- <button type = "submit" formaction="/dump_USR_TABLES" class="info">dump_USR_TABLES <em>(topics i18n feedback)</em> </button>
+ <button type = "submit" formaction="/dump_TABLES" class="info">dump_TABLES <em>(topics i18n feedback)</em> </button>
 <ol>
 <!-- TABLE topics {{{-->
 <li>
@@ -823,6 +823,7 @@ let check_cookies = function(event)
      onclick     = 'disableAfterSubmit(event);'
      >shutdown server</button>
     <!--}}}-->
+
     <!-- LOG_MORE {{{-->
     <button type = "submit" id="submit_LOG_MORE"
      name        = "log_more"
@@ -831,11 +832,11 @@ let check_cookies = function(event)
      >LOG_MORE</button>
 
     <!--}}}-->
-    <!-- POSTGRES TABLES (I18N only) {{{-->
+    <!-- POSTGRES TABLES FEEDBACK {{{-->
     <button type = "submit" id = "submit_pg_tables_i18n"
      onclick     = 'return qtext_add("SELECT * FROM pg_catalog.pg_tables ,REGEXP_MATCHES(tablename,\"i18n|topics|feedbacks\")");'
      style       = "background-color: rgba(192,128,192,0.3); font-weight:900;"
-    >PG CATALOG <sup><i style="color:gray;">I18N</i></sup></button>
+    >PG CATALOG <sup><i style="color:gray;">FEEDBACK</i></sup></button>
     <!--}}}-->
     <!-- POSTGRES TABLES {{{-->
     <button type = "submit" id = "submit_pg_tables"
@@ -1542,7 +1543,7 @@ logBIG("JSON_parse")
 
 <!--
 -->
-  <script src="t_details.js"></script> 
+  <script src="/lib/t_details.js"></script> 
   <script> t_details.t_details_onload("index_CONTROL.html"); </script>
 
  </body>
