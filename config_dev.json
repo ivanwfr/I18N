@@ -17,5 +17,5 @@
 , "SELECT_i18n"        : "SELECT * FROM i18n                        ORDER BY key"
 , "SELECT_topics"      : "SELECT * FROM topics                      ORDER BY subject,question"
 
-, "LOG_MORE"           : true
+, "LOG_MORE"           : false
 }
