@@ -1,5 +1,5 @@
 //┌────────────────────────────────────────────────────────────────────────────┐
-//│ [server_sql] .. [SELECT] [DELETE] [INSERT] [GENERATE] _TAG (211022:01h:00) │
+//│ [server_sql] .. [SELECT] [DELETE] [INSERT] [GENERATE] _TAG (211027:17h:13) │
 //└────────────────────────────────────────────────────────────────────────────┘
 /* jshint esversion 9, laxbreak:true, laxcomma:true, boss:true */ /*{{{*/
 /* globals  module */
@@ -162,7 +162,7 @@ if(config.LOG_MORE) console.log("get_query_for_file_name("+file_name+"): return 
 const TABLE_NAMES
     = [   "topics"
         , "i18n"
-        , "feedback"
+        , "feedbacks"
     ];
 
 let get_table_names = function()
@@ -183,7 +183,7 @@ console.log("populate_JSON("+args.file_name+")");
       )
     {
         log_M( M+"  ┌────────────────────────────────────────────────────────────────────────────┐\n"
-              +M+"… │ POSTGRES QUERY: "+G+args.file_name+" "+Y+args.lang+" "+B+args.user_id+"\n"
+              +M+"… │ SQL QUERY: "+G+args.file_name+" "+Y+args.lang+" "+B+args.user_id+"\n"
               +M+"  └────────────────────────────────────────────────────────────────────────────┘");
 
         if     (args.file_name == "feedback_topics_json.js"      ) generate_feedback_topics_json(args, response, res);
