@@ -7,7 +7,7 @@
 /* eslint-disable no-warning-comments */
 
 const SERVER_JS_ID  = "server";
-const SERVER_JS_TAG = SERVER_JS_ID    +" (211020:17h:02)";
+const SERVER_JS_TAG = SERVER_JS_ID  +" (211027:17h:58)";
 /*}}}*/
 let server = (function() {
 "use strict";
@@ -55,7 +55,7 @@ let   https                     = require("https");
 let { networkInterfaces }       = require("os"   );
 //}}}
 //➔ [config defaults] {{{
-let   config              =
+let   config =
 {     LOAD_STATUS               : ""
 
     , PORT_HTTP                 :  81
@@ -85,9 +85,9 @@ let config_LOAD_STATUS_log = function(msg)
 };
 /*}}}*/
 //➔ CONFIG_JSON {{{
-const CONFIG_JSON               = "./config.json" ;
-const CONFIG_DEV_JSON           = "./config_dev.json" ;
-let   config_json               = fs.existsSync( CONFIG_DEV_JSON ) ? CONFIG_DEV_JSON : CONFIG_JSON;
+const CONFIG_JSON               = "config.json" ;
+const CONFIG_DEV_JSON           = "config_dev.json" ;
+let   config_json               = "../"+(fs.existsSync( CONFIG_DEV_JSON ) ? CONFIG_DEV_JSON : CONFIG_JSON);
 
 try {
     config                      = require(      config_json );
@@ -106,7 +106,7 @@ try {
 }
 /*}}}*/
 //➔ SQL_REQUIRE {{{
-const SQL_REQUIRE               = "./POSTGRES/server_sql.js";
+const SQL_REQUIRE               = "../SERVER/server_sql.js";
 let   server_sql;
 try {
     server_sql                  = require(      SQL_REQUIRE );
@@ -117,7 +117,7 @@ try {
 
 /*}}}*/
 //➔ [lib_postgres] {{{
-const LIB_PG_REQUIRE            = "./lib/lib_postgres.js";
+const LIB_PG_REQUIRE            = "../lib/lib_postgres.js";
 let   lib_postgres;
 try {
     lib_postgres                = require(      LIB_PG_REQUIRE );
@@ -479,11 +479,11 @@ if(config.LOG_MORE) console.log(TRACE_CLOSE);//DEBUG
 /*_ parse_url {{{*/
 let parse_url = function(url)
 {
-    //console.log("parse_url:")
-    //console.log("url:")
-    //console.dir( url  )
-    //console.log("decodeURIComponent(url):")
-    //console.dir( decodeURIComponent(url)  )
+//console.log("parse_url:")
+//console.log("url:")
+//console.dir( url  )
+//console.log("decodeURIComponent(url):")
+//console.dir( decodeURIComponent(url)  )
 
     //..................... scheme://     domain    /path        query
     let url_match
@@ -500,12 +500,16 @@ let parse_url = function(url)
     //console.log("url_match[0]:")
     //console.dir( url_match[0]  )
 
-    return { scheme : url_match[1]
-        //,      port : url_match[2]
-        ,    domain : url_match[3]
-        ,      path : url_match[4]
-        ,     query : url_match[5]
-    };
+    let args
+        = {   scheme : url_match[1]
+          //,   port : url_match[2]
+            , domain : url_match[3]
+            ,   path : url_match[4]
+            ,  query : url_match[5]
+        };
+//console.dir(args)//FIXME
+
+    return  args;
 };
 /*}}}*/
 return { request_listener };
@@ -696,10 +700,13 @@ log_N("  ┌───────┐\n"
 /*_ request_dump_TABLES {{{*/
 let request_dump_TABLES = function(args)
 {
+//console.trace()//FIXME
     let { uri,          response } = args;
+console.dir(uri);//FIXME
     let consumed_by;
 
-    if((uri.path == "query") && uri.query.includes("dump_TABLES"))
+    if(   (uri.path  && uri.path .includes("dump_TABLES")
+       || (uri.query && uri.query.includes("dump_TABLES"))))
     {
 log_M("  ┌─────────────┐\n"
      +"➔ │ dump_TABLES │\n"
