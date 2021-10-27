@@ -8,8 +8,8 @@
 
 /* eslint-disable no-warning-comments */
 
-const SERVER_CONTROL_JS_ID  = "server";
-const SERVER_CONTROL_JS_TAG = SERVER_CONTROL_JS_ID +" (211018:13h:56)";
+const SERVER_CONTROL_JS_ID  = "server_control";
+const SERVER_CONTROL_JS_TAG = SERVER_CONTROL_JS_ID +" (211027:19h:15)";
 /*}}}*/
 let server_control = (function() {
 "use strict";
@@ -172,7 +172,7 @@ let sync_user_id = function(_caller)
 
 //┌────────────────────────────────────────────────────────────────────────────┐
 //│ SUBMIT SQL QUERY .. work on loading-sql-from-file here                     │
-//  see USR/server.js:
+//  see server.js:
 //      let fs = require("fs");
 //      fs.existsSync   ( dir_name  )
 //      fs.existsSync   ( file_name )
@@ -455,8 +455,8 @@ let tag_page = function()
 
     document.getElementsByTagName("title")[0].innerText
     = document.location.href
-      .replace(/\/server_control.html/,"")
-      .replace(/:\/\//," ➔ ")
+      .replace(/\/\w+\.html/,   "")
+      .replace(/:\/\//      ," ➔ ")
       .toUpperCase()
       ;
 
