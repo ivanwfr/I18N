@@ -8,9 +8,8 @@
 /* eslint-disable no-warning-comments */
 
 const I18N_TRANSLATE_JS_ID  = "i18n_translate";
-const I18N_TRANSLATE_JS_TAG = I18N_TRANSLATE_JS_ID+" (211020:17h:06)";    // eslint-disable-line no-unused-vars
+const I18N_TRANSLATE_JS_TAG = I18N_TRANSLATE_JS_ID+" (211022:18h:51)";    // eslint-disable-line no-unused-vars
 /*}}}*/
-//try { i18n_translate_json = require("./i18n_translate_json.js"); } catch(ex) {} // server-side-only requirement
 let i18n_translate = (function() {
 "use strict";
 const LOG_I18N = false;
