@@ -1,4 +1,24 @@
 # I18N - PostgreSQL, NodeJS, Admin, User and Translator pages
+<!-- {{{
+
+}!!tree | grep -v '\(url\|html\|sh\|ico\|ini\|css\|md\|png\|vim\|Makefile\|tags\|directories\)'
+.
+├── CLIENT
+│   ├── feedback_tree.js
+├── CONTROL
+│   └── server_control.js
+├── I18N
+│   ├── i18n_populate.js
+│   └── i18n_translate.js
+├── SERVER
+│   ├── server.js
+│   └── server_sql.js
+├── config_dev.json
+└── lib
+    └── lib_postgres.js
+
+
+}}}-->
 
 ### ✔ [ZIP archive on GitHub](../../archive/master.zip)
 
@@ -60,7 +80,7 @@ $ explorer 4_i18n_populate.url     # visit translation provider page
 > File                          | Description
 > ------------------------------|-------------
 > config_dev.json               | PostgreSQL: db,tables,sql<br>Server: host,port,cert
-> POSTGRES/server_sql.js        | Tables: delete,insert,append
+> SERVER/server_sql.js        | Tables: delete,insert,append
 
 <!--}}}-->
 
