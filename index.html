@@ -86,7 +86,7 @@ console.log("%c replace_localhost_with_location_hostname ["+location.hostname+"]
      {
       //let a_innerText = a_array[i].innerText;
       a_array[i].href      = a_array[i].href     .replace(/localhost/gm, location.hostname);
-      a_array[i].innerHTML = a_array[i].innerHTML.replace(/localhost/gm, location.hostname);
+      a_array[i].innerHTML = a_array[i].innerText.replace(/localhost/gm, location.hostname);
 
 console.log("┌──────────────────────────────────────┐");
 console.log(  a_array[i].innerText                    );
