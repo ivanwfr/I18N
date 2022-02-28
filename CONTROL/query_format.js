@@ -8,7 +8,7 @@
 /* eslint-disable no-warning-comments */
 
 const QUERY_FORMAT_JS_ID  = "query_format";
-const QUERY_FORMAT_JS_TAG = QUERY_FORMAT_JS_ID    +" (211027:20h:03)";
+const QUERY_FORMAT_JS_TAG = QUERY_FORMAT_JS_ID    +" (211223:20h:00)";
 /*}}}*/
 let query_format = (function() {
 "use strict";
@@ -28,23 +28,36 @@ let query_format_watermark;
 
 /* HTML */
 /*➔ query_format_load_config {{{*/
-/*{{{*/
-const        regexp_LOG_MORE    = new RegExp("^.*LOG_MORE.*true.*$"   , "gmu");
-
-/*}}}*/
 let query_format_load_config = function(config,textContent)
 {
 //console.log("%c query_format_load_config:", "background-color:navy;");
+    /* I18N_ACTIVE {{{*/
+    config.I18N_ACTIVE = query_format_load_config_is_active(textContent, regexp_I18N_ACTIVE);
+//console.log("config.I18N_ACTIVE %c "+config.I18N_ACTIVE+" ", "background-color: "+(config.I18N_ACTIVE ? "#D00" : "#00D"));
+
+    let el = document.getElementById("submit_I18N_ACTIVE");
+    if( el ) {
+        if( config.I18N_ACTIVE ) { el.classList.add   ("selected"); el.title = "CURRENTLY ✔ ACTIVE"; }
+        else                     { el.classList.remove("selected"); el.title = "currently inactive"; }
+    }
+    /*}}}*/
     /* LOG_MORE {{{*/
-    config.LOG_MORE = t_load_config_regexp(textContent, regexp_LOG_MORE);
+    config.LOG_MORE = query_format_load_config_is_active(textContent, regexp_LOG_MORE);
 //console.log("config.LOG_MORE %c "+config.LOG_MORE+" ", "background-color: "+(config.LOG_MORE ? "#D00" : "#00D"));
 
-    let el = document.getElementById("submit_LOG_MORE");
+    /**/el = document.getElementById("submit_LOG_MORE");
     if( config.LOG_MORE ) { el.classList.add   ("selected"); el.title = "CURRENTLY ✔ ACTIVE"; }
     else                  { el.classList.remove("selected"); el.title = "currently inactive"; }
     /*}}}*/
 };
-let t_load_config_regexp = function(textContent,regex)
+    /*}}}*/
+/*_ query_format_load_config_is_active {{{*/
+/*{{{*/
+const        regexp_I18N_ACTIVE = new RegExp("^.*I18N_ACTIVE.*true.*$", "gmu");
+const        regexp_LOG_MORE    = new RegExp("^.*LOG_MORE.*true.*$"   , "gmu");
+
+/*}}}*/
+let query_format_load_config_is_active = function(textContent,regex)
 {
 //console.log("%c regex:", "color:yellow;");
 //console.dir(    regex                   );

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- ┌─────────────────────────────────────────────────────────────────────┐ -->
-<!-- │ [index_control.html]                           _TAG (211030:00h:02) │ -->
+<!-- │ [index_control.html]                           _TAG (220228:15h:55) │ -->
 <!-- └─────────────────────────────────────────────────────────────────────┘ -->
 <html lang="FR">
  <head> <!--{{{-->
@@ -242,7 +242,8 @@ FORM>ol button { text-align :   left; }
 */
  details    button { white-space : pre;      }
 FORM>ol>button { white-space : nowrap;   }
- button.info       { white-space : nowrap;   }
+ button.info       { white-space : pre;   }
+ button.info       { font-family : monospace;}
  button.delete     { white-space : nowrap;   }
 
 /*}}}*/
@@ -525,8 +526,11 @@ let check_cookies = function(event)
   <button  class="create"  > CREATE  TABLE i18n <em>(lang varchar, key varchar, val varchar, UNIQUE(lang,key))</em> </button>
   <details id="lang_FR"> <summary class="lang flag bg_FR"></summary> <!--{{{-->
   <br>
-  <button class="info"     > SELECT *  FROM i18n WHERE lang='FR'</button><br>
-  <button  class="delete"  > DELETE    FROM i18n WHERE lang='FR'</button><br>
+  <button class="info"     > SELECT COUNT(*)  FROM i18n WHERE lang='FR' AND val='' ;
+<!--.....................--> SELECT       *   FROM i18n WHERE lang='FR' AND val='' ;
+<!--.....................--> SELECT COUNT(*)  FROM i18n WHERE lang='FR' AND val<>'';
+<!--.....................--> SELECT       *   FROM i18n WHERE lang='FR' AND val<>''</button><br>
+  <button  class="delete"  > DELETE           FROM i18n WHERE lang='FR'            </button><br>
   <details open> <summary>(Page title) .. (8 phrases) .. (6 subjects)</summary> <!--{{{-->
    <button class="insert">
     INSERT into i18n values('FR', $$Page d'évaluation$$                , $$FR ➔ PAGE D'ÉVALUATION$$        );
@@ -564,8 +568,11 @@ let check_cookies = function(event)
   </details> <!--}}}-->
   <details id="lang_EN"> <summary class="lang flag bg_EN"></summary> <!--{{{-->
   <br>
-  <button class="info"    > SELECT *  FROM i18n WHERE lang='EN'</button><br>
-  <button  class="delete"  > DELETE    FROM i18n WHERE lang='EN'</button><br>
+  <button class="info"     > SELECT COUNT(*)  FROM i18n WHERE lang='EN' AND val='' ;
+<!--.....................--> SELECT       *   FROM i18n WHERE lang='EN' AND val='' ;
+<!--.....................--> SELECT COUNT(*)  FROM i18n WHERE lang='EN' AND val<>'';
+<!--.....................--> SELECT       *   FROM i18n WHERE lang='EN' AND val<>''</button><br>
+  <button  class="delete"  > DELETE           FROM i18n WHERE lang='EN'            </button><br>
   <details open> <summary>(8 phrases) .. (6 subjects)</summary> <!--{{{-->
   <button class="insert">
    INSERT into i18n values('EN', 'Submit'                           , 'Submit'                );
@@ -595,8 +602,11 @@ let check_cookies = function(event)
   </details> <!--}}}-->
   <details id="lang_DE"> <summary class="lang flag bg_DE"></summary> <!--{{{-->
   <br>
-  <button class="info"    > SELECT *  FROM i18n WHERE lang='DE'</button><br>
-  <button  class="delete"  > DELETE    FROM i18n WHERE lang='DE'</button><br>
+  <button class="info"     > SELECT COUNT(*)  FROM i18n WHERE lang='DE' AND val='' ;
+<!--.....................--> SELECT       *   FROM i18n WHERE lang='DE' AND val='' ;
+<!--.....................--> SELECT COUNT(*)  FROM i18n WHERE lang='DE' AND val<>'';
+<!--.....................--> SELECT       *   FROM i18n WHERE lang='DE' AND val<>''</button><br>
+  <button  class="delete"  > DELETE           FROM i18n WHERE lang='DE'            </button><br>
   <details open> <summary>(8 phrases) .. (6 subjects)</summary> <!--{{{-->
   <button class="insert">
    INSERT into i18n values('DE', 'Submit'                           , 'Senden'                          );
@@ -622,8 +632,11 @@ let check_cookies = function(event)
   </details> <!--}}}-->
   <details id="lang_GR"> <summary class="lang flag bg_GR"></summary> <!--{{{-->
   <br>
-  <button class="info"    > SELECT *  FROM i18n WHERE lang='GR'</button><br>
-  <button  class="delete"  > DELETE    FROM i18n WHERE lang='GR'</button><br>
+  <button class="info"     > SELECT COUNT(*)  FROM i18n WHERE lang='GR' AND val='' ;
+<!--.....................--> SELECT       *   FROM i18n WHERE lang='GR' AND val='' ;
+<!--.....................--> SELECT COUNT(*)  FROM i18n WHERE lang='GR' AND val<>'';
+<!--.....................--> SELECT       *   FROM i18n WHERE lang='GR' AND val<>''</button><br>
+  <button  class="delete"  > DELETE           FROM i18n WHERE lang='GR'            </button><br>
   <details open> <summary>(8 phrases) .. (6 subjects)</summary> <!--{{{-->
   <button class="insert">
    INSERT into i18n values('GR', 'Submit'                           , 'Steílete'              );
@@ -649,8 +662,11 @@ let check_cookies = function(event)
   </details> <!--}}}-->
   <details id="lang_ES"> <summary class="lang flag bg_ES"></summary> <!--{{{-->
   <br>
-  <button class="info"    > SELECT *  FROM i18n WHERE lang='ES'</button><br>
-  <button  class="delete"  > DELETE    FROM i18n WHERE lang='ES'</button><br>
+  <button class="info"     > SELECT COUNT(*)  FROM i18n WHERE lang='ES' AND val='' ;
+<!--.....................--> SELECT       *   FROM i18n WHERE lang='ES' AND val='' ;
+<!--.....................--> SELECT COUNT(*)  FROM i18n WHERE lang='ES' AND val<>'';
+<!--.....................--> SELECT       *   FROM i18n WHERE lang='ES' AND val<>''</button><br>
+  <button  class="delete"  > DELETE           FROM i18n WHERE lang='ES'            </button><br>
   <details open> <summary>(8 phrases) .. (6 subjects)</summary> <!--{{{-->
   <button class="insert">
    INSERT into i18n values('ES', 'Submit'                            , 'Enviar'            );
@@ -676,8 +692,11 @@ let check_cookies = function(event)
   </details> <!--}}}-->
   <details id="lang_IT"> <summary class="lang flag bg_IT"></summary> <!--{{{-->
   <br>
-  <button class="info"    > SELECT *  FROM i18n WHERE lang='IT'</button><br>
-  <button  class="delete"  > DELETE    FROM i18n WHERE lang='IT'</button><br>
+  <button class="info"     > SELECT COUNT(*)  FROM i18n WHERE lang='IT' AND val='' ;
+<!--.....................--> SELECT       *   FROM i18n WHERE lang='IT' AND val='' ;
+<!--.....................--> SELECT COUNT(*)  FROM i18n WHERE lang='IT' AND val<>'';
+<!--.....................--> SELECT       *   FROM i18n WHERE lang='IT' AND val<>''</button><br>
+  <button  class="delete"  > DELETE           FROM i18n WHERE lang='IT'            </button><br>
   <details open> <summary>(8 phrases) .. (6 subjects)</summary> <!--{{{-->
   <button class="insert">
    INSERT into i18n values('IT', 'Submit'                            , 'Mandare'                );
@@ -703,8 +722,11 @@ let check_cookies = function(event)
   </details> <!--}}}-->
   <details id="lang_PT"> <summary class="lang flag bg_PT"></summary> <!--{{{-->
   <br>
-  <button class="info"    > SELECT *  FROM i18n WHERE lang='PT'</button><br>
-  <button  class="delete"  > DELETE    FROM i18n WHERE lang='PT'</button><br>
+  <button class="info"     > SELECT COUNT(*)  FROM i18n WHERE lang='PT' AND val='' ;
+<!--.....................--> SELECT       *   FROM i18n WHERE lang='PT' AND val='' ;
+<!--.....................--> SELECT COUNT(*)  FROM i18n WHERE lang='PT' AND val<>'';
+<!--.....................--> SELECT       *   FROM i18n WHERE lang='PT' AND val<>''</button><br>
+  <button  class="delete"  > DELETE           FROM i18n WHERE lang='PT'            </button><br>
   <details open> <summary>(8 phrases) .. (6 subjects)</summary> <!--{{{-->
   <button class="insert">
    INSERT into i18n values('PT', 'Submit'                            , 'Mandar'                   );
@@ -823,7 +845,14 @@ let check_cookies = function(event)
      onclick     = 'disableAfterSubmit(event);'
      >shutdown server</button>
     <!--}}}-->
+    <!-- I18N_ACTIVE {{{-->
+    <button type = "submit" id="submit_I18N_ACTIVE"
+     name        = "i18n_active"
+     formaction  ="/i18n_active"
+     style       = "background-color: rgba(128,128,128,0.3); font-weight:900; margin-bottom:1rem;"
+     >I18N_ACTIVE</button>
 
+    <!--}}}-->
     <!-- LOG_MORE {{{-->
     <button type = "submit" id="submit_LOG_MORE"
      name        = "log_more"
