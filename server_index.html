@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- ┌─────────────────────────────────────────────────────────────────────┐ -->
-<!-- │ I18N [SERVER_INDEX]                            _TAG (211030:00h:01) │ -->
+<!-- │ I18N [SERVER_INDEX]                            _TAG (220902:18h:31) │ -->
 <!-- └─────────────────────────────────────────────────────────────────────┘ -->
 <html lang="FR">
  <head>
@@ -14,12 +14,25 @@ SUMMARY { cursor      : pointer; }
 SUMMARY { user-select : none;    } /* to allow shift modifier */
 </style>
 
-   <a href="https://github.com/ivanwfr/I18N" target="GitHub" style="float:right; margin:0 1em;">GitHub I18N</a>
+   <a href="https://github.com/ivanwfr/I18N"    target="GitHub" style="margin:0 1em;">GitHub I18N</a>
+<!-- script get_index_url {{{-->
+<script>
+let get_index_url = function()
+{
+ return location.protocol
+  +               "//"
+  +               location.host
+  +               "/index.html";
+};
+</script>
+<!--}}}-->
+   <a href="index.html" onclick='location = get_index_url()'><em>index.html</em></a>
+   <hr>
 
    <details id="iframe_CLIENT">
    <summary>iframe_CLIENT</summary>
    <iframe id = "iframe_CLIENT"
-    src       = "./CLIENT/index_CLIENT.html"
+    src       = "./CLIENT/index_client.html"
     style     = "
         background-color : #484;
         width            : 99%;
@@ -34,7 +47,7 @@ SUMMARY { user-select : none;    } /* to allow shift modifier */
    <details id="iframe_CONTROL">
    <summary>iframe_CONTROL</summary>
    <iframe id = "iframe_CONTROL"
-    src       = "./CONTROL/index_CONTROL.html"
+    src       = "./CONTROL/index_control.html"
     style     = "
         background-color : #448;
         width            : 99%;
